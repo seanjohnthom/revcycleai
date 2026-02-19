@@ -29,7 +29,7 @@
 
 **Notes:**
 - Send Tuesday or Wednesday 8–10am CT
-- Use sender name: Sean Thompson | sender email: sean@revcycleai.com (once domain verified)
+- Use sender name: Alex | sender email: alex@revcycleai.com (once domain verified)
 - The personalization_line should reference their specific company/role/pain point
 
 ---
