@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap — RevCycleAI</title>
+<meta name="description" content="What we're building next. See what's live, what's in progress, and what's coming to RevCycleAI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAFA; --surface: #fff; --surface2: #F4F4F5;
+  --border: #E4E4E7; --border2: #D4D4D8;
+  --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+  --accent: #1D4ED8; --accent-bg: #EFF6FF;
+  --green: #059669; --green-bg: #ECFDF5;
+  --yellow: #D97706; --yellow-bg: #FFFBEB;
+  --purple: #7C3AED; --purple-bg: #F5F3FF;
+  --red: #DC2626;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: var(--accent); text-decoration: none; }
+
+.masthead { max-width: 1200px; margin: 0 auto; padding: 20px 24px 16px; border-bottom: 3px solid var(--text); }
+.masthead-inner { display: flex; align-items: center; justify-content: space-between; }
+.wordmark { display: inline-flex; align-items: center; line-height: 1; text-decoration: none; color: inherit; }
+.wordmark-rc { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.wordmark-cycle { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 400; letter-spacing: -0.5px; }
+.wordmark-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 10px; }
+.wordmark-ai { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+.pub-tagline { font-size: 11px; color: var(--text3); margin-top: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+.nav-back { font-size: 13px; font-weight: 600; color: var(--text2); text-decoration: none; }
+.nav-back:hover { color: var(--text); }
+
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.page-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text3); margin-bottom: 12px; }
+.page-title { font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 12px; }
+.page-deck { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 40px; max-width: 580px; }
+
+/* STATUS LEGEND */
+.legend { display: flex; gap: 20px; margin-bottom: 40px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--text2); }
+.badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+.badge.live { background: var(--green-bg); color: var(--green); }
+.badge.building { background: var(--accent-bg); color: var(--accent); }
+.badge.next { background: var(--yellow-bg); color: var(--yellow); }
+.badge.planned { background: var(--surface2); color: var(--text2); }
+.badge.idea { background: var(--purple-bg); color: var(--purple); }
+
+/* PHASE BLOCK */
+.phase { margin-bottom: 48px; }
+.phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--text); }
+.phase-title { font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 800; }
+.phase-desc { font-size: 12px; color: var(--text2); margin-left: auto; }
+
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.roadmap-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+.roadmap-item:hover { border-color: var(--border2); }
+.item-left { display: flex; align-items: flex-start; gap: 12px; }
+.item-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.item-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.item-text p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.item-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-top: 4px; }
+
+/* NOTIFY BLOCK */
+.notify-block { background: var(--text); color: #fff; border-radius: 10px; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 48px; flex-wrap: wrap; }
+.notify-block h3 { font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.notify-block p { font-size: 13px; color: #A1A1AA; }
+.notify-form { display: flex; gap: 8px; flex-shrink: 0; }
+.notify-form input { padding: 9px 14px; border-radius: 6px; border: 1px solid #3F3F46; background: #27272A; color: #fff; font-size: 13px; font-family: inherit; outline: none; width: 220px; }
+.notify-form input::placeholder { color: #71717A; }
+.notify-form input:focus { border-color: #6366F1; }
+.notify-form button { background: #fff; color: var(--text); border: none; border-radius: 6px; padding: 9px 18px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+.notify-form button:hover { background: #F4F4F5; }
+
+footer { border-top: 3px solid var(--text); background: var(--text); color: #fff; padding: 28px 24px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-links a { font-size: 12px; color: #A1A1AA; margin-right: 20px; }
+.footer-links a:hover { color: #fff; }
+.footer-copy { font-size: 11px; color: #71717A; }
+
+@media (max-width: 640px) {
+  .page-title { font-size: 28px; }
+  .notify-block { flex-direction: column; align-items: flex-start; }
+  .notify-form { flex-direction: column; width: 100%; }
+  .notify-form input { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <a href="/" class="wordmark">
+        <span class="wordmark-rc">Rev</span><span class="wordmark-cycle">Cycle</span>
+        <div class="wordmark-divider"></div>
+        <span class="wordmark-ai">AI</span>
+      </a>
+      <div class="pub-tagline">Revenue Cycle Intelligence · Published Daily</div>
+    </div>
+    <a href="/" class="nav-back">← Back to top stories</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="page-label">Product Roadmap</div>
+  <h1 class="page-title">What we're building</h1>
+  <p class="page-deck">RevCycleAI is expanding from a daily intelligence feed into a full suite of tools for RCM teams. Here's what's live, what's in progress, and what's coming next.</p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="badge live">● Live</span> Available now</div>
+    <div class="legend-item"><span class="badge building">● Building</span> In progress</div>
+    <div class="legend-item"><span class="badge next">● Up next</span> Starting soon</div>
+    <div class="legend-item"><span class="badge planned">● Planned</span> On the roadmap</div>
+    <div class="legend-item"><span class="badge idea">● Exploring</span> Under consideration</div>
+  </div>
+
+  <!-- LIVE -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-title">Now live</div>
+      <div class="phase-desc">Updated February 2026</div>
+    </div>
+    <div class="item-list">
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📰</div>
+          <div class="item-text">
+            <h4>Daily RCM Intelligence Feed</h4>
+            <p>Top stories, regulatory alerts, and payor network changes — published every morning before your AR does.</p>
+            <div class="item-tag">Content</div>
+          </div>
+        </div>
+        <span class="badge live">● Live</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">🔍</div>
+          <div class="item-text">
+            <h4>Axlow — AI Payor Policy Search</h4>
+            <p>Find any payor policy in 20 seconds. Natural language search across UHC, Aetna, Cigna, 200+ payors.</p>
+            <div class="item-tag">Tool · axlow.com</div>
+          </div>
+        </div>
+        <span class="badge live">● Live</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">🗺️</div>
+          <div class="item-text">
+            <h4>PayorMap — Dental PPO Routing Intelligence</h4>
+            <p>See exactly which network is repricing your dental claims. Zelis, DenteMax, DNOA, and more — mapped by state.</p>
+            <div class="item-tag">Tool · payormap.com</div>
+          </div>
+        </div>
+        <span class="badge live">● Live</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📧</div>
+          <div class="item-text">
+            <h4>Weekly Newsletter — This Week in RCM</h4>
+            <p>The top 3 RCM signals from the past week. What changed, what it means, what to do. Every Tuesday.</p>
+            <div class="item-tag">Newsletter</div>
+          </div>
+        </div>
+        <span class="badge live">● Live</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📥</div>
+          <div class="item-text">
+            <h4>Free Resources Library</h4>
+            <p>Prior auth checklists, appeal letter templates, PPO network maps, and revenue leakage calculators — free to download.</p>
+            <div class="item-tag">Resources</div>
+          </div>
+        </div>
+        <span class="badge live">● Live</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILDING -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-title">In progress</div>
+    </div>
+    <div class="item-list">
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📋</div>
+          <div class="item-text">
+            <h4>PPO Playbook — Fee Schedule Negotiation System</h4>
+            <p>A step-by-step negotiation framework, fee schedule comparison calculator, and letter templates for getting payor rate increases.</p>
+            <div class="item-tag">Tool</div>
+          </div>
+        </div>
+        <span class="badge building">● Building</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">🔔</div>
+          <div class="item-text">
+            <h4>PayorMap Network Change Alerts</h4>
+            <p>Push notifications the moment a payor changes its network routing — before it hits your EOBs.</p>
+            <div class="item-tag">Tool · PayorMap</div>
+          </div>
+        </div>
+        <span class="badge building">● Building</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📢</div>
+          <div class="item-text">
+            <h4>Advertising & Sponsorships</h4>
+            <p>Self-serve ad checkout for newsletter, sidebar, and sponsored content placements targeting RCM decision-makers.</p>
+            <div class="item-tag">Monetization</div>
+          </div>
+        </div>
+        <span class="badge building">● Building</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- UP NEXT -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-title">Up next</div>
+    </div>
+    <div class="item-list">
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📉</div>
+          <div class="item-text">
+            <h4>Denial Rate Benchmarking Tool</h4>
+            <p>See how your denial rate compares to peers by specialty, payor, and procedure type. Free, no PHI required.</p>
+            <div class="item-tag">Free Tool</div>
+          </div>
+        </div>
+        <span class="badge next">● Up next</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">💼</div>
+          <div class="item-text">
+            <h4>RCM Salary Benchmarking Tool</h4>
+            <p>Compare compensation for billing specialists, RCM directors, and credentialing staff by region and practice size.</p>
+            <div class="item-tag">Free Tool</div>
+          </div>
+        </div>
+        <span class="badge next">● Up next</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">🔍</div>
+          <div class="item-text">
+            <h4>Carve-Out Opportunity Scanner</h4>
+            <p>Identify where umbrella network stacking is costing you money — and which payors are worth renegotiating directly.</p>
+            <div class="item-tag">Tool · PayorMap</div>
+          </div>
+        </div>
+        <span class="badge next">● Up next</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANNED -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-title">Planned</div>
+    </div>
+    <div class="item-list">
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📅</div>
+          <div class="item-text">
+            <h4>Contract Expiration Calendar</h4>
+            <p>Track payor contract renewal dates with 90/60/30-day reminders. Never miss a renegotiation window again.</p>
+            <div class="item-tag">Tool · PayorMap</div>
+          </div>
+        </div>
+        <span class="badge planned">● Planned</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">📊</div>
+          <div class="item-text">
+            <h4>PayorMap API — Data Access for Platforms</h4>
+            <p>Programmatic access to payor routing intelligence for clearinghouses, practice management systems, and EHR vendors.</p>
+            <div class="item-tag">API · Enterprise</div>
+          </div>
+        </div>
+        <span class="badge planned">● Planned</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">🤝</div>
+          <div class="item-text">
+            <h4>Axlow Affiliate Program</h4>
+            <p>Billing companies refer clients to Axlow and earn a recurring percentage of subscription revenue.</p>
+            <div class="item-tag">Growth · Axlow</div>
+          </div>
+        </div>
+        <span class="badge planned">● Planned</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPLORING -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-title">Exploring</div>
+    </div>
+    <div class="item-list">
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">🔒</div>
+          <div class="item-text">
+            <h4>Contract Analysis (SOC 2-gated)</h4>
+            <p>Upload payor contracts and get an AI-powered analysis of fee schedules, carve-outs, and renewal terms. Requires SOC 2 certification first.</p>
+            <div class="item-tag">Tool · PayorMap · Future</div>
+          </div>
+        </div>
+        <span class="badge idea">● Exploring</span>
+      </div>
+      <div class="roadmap-item">
+        <div class="item-left">
+          <div class="item-icon">🏥</div>
+          <div class="item-text">
+            <h4>RCM Company Acquisition Intelligence</h4>
+            <p>A deal flow tool for operators looking to acquire billing companies — target identification, EBITDA estimation, and outreach automation.</p>
+            <div class="item-tag">Tool · Enterprise</div>
+          </div>
+        </div>
+        <span class="badge idea">● Exploring</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFY CTA -->
+  <div class="notify-block">
+    <div>
+      <h3>Stay ahead of what's shipping</h3>
+      <p>Get notified when new tools launch. No spam — just product updates when they matter.</p>
+    </div>
+    <form class="notify-form" data-subscribe-form data-subscribe-source="roadmap">
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <button type="submit">Notify me →</button>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:'DM Sans',sans-serif;font-size:18px">
+      <span style="font-weight:800">Rev</span><span style="font-weight:400">Cycle</span>
+      <span style="font-size:10px;font-weight:800;background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px">AI</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Top Stories</a>
+      <a href="/newsletter">Newsletter</a>
+      <a href="/tools">Tools</a>
+      <a href="/free">Free Resources</a>
+      <a href="/advertise">Advertise</a>
+    </div>
+    <div class="footer-copy">© 2026 RevCycleAI</div>
+  </div>
+</footer>
+
+<script src="/subscribe.js"></script>
+</body>
+</html>
