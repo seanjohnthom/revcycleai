@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCM Salary Benchmarking Tool — RevCycleAI</title>
+<meta name="description" content="See what RCM professionals earn by role, region, experience level, and practice type. Free salary benchmarking tool for revenue cycle teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAFA; --surface: #fff; --surface2: #F4F4F5;
+  --border: #E4E4E7; --border2: #D4D4D8;
+  --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+  --accent: #1D4ED8; --accent-bg: #EFF6FF;
+  --green: #059669; --green-bg: #ECFDF5;
+  --yellow: #D97706; --yellow-bg: #FFFBEB;
+  --purple: #7C3AED; --purple-bg: #F5F3FF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: var(--accent); text-decoration: none; }
+
+.masthead { max-width: 1200px; margin: 0 auto; padding: 20px 24px 16px; border-bottom: 3px solid var(--text); }
+.masthead-inner { display: flex; align-items: center; justify-content: space-between; }
+.wordmark { display: inline-flex; align-items: center; line-height: 1; text-decoration: none; color: inherit; }
+.wordmark-rc { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.wordmark-cycle { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 400; letter-spacing: -0.5px; }
+.wordmark-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 10px; }
+.wordmark-ai { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+.pub-tagline { font-size: 11px; color: var(--text3); margin-top: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+.nav-back { font-size: 13px; font-weight: 600; color: var(--text2); }
+.nav-back:hover { color: var(--text); }
+
+/* PAGE */
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+.page-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text3); margin-bottom: 10px; }
+.page-title { font-family: 'DM Sans', sans-serif; font-size: 34px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px; }
+.page-deck { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 32px; max-width: 620px; }
+.pro-note { display: inline-flex; align-items: center; gap: 7px; background: var(--accent-bg); border: 1px solid #BFDBFE; border-radius: 6px; padding: 7px 14px; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 36px; }
+
+/* TOOL LAYOUT */
+.tool-layout { display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: start; }
+
+/* FILTERS */
+.filters-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px; position: sticky; top: 24px; }
+.filters-panel h3 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); margin-bottom: 20px; }
+.filter-group { margin-bottom: 20px; }
+.filter-group label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text2); margin-bottom: 8px; }
+.filter-group select { width: 100%; padding: 9px 12px; border: 1px solid var(--border2); border-radius: 6px; font-size: 13px; font-family: inherit; outline: none; background: var(--bg); color: var(--text); appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2352525B' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; cursor: pointer; }
+.filter-group select:focus { border-color: var(--accent); background-color: #fff; }
+.filter-divider { height: 1px; background: var(--border); margin: 20px 0; }
+.my-salary-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text2); margin-bottom: 8px; display: block; }
+.salary-input-wrap { position: relative; }
+.salary-input-wrap span { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--text3); font-weight: 600; }
+.salary-input-wrap input { width: 100%; padding: 9px 12px 9px 22px; border: 1px solid var(--border2); border-radius: 6px; font-size: 13px; font-family: inherit; outline: none; background: var(--bg); }
+.salary-input-wrap input:focus { border-color: var(--accent); background: #fff; }
+.compare-btn { width: 100%; margin-top: 10px; padding: 10px; background: var(--text); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.compare-btn:hover { background: #27272A; }
+
+/* RESULTS */
+.results-panel { display: flex; flex-direction: column; gap: 20px; }
+
+/* MAIN RESULT CARD */
+.result-main { background: var(--surface); border: 2px solid var(--accent); border-radius: 10px; padding: 28px 32px; }
+.result-role { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text2); margin-bottom: 4px; }
+.result-title { font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 20px; }
+.salary-range-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.salary-box { text-align: center; padding: 16px; background: var(--surface2); border-radius: 8px; }
+.salary-box.median { background: var(--accent-bg); border: 1px solid #BFDBFE; }
+.salary-box .s-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-bottom: 4px; }
+.salary-box.median .s-label { color: var(--accent); }
+.salary-box .s-value { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; color: var(--text); }
+.salary-box.median .s-value { color: var(--accent); }
+.salary-box .s-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* RANGE BAR */
+.range-bar-wrap { margin-bottom: 24px; }
+.range-bar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+.range-bar-track { height: 10px; background: var(--surface2); border-radius: 10px; position: relative; overflow: hidden; }
+.range-bar-fill { position: absolute; top: 0; height: 100%; background: linear-gradient(90deg, #BFDBFE, var(--accent)); border-radius: 10px; transition: all 0.4s ease; }
+.range-bar-marker { position: absolute; top: -4px; width: 18px; height: 18px; background: var(--yellow); border: 2px solid #fff; border-radius: 50%; transform: translateX(-50%); box-shadow: 0 1px 4px rgba(0,0,0,0.15); transition: left 0.4s ease; display: none; }
+.range-bar-marker-label { position: absolute; top: 22px; transform: translateX(-50%); font-size: 10px; font-weight: 800; color: var(--yellow); white-space: nowrap; }
+
+/* COMP BREAKDOWN */
+.comp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.comp-item { background: var(--surface2); border-radius: 8px; padding: 14px 16px; }
+.comp-item .c-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text2); margin-bottom: 4px; }
+.comp-item .c-value { font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 800; }
+.comp-item .c-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* COMPARE RESULT */
+.compare-result { display: none; background: var(--yellow-bg); border: 1px solid #FDE68A; border-radius: 8px; padding: 16px 20px; margin-top: 4px; }
+.compare-result h4 { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
+.compare-result p { font-size: 13px; color: var(--text2); }
+
+/* ROLE BREAKDOWN TABLE */
+.breakdown-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+.breakdown-card h3 { font-size: 13px; font-weight: 800; margin-bottom: 18px; color: var(--text); }
+.breakdown-table { width: 100%; border-collapse: collapse; }
+.breakdown-table th { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); padding: 0 12px 10px 0; text-align: left; border-bottom: 1px solid var(--border); }
+.breakdown-table td { padding: 10px 12px 10px 0; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.breakdown-table tr:last-child td { border-bottom: none; }
+.breakdown-table .role-name { font-weight: 600; color: var(--text); }
+.breakdown-table .level-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; display: inline-block; }
+.level-badge.entry { background: var(--surface2); color: var(--text2); }
+.level-badge.mid { background: var(--accent-bg); color: var(--accent); }
+.level-badge.senior { background: var(--green-bg); color: var(--green); }
+.level-badge.leadership { background: var(--purple-bg); color: var(--purple); }
+.mini-bar { height: 4px; background: var(--border); border-radius: 4px; margin-top: 4px; overflow: hidden; }
+.mini-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
+
+/* METHODOLOGY */
+.method-note { background: var(--surface2); border-radius: 8px; padding: 16px 20px; font-size: 12px; color: var(--text2); line-height: 1.6; }
+.method-note strong { color: var(--text); }
+
+/* EMAIL GATE - shown for non-pro users */
+.gate-overlay { background: linear-gradient(to bottom, transparent 0%, var(--bg) 60%); position: absolute; bottom: 0; left: 0; right: 0; height: 180px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 24px; display: none; }
+
+/* CTA BLOCK */
+.pro-cta { background: var(--text); color: #fff; border-radius: 10px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.pro-cta h4 { font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.pro-cta p { font-size: 13px; color: #A1A1AA; }
+.pro-cta a { background: #fff; color: var(--text); border-radius: 6px; padding: 10px 20px; font-size: 13px; font-weight: 700; white-space: nowrap; font-family: 'DM Sans', sans-serif; flex-shrink: 0; }
+.pro-cta a:hover { background: #F4F4F5; }
+
+footer { border-top: 3px solid var(--text); background: var(--text); color: #fff; padding: 28px 24px; margin-top: 60px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-links a { font-size: 12px; color: #A1A1AA; margin-right: 20px; }
+.footer-links a:hover { color: #fff; }
+
+@media (max-width: 720px) {
+  .tool-layout { grid-template-columns: 1fr; }
+  .filters-panel { position: static; }
+  .salary-range-row { grid-template-columns: repeat(3, 1fr); }
+  .comp-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <a href="/" class="wordmark">
+        <span class="wordmark-rc">Rev</span><span class="wordmark-cycle">Cycle</span>
+        <div class="wordmark-divider"></div>
+        <span class="wordmark-ai">AI</span>
+      </a>
+      <div class="pub-tagline">Revenue Cycle Intelligence · Published Daily</div>
+    </div>
+    <a href="/" class="nav-back">← Back to top stories</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="page-label">Free Tool</div>
+  <h1 class="page-title">RCM Salary Benchmarking</h1>
+  <p class="page-deck">See what revenue cycle professionals earn — by role, region, experience level, and practice type. Updated quarterly. No PHI, no login required.</p>
+  <div class="pro-note">⚡ <strong>Pro:</strong> Unlock full role-by-role breakdown, bonus data, and year-over-year trend reports → <a href="/pro" style="font-weight:800">RevCycleAI Pro</a></div>
+
+  <div class="tool-layout">
+
+    <!-- FILTERS -->
+    <div class="filters-panel">
+      <h3>Filter</h3>
+
+      <div class="filter-group">
+        <label>Role</label>
+        <select id="roleSelect" onchange="calculate()">
+          <option value="billing-specialist">Medical Billing Specialist</option>
+          <option value="ar-followup">AR Follow-Up Specialist</option>
+          <option value="denial-specialist">Denial Management Specialist</option>
+          <option value="prior-auth">Prior Authorization Specialist</option>
+          <option value="credentialing-specialist">Credentialing Specialist</option>
+          <option value="coder">Medical Coder (CPC/CCS)</option>
+          <option value="rcm-analyst">Revenue Cycle Analyst</option>
+          <option value="billing-supervisor">Billing Supervisor / Team Lead</option>
+          <option value="credentialing-manager">Credentialing Manager</option>
+          <option value="rcm-manager">Revenue Cycle Manager</option>
+          <option value="director-rcm">Director, Revenue Cycle</option>
+          <option value="vp-rcm">VP Revenue Cycle</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Experience Level</label>
+        <select id="expSelect" onchange="calculate()">
+          <option value="entry">Entry (0–2 years)</option>
+          <option value="mid" selected>Mid-Level (3–5 years)</option>
+          <option value="senior">Senior (6–10 years)</option>
+          <option value="leadership">Leadership (10+ years)</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Region</label>
+        <select id="regionSelect" onchange="calculate()">
+          <option value="national">National Average</option>
+          <option value="pacific">Pacific (CA, WA, OR)</option>
+          <option value="northeast">Northeast (NY, NJ, MA, CT, PA)</option>
+          <option value="mountain">Mountain West (CO, AZ, NV, UT)</option>
+          <option value="midwest">Midwest (OH, IL, MI, IN, MO)</option>
+          <option value="south-central">South Central (TX, LA, OK, AR)</option>
+          <option value="southeast">Southeast (FL, GA, NC, SC, TN)</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Practice Type</label>
+        <select id="practiceSelect" onchange="calculate()">
+          <option value="hospital">Hospital / Health System</option>
+          <option value="pe-group">PE-Backed / Large Group</option>
+          <option value="rcm-company" selected>RCM / Third-Party Biller</option>
+          <option value="dso">DSO (Dental)</option>
+          <option value="group-practice">Group Practice (10–50 providers)</option>
+          <option value="small-practice">Solo / Small Practice (&lt;10 providers)</option>
+        </select>
+      </div>
+
+      <div class="filter-divider"></div>
+
+      <span class="my-salary-label">Compare my salary</span>
+      <div class="salary-input-wrap">
+        <span>$</span>
+        <input type="number" id="mySalary" placeholder="e.g. 62000" min="20000" max="500000">
+      </div>
+      <button class="compare-btn" onclick="compare()">Compare →</button>
+
+      <div class="compare-result" id="compareResult">
+        <h4 id="compareHeadline"></h4>
+        <p id="compareBody"></p>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-panel">
+
+      <!-- MAIN RESULT -->
+      <div class="result-main">
+        <div class="result-role" id="resultCategory"></div>
+        <div class="result-title" id="resultTitle"></div>
+
+        <div class="salary-range-row">
+          <div class="salary-box">
+            <div class="s-label">25th Pct</div>
+            <div class="s-value" id="p25Val"></div>
+            <div class="s-sub">Lower range</div>
+          </div>
+          <div class="salary-box median">
+            <div class="s-label">Median</div>
+            <div class="s-value" id="p50Val"></div>
+            <div class="s-sub">Market rate</div>
+          </div>
+          <div class="salary-box">
+            <div class="s-label">75th Pct</div>
+            <div class="s-value" id="p75Val"></div>
+            <div class="s-sub">Upper range</div>
+          </div>
+        </div>
+
+        <!-- RANGE BAR -->
+        <div class="range-bar-wrap">
+          <div class="range-bar-labels">
+            <span id="barMin"></span>
+            <span id="barMid">← Market range →</span>
+            <span id="barMax"></span>
+          </div>
+          <div class="range-bar-track">
+            <div class="range-bar-fill" id="barFill" style="left:0%;width:100%"></div>
+            <div class="range-bar-marker" id="myMarker">
+              <div class="range-bar-marker-label" id="myMarkerLabel"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOTAL COMP -->
+        <div class="comp-row">
+          <div class="comp-item">
+            <div class="c-label">Typical Bonus</div>
+            <div class="c-value" id="bonusVal"></div>
+            <div class="c-sub" id="bonusSub"></div>
+          </div>
+          <div class="comp-item">
+            <div class="c-label">Total Comp (Median)</div>
+            <div class="c-value" id="totalComp"></div>
+            <div class="c-sub">Base + bonus at median</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROLE CONTEXT CARD -->
+      <div class="breakdown-card">
+        <h3 id="breakdownTitle">Salary by Experience Level — All Regions</h3>
+        <table class="breakdown-table">
+          <thead>
+            <tr>
+              <th>Experience</th>
+              <th>25th Pct</th>
+              <th>Median</th>
+              <th>75th Pct</th>
+              <th style="min-width:80px">Range</th>
+            </tr>
+          </thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+
+      <!-- METHODOLOGY -->
+      <div class="method-note">
+        <strong>Methodology:</strong> Data compiled from publicly available compensation surveys (BLS Occupational Employment Statistics, MGMA, HFMA), job posting analysis, and RevCycleAI community reporting. Regional and practice-type adjustments applied using published cost-of-labor indices. Updated Q1 2026. This tool is for benchmarking purposes only — individual compensation varies based on credentials, certifications (CPC, CPCO, CRCR), and negotiation.
+      </div>
+
+      <!-- PRO CTA -->
+      <div class="pro-cta">
+        <div>
+          <h4>Get the full picture with Pro</h4>
+          <p>Year-over-year salary trends, remote vs. on-site breakdown, certification premium data, and monthly deep-dive reports.</p>
+        </div>
+        <a href="/pro">Try Pro free for 30 days →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:'DM Sans',sans-serif;font-size:18px">
+      <span style="font-weight:800">Rev</span><span style="font-weight:400">Cycle</span>
+      <span style="font-size:10px;font-weight:800;background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px">AI</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Top Stories</a>
+      <a href="/tools">Tools</a>
+      <a href="/pro">Pro</a>
+      <a href="/newsletter">Newsletter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── SALARY DATA ──────────────────────────────────────────────────────────────
+// Base salaries (national average, RCM company setting)
+// { entry, mid, senior, leadership } × { p25, p50, p75 }
+const roles = {
+  'billing-specialist': {
+    title: 'Medical Billing Specialist',
+    category: 'Operations',
+    bonus: { pct: 0.03, label: '3% of base avg.' },
+    base: {
+      entry:      { p25: 33000, p50: 37000, p75: 42000 },
+      mid:        { p25: 40000, p50: 47000, p75: 54000 },
+      senior:     { p25: 50000, p50: 58000, p75: 66000 },
+      leadership: { p25: 60000, p50: 68000, p75: 78000 }
+    }
+  },
+  'ar-followup': {
+    title: 'AR Follow-Up Specialist',
+    category: 'Operations',
+    bonus: { pct: 0.04, label: '3–5% of base avg.' },
+    base: {
+      entry:      { p25: 34000, p50: 38000, p75: 43000 },
+      mid:        { p25: 41000, p50: 48000, p75: 56000 },
+      senior:     { p25: 52000, p50: 60000, p75: 68000 },
+      leadership: { p25: 62000, p50: 71000, p75: 82000 }
+    }
+  },
+  'denial-specialist': {
+    title: 'Denial Management Specialist',
+    category: 'Operations',
+    bonus: { pct: 0.05, label: '4–6% of base avg.' },
+    base: {
+      entry:      { p25: 36000, p50: 41000, p75: 47000 },
+      mid:        { p25: 44000, p50: 52000, p75: 61000 },
+      senior:     { p25: 56000, p50: 65000, p75: 75000 },
+      leadership: { p25: 68000, p50: 78000, p75: 90000 }
+    }
+  },
+  'prior-auth': {
+    title: 'Prior Authorization Specialist',
+    category: 'Operations',
+    bonus: { pct: 0.03, label: '2–4% of base avg.' },
+    base: {
+      entry:      { p25: 35000, p50: 40000, p75: 46000 },
+      mid:        { p25: 42000, p50: 49000, p75: 57000 },
+      senior:     { p25: 52000, p50: 61000, p75: 70000 },
+      leadership: { p25: 63000, p50: 72000, p75: 84000 }
+    }
+  },
+  'credentialing-specialist': {
+    title: 'Credentialing Specialist',
+    category: 'Operations',
+    bonus: { pct: 0.03, label: '2–4% of base avg.' },
+    base: {
+      entry:      { p25: 36000, p50: 41000, p75: 47000 },
+      mid:        { p25: 43000, p50: 50000, p75: 58000 },
+      senior:     { p25: 53000, p50: 62000, p75: 72000 },
+      leadership: { p25: 65000, p50: 75000, p75: 87000 }
+    }
+  },
+  'coder': {
+    title: 'Medical Coder (CPC / CCS)',
+    category: 'Coding',
+    bonus: { pct: 0.04, label: '3–5% of base avg.' },
+    base: {
+      entry:      { p25: 38000, p50: 43000, p75: 50000 },
+      mid:        { p25: 48000, p50: 56000, p75: 65000 },
+      senior:     { p25: 60000, p50: 70000, p75: 82000 },
+      leadership: { p25: 74000, p50: 85000, p75: 98000 }
+    }
+  },
+  'rcm-analyst': {
+    title: 'Revenue Cycle Analyst',
+    category: 'Analytics',
+    bonus: { pct: 0.06, label: '5–8% of base avg.' },
+    base: {
+      entry:      { p25: 45000, p50: 52000, p75: 61000 },
+      mid:        { p25: 56000, p50: 65000, p75: 76000 },
+      senior:     { p25: 68000, p50: 80000, p75: 93000 },
+      leadership: { p25: 84000, p50: 97000, p75: 113000 }
+    }
+  },
+  'billing-supervisor': {
+    title: 'Billing Supervisor / Team Lead',
+    category: 'Management',
+    bonus: { pct: 0.06, label: '5–8% of base avg.' },
+    base: {
+      entry:      { p25: 48000, p50: 55000, p75: 63000 },
+      mid:        { p25: 57000, p50: 66000, p75: 77000 },
+      senior:     { p25: 67000, p50: 78000, p75: 90000 },
+      leadership: { p25: 80000, p50: 93000, p75: 107000 }
+    }
+  },
+  'credentialing-manager': {
+    title: 'Credentialing Manager',
+    category: 'Management',
+    bonus: { pct: 0.08, label: '6–10% of base avg.' },
+    base: {
+      entry:      { p25: 58000, p50: 67000, p75: 77000 },
+      mid:        { p25: 70000, p50: 81000, p75: 94000 },
+      senior:     { p25: 84000, p50: 97000, p75: 112000 },
+      leadership: { p25: 98000, p50: 113000, p75: 130000 }
+    }
+  },
+  'rcm-manager': {
+    title: 'Revenue Cycle Manager',
+    category: 'Management',
+    bonus: { pct: 0.10, label: '8–12% of base avg.' },
+    base: {
+      entry:      { p25: 65000, p50: 75000, p75: 87000 },
+      mid:        { p25: 78000, p50: 90000, p75: 105000 },
+      senior:     { p25: 93000, p50: 108000, p75: 125000 },
+      leadership: { p25: 110000, p50: 128000, p75: 148000 }
+    }
+  },
+  'director-rcm': {
+    title: 'Director, Revenue Cycle',
+    category: 'Leadership',
+    bonus: { pct: 0.15, label: '12–20% of base avg.' },
+    base: {
+      entry:      { p25: 90000, p50: 105000, p75: 122000 },
+      mid:        { p25: 108000, p50: 126000, p75: 147000 },
+      senior:     { p25: 128000, p50: 150000, p75: 175000 },
+      leadership: { p25: 152000, p50: 178000, p75: 208000 }
+    }
+  },
+  'vp-rcm': {
+    title: 'VP Revenue Cycle',
+    category: 'Executive',
+    bonus: { pct: 0.20, label: '15–25% of base avg.' },
+    base: {
+      entry:      { p25: 140000, p50: 163000, p75: 190000 },
+      mid:        { p25: 165000, p50: 193000, p75: 225000 },
+      senior:     { p25: 195000, p50: 228000, p75: 267000 },
+      leadership: { p25: 230000, p50: 270000, p75: 320000 }
+    }
+  }
+};
+
+// Regional multipliers (vs national average)
+const regionMult = {
+  'national': 1.00,
+  'pacific': 1.19,
+  'northeast': 1.13,
+  'mountain': 1.03,
+  'midwest': 0.94,
+  'south-central': 0.93,
+  'southeast': 0.91
+};
+
+// Practice type multipliers
+const practiceMult = {
+  'hospital': 1.11,
+  'pe-group': 1.09,
+  'rcm-company': 1.00,
+  'dso': 0.97,
+  'group-practice': 0.94,
+  'small-practice': 0.87
+};
+
+const fmt = (n) => '$' + Math.round(n / 1000) + 'K';
+const fmtFull = (n) => '$' + Math.round(n).toLocaleString();
+
+function calculate() {
+  const roleId = document.getElementById('roleSelect').value;
+  const exp = document.getElementById('expSelect').value;
+  const region = document.getElementById('regionSelect').value;
+  const practice = document.getElementById('practiceSelect').value;
+
+  const role = roles[roleId];
+  const mult = regionMult[region] * practiceMult[practice];
+  const base = role.base[exp];
+
+  const p25 = Math.round(base.p25 * mult);
+  const p50 = Math.round(base.p50 * mult);
+  const p75 = Math.round(base.p75 * mult);
+  const bonus = Math.round(p50 * role.bonus.pct);
+  const total = p50 + bonus;
+
+  // Absolute range for bar (10% below p25 to 20% above p75)
+  const barMin = Math.round(p25 * 0.88);
+  const barMax = Math.round(p75 * 1.14);
+  const barRange = barMax - barMin;
+  const fillLeft = ((p25 - barMin) / barRange * 100).toFixed(1);
+  const fillWidth = ((p75 - p25) / barRange * 100).toFixed(1);
+
+  document.getElementById('resultCategory').textContent = role.category.toUpperCase() + ' · REVENUE CYCLE';
+  document.getElementById('resultTitle').textContent = role.title;
+  document.getElementById('p25Val').textContent = fmt(p25);
+  document.getElementById('p50Val').textContent = fmt(p50);
+  document.getElementById('p75Val').textContent = fmt(p75);
+  document.getElementById('bonusVal').textContent = fmt(bonus);
+  document.getElementById('bonusSub').textContent = role.bonus.label;
+  document.getElementById('totalComp').textContent = fmt(total);
+  document.getElementById('barMin').textContent = fmt(barMin);
+  document.getElementById('barMax').textContent = fmt(barMax);
+  document.getElementById('barFill').style.left = fillLeft + '%';
+  document.getElementById('barFill').style.width = fillWidth + '%';
+
+  // Breakdown table
+  document.getElementById('breakdownTitle').textContent = `${role.title} — Salary by Experience Level`;
+  const levels = ['entry', 'mid', 'senior', 'leadership'];
+  const levelLabels = { entry: 'Entry (0–2 yrs)', mid: 'Mid-Level (3–5 yrs)', senior: 'Senior (6–10 yrs)', leadership: 'Leadership (10+ yrs)' };
+  const maxP75 = Math.max(...levels.map(l => role.base[l].p75)) * mult;
+
+  document.getElementById('breakdownBody').innerHTML = levels.map(lvl => {
+    const lp25 = Math.round(role.base[lvl].p25 * mult);
+    const lp50 = Math.round(role.base[lvl].p50 * mult);
+    const lp75 = Math.round(role.base[lvl].p75 * mult);
+    const barW = Math.round(lp75 / maxP75 * 100);
+    const active = lvl === exp ? 'font-weight:700;color:var(--accent)' : '';
+    return `<tr style="${active}">
+      <td><span class="level-badge ${lvl}">${levelLabels[lvl]}</span></td>
+      <td>${fmt(lp25)}</td>
+      <td><strong>${fmt(lp50)}</strong></td>
+      <td>${fmt(lp75)}</td>
+      <td><div class="mini-bar"><div class="mini-bar-fill" style="width:${barW}%"></div></div></td>
+    </tr>`;
+  }).join('');
+
+  // Reset compare
+  document.getElementById('compareResult').style.display = 'none';
+  document.getElementById('myMarker').style.display = 'none';
+
+  // Re-run compare if salary entered
+  if (document.getElementById('mySalary').value) compare();
+
+  // Store for compare
+  window._currentRange = { p25, p50, p75, barMin, barMax, barRange };
+}
+
+function compare() {
+  const input = parseInt(document.getElementById('mySalary').value);
+  if (!input || !window._currentRange) return;
+
+  const { p25, p50, p75, barMin, barMax, barRange } = window._currentRange;
+  const result = document.getElementById('compareResult');
+  const headline = document.getElementById('compareHeadline');
+  const body = document.getElementById('compareBody');
+  const marker = document.getElementById('myMarker');
+  const markerLabel = document.getElementById('myMarkerLabel');
+
+  // Position marker
+  const markerPct = Math.min(Math.max((input - barMin) / barRange * 100, 2), 98);
+  marker.style.left = markerPct + '%';
+  marker.style.display = 'block';
+  markerLabel.textContent = 'You: ' + fmt(input);
+
+  result.style.display = 'block';
+
+  if (input < p25) {
+    const gap = p50 - input;
+    headline.textContent = `You're earning below the 25th percentile`;
+    body.textContent = `The median for this role and profile is ${fmt(p50)}. You may have room to negotiate — a ${Math.round(gap/input*100)}% increase would bring you to market rate.`;
+  } else if (input < p50) {
+    headline.textContent = `You're between the 25th and 50th percentile`;
+    body.textContent = `You're earning below the median of ${fmt(p50)} but above the lower range. Strong performance and tenure should support a push toward market rate.`;
+  } else if (input < p75) {
+    headline.textContent = `You're at or above the market median ✓`;
+    body.textContent = `Your compensation is competitive for this role and profile. The 75th percentile is ${fmt(p75)}.`;
+  } else {
+    headline.textContent = `You're in the top quartile for this role 🎉`;
+    body.textContent = `You're earning above the 75th percentile (${fmt(p75)}) for this profile. You're well-compensated relative to peers.`;
+  }
+}
+
+// Initialize
+calculate();
+</script>
+</body>
+</html>
