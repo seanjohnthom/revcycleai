@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevCycleAI Pro — Premium RCM Intelligence</title>
+<meta name="description" content="Unlock the full RevCycleAI toolkit. Denial benchmarking, salary data, premium reports, and a growing library of RCM intelligence tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAFA; --surface: #fff; --surface2: #F4F4F5;
+  --border: #E4E4E7; --border2: #D4D4D8;
+  --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+  --accent: #1D4ED8; --accent-bg: #EFF6FF;
+  --green: #059669; --green-bg: #ECFDF5;
+  --yellow: #D97706;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: var(--accent); text-decoration: none; }
+
+.masthead { max-width: 1200px; margin: 0 auto; padding: 20px 24px 16px; border-bottom: 3px solid var(--text); }
+.masthead-inner { display: flex; align-items: center; justify-content: space-between; }
+.wordmark { display: inline-flex; align-items: center; line-height: 1; text-decoration: none; color: inherit; }
+.wordmark-rc { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.wordmark-cycle { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 400; letter-spacing: -0.5px; }
+.wordmark-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 10px; }
+.wordmark-ai { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+.pub-tagline { font-size: 11px; color: var(--text3); margin-top: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+.nav-back { font-size: 13px; font-weight: 600; color: var(--text2); }
+.nav-back:hover { color: var(--text); }
+
+/* PAGE */
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 60px 24px 80px; }
+
+.hero { text-align: center; margin-bottom: 56px; }
+.pro-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: #fff; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+.hero h1 { font-family: 'DM Sans', sans-serif; font-size: 42px; font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 14px; }
+.hero p { font-size: 17px; color: var(--text2); line-height: 1.7; max-width: 520px; margin: 0 auto 24px; }
+.founding-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--yellow); color: #fff; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px; }
+
+/* TOGGLE */
+.billing-toggle { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; }
+.toggle-label { font-size: 14px; font-weight: 600; color: var(--text2); }
+.toggle-label.active { color: var(--text); }
+.toggle-switch { width: 48px; height: 26px; background: var(--accent); border-radius: 13px; position: relative; cursor: pointer; border: none; outline: none; transition: background 0.2s; }
+.toggle-knob { width: 20px; height: 20px; background: #fff; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: left 0.2s; }
+.toggle-switch.monthly .toggle-knob { left: 25px; }
+.save-pill { background: var(--green-bg); color: var(--green); font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 10px; }
+
+/* PRICING CARDS */
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 56px; }
+.pricing-card { background: var(--surface); border: 2px solid var(--border); border-radius: 12px; padding: 32px; position: relative; }
+.pricing-card.featured { border-color: var(--accent); }
+.featured-label { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; padding: 3px 14px; border-radius: 20px; white-space: nowrap; }
+.card-name { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); margin-bottom: 8px; }
+.card-price { font-family: 'DM Sans', sans-serif; font-size: 44px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+.card-price sup { font-size: 22px; vertical-align: top; margin-top: 8px; font-weight: 700; }
+.card-price span { font-size: 16px; font-weight: 500; color: var(--text2); }
+.card-billing { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
+.card-savings { font-size: 12px; font-weight: 700; color: var(--green); margin-bottom: 24px; height: 18px; }
+.card-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.feature-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.5; }
+.feature-list li::before { content: '✓'; font-weight: 800; color: var(--green); flex-shrink: 0; margin-top: 1px; }
+.feature-list li.dim { color: var(--text2); }
+.feature-list li.dim::before { color: var(--text3); }
+.card-cta { display: block; width: 100%; padding: 13px; text-align: center; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; border: none; transition: all 0.15s; }
+.card-cta.primary { background: var(--accent); color: #fff; }
+.card-cta.primary:hover { background: #1E40AF; }
+.card-cta.secondary { background: var(--surface2); color: var(--text); }
+.card-cta.secondary:hover { background: var(--border2); }
+.card-note { font-size: 11px; color: var(--text3); text-align: center; margin-top: 10px; }
+
+/* WHAT'S INCLUDED */
+.section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text2); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 56px; }
+.tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+.tool-card .tool-emoji { font-size: 24px; margin-bottom: 10px; }
+.tool-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.tool-card p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.tool-card .tool-status { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; }
+.tool-card .tool-status.live { color: var(--green); }
+.tool-card .tool-status.soon { color: var(--yellow); }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 56px; }
+.faq-item { padding: 18px 0; border-bottom: 1px solid var(--border); }
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.faq-item p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* GUARANTEE */
+.guarantee { background: var(--green-bg); border: 1px solid #A7F3D0; border-radius: 10px; padding: 24px 28px; display: flex; gap: 16px; align-items: flex-start; margin-bottom: 56px; }
+.guarantee-icon { font-size: 28px; flex-shrink: 0; }
+.guarantee h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.guarantee p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+footer { border-top: 3px solid var(--text); background: var(--text); color: #fff; padding: 28px 24px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-links a { font-size: 12px; color: #A1A1AA; margin-right: 20px; }
+.footer-links a:hover { color: #fff; }
+.footer-copy { font-size: 11px; color: #71717A; }
+
+@media (max-width: 700px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <a href="/" class="wordmark">
+        <span class="wordmark-rc">Rev</span><span class="wordmark-cycle">Cycle</span>
+        <div class="wordmark-divider"></div>
+        <span class="wordmark-ai">AI</span>
+      </a>
+      <div class="pub-tagline">Revenue Cycle Intelligence · Published Daily</div>
+    </div>
+    <a href="/" class="nav-back">← Back to top stories</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="pro-badge">⚡ RevCycleAI Pro</div>
+    <h1>The full toolkit for RCM professionals who can't afford to guess</h1>
+    <p>Benchmark your denial rates. Know what your peers are paid. Access every tool and report we publish — one subscription.</p>
+    <span class="founding-tag">🔒 Founding member rate — locks in forever</span>
+  </div>
+
+  <!-- BILLING TOGGLE -->
+  <div class="billing-toggle">
+    <span class="toggle-label active" id="annualLabel">Annual</span>
+    <button class="toggle-switch" id="billingToggle" onclick="toggleBilling()" aria-label="Toggle billing period">
+      <div class="toggle-knob"></div>
+    </button>
+    <span class="toggle-label" id="monthlyLabel">Monthly</span>
+    <span class="save-pill" id="savePill">Save $99/yr</span>
+  </div>
+
+  <!-- PRICING CARDS -->
+  <div class="pricing-grid">
+
+    <!-- FREE -->
+    <div class="pricing-card">
+      <div class="card-name">Free</div>
+      <div class="card-price"><sup>$</sup>0</div>
+      <div class="card-billing">Always free</div>
+      <div class="card-savings">&nbsp;</div>
+      <div class="card-divider"></div>
+      <ul class="feature-list">
+        <li>Daily RCM intelligence feed</li>
+        <li>Weekly newsletter — This Week in RCM</li>
+        <li>6 free downloadable resources</li>
+        <li class="dim">Denial rate benchmarking tool</li>
+        <li class="dim">RCM salary benchmarking tool</li>
+        <li class="dim">Carve-out opportunity scanner</li>
+        <li class="dim">Premium deep-dive reports</li>
+        <li class="dim">Full resource library (growing monthly)</li>
+      </ul>
+      <a href="/" class="card-cta secondary">Stay on free →</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="pricing-card featured">
+      <div class="featured-label">Most popular</div>
+      <div class="card-name">Pro</div>
+      <div class="card-price" id="proPrice"><sup>$</sup>21<span>/mo</span></div>
+      <div class="card-billing" id="proBilling">Billed annually as $249/yr</div>
+      <div class="card-savings" id="proSavings">Save $99 vs monthly</div>
+      <div class="card-divider"></div>
+      <ul class="feature-list">
+        <li>Everything in Free</li>
+        <li><strong>Denial rate benchmarking tool</strong></li>
+        <li><strong>RCM salary benchmarking tool</strong></li>
+        <li><strong>Carve-out opportunity scanner</strong></li>
+        <li><strong>Premium deep-dive reports</strong> (monthly)</li>
+        <li><strong>Full resource library</strong> — all future tools included</li>
+        <li>Early access to new features</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <button class="card-cta primary" id="proCtaBtn" onclick="startCheckout()">Get Pro access →</button>
+      <p class="card-note">Stripe checkout — cancel anytime</p>
+    </div>
+
+  </div>
+
+  <!-- WHAT'S INCLUDED -->
+  <div class="section-title">What Pro includes</div>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-emoji">📉</div>
+      <h4>Denial Rate Benchmarking</h4>
+      <p>See how your denial rate stacks up by specialty, payor, and procedure type. No PHI required.</p>
+      <div class="tool-status soon">Coming soon</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">💼</div>
+      <h4>RCM Salary Benchmarking</h4>
+      <p>Compensation data for billing specialists, RCM directors, and credentialing staff by region and practice size.</p>
+      <div class="tool-status soon">Coming soon</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">🔍</div>
+      <h4>Carve-Out Opportunity Scanner</h4>
+      <p>Find where umbrella network stacking is costing you money and which payors are worth renegotiating.</p>
+      <div class="tool-status soon">Coming soon</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">📊</div>
+      <h4>Monthly Deep-Dive Reports</h4>
+      <p>One long-form analysis per month. Payor trends, network changes, and what they mean for your AR.</p>
+      <div class="tool-status live">Live on launch</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">📥</div>
+      <h4>Full Resource Library</h4>
+      <p>Every checklist, template, and calculator we publish — past and future — in one place.</p>
+      <div class="tool-status live">Live on launch</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">⚡</div>
+      <h4>Early Access</h4>
+      <p>Pro members get first access to every new tool before it's announced publicly.</p>
+      <div class="tool-status live">Always</div>
+    </div>
+  </div>
+
+  <!-- GUARANTEE -->
+  <div class="guarantee">
+    <div class="guarantee-icon">🛡️</div>
+    <div>
+      <h4>30-day money-back guarantee</h4>
+      <p>If Pro doesn't deliver value in your first 30 days — tools weren't useful, reports weren't relevant — email us and we'll refund you in full. No questions asked.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-title">Common questions</div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <h4>What is the founding member rate?</h4>
+      <p>The first subscribers to RevCycleAI Pro lock in $29/mo (or $249/yr) permanently. When we raise prices — which we will as the tool library grows — founding members keep their original rate as long as they stay subscribed.</p>
+    </div>
+    <div class="faq-item">
+      <h4>When do the denial and salary tools launch?</h4>
+      <p>Both are in active development and will be available to Pro subscribers first. Subscribe now to lock in the founding rate and get notified the moment they're ready.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can I cancel anytime?</h4>
+      <p>Yes. Cancel from your Stripe billing portal anytime — no penalty, no runaround. Your access continues until the end of your billing period.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Is this for individuals or teams?</h4>
+      <p>Pro is priced for individual RCM professionals. Team pricing for departments and billing companies is coming — fill in the form below if you need more than one seat and we'll reach out.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What if I need an invoice for reimbursement?</h4>
+      <p>Stripe sends an automatic receipt for every payment. If you need a formal invoice for your employer, contact us and we'll generate one.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:'DM Sans',sans-serif;font-size:18px">
+      <span style="font-weight:800">Rev</span><span style="font-weight:400">Cycle</span>
+      <span style="font-size:10px;font-weight:800;background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px">AI</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Top Stories</a>
+      <a href="/newsletter">Newsletter</a>
+      <a href="/tools">Tools</a>
+      <a href="/roadmap">Roadmap</a>
+      <a href="/advertise">Advertise</a>
+    </div>
+    <div class="footer-copy">© 2026 RevCycleAI</div>
+  </div>
+</footer>
+
+<script>
+let isMonthly = false;
+
+function toggleBilling() {
+  isMonthly = !isMonthly;
+  const toggle = document.getElementById('billingToggle');
+  const annualLabel = document.getElementById('annualLabel');
+  const monthlyLabel = document.getElementById('monthlyLabel');
+  const proPrice = document.getElementById('proPrice');
+  const proBilling = document.getElementById('proBilling');
+  const proSavings = document.getElementById('proSavings');
+  const savePill = document.getElementById('savePill');
+  const ctaBtn = document.getElementById('proCtaBtn');
+
+  if (isMonthly) {
+    toggle.classList.add('monthly');
+    annualLabel.classList.remove('active');
+    monthlyLabel.classList.add('active');
+    proPrice.innerHTML = '<sup>$</sup>29<span>/mo</span>';
+    proBilling.textContent = 'Billed monthly — cancel anytime';
+    proSavings.innerHTML = '&nbsp;';
+    savePill.style.opacity = '0.4';
+    ctaBtn.dataset.plan = 'monthly';
+  } else {
+    toggle.classList.remove('monthly');
+    annualLabel.classList.add('active');
+    monthlyLabel.classList.remove('active');
+    proPrice.innerHTML = '<sup>$</sup>21<span>/mo</span>';
+    proBilling.textContent = 'Billed annually as $249/yr';
+    proSavings.textContent = 'Save $99 vs monthly';
+    savePill.style.opacity = '1';
+    ctaBtn.dataset.plan = 'annual';
+  }
+}
+
+async function startCheckout() {
+  const btn = document.getElementById('proCtaBtn');
+  const plan = isMonthly ? 'monthly' : 'annual';
+  btn.textContent = 'Loading...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error('No checkout URL');
+    }
+  } catch (e) {
+    btn.textContent = 'Get Pro access →';
+    btn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  }
+}
+</script>
+</body>
+</html>
