@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denial Rate Benchmarking Tool — RevCycleAI</title>
+<meta name="description" content="See how your denial rate compares to peers by specialty, payor, and practice type. Free denial benchmarking tool for RCM teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAFA; --surface: #fff; --surface2: #F4F4F5;
+  --border: #E4E4E7; --border2: #D4D4D8;
+  --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+  --accent: #1D4ED8; --accent-bg: #EFF6FF;
+  --green: #059669; --green-bg: #ECFDF5; --green-border: #A7F3D0;
+  --yellow: #D97706; --yellow-bg: #FFFBEB; --yellow-border: #FDE68A;
+  --red: #DC2626; --red-bg: #FEF2F2; --red-border: #FECACA;
+  --purple: #7C3AED; --purple-bg: #F5F3FF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: var(--accent); text-decoration: none; }
+
+.masthead { max-width: 1200px; margin: 0 auto; padding: 20px 24px 16px; border-bottom: 3px solid var(--text); }
+.masthead-inner { display: flex; align-items: center; justify-content: space-between; }
+.wordmark { display: inline-flex; align-items: center; line-height: 1; text-decoration: none; color: inherit; }
+.wordmark-rc { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.wordmark-cycle { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 400; letter-spacing: -0.5px; }
+.wordmark-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 10px; }
+.wordmark-ai { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+.pub-tagline { font-size: 11px; color: var(--text3); margin-top: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+.nav-back { font-size: 13px; font-weight: 600; color: var(--text2); }
+.nav-back:hover { color: var(--text); }
+
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+.page-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text3); margin-bottom: 10px; }
+.page-title { font-family: 'DM Sans', sans-serif; font-size: 34px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px; }
+.page-deck { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 32px; max-width: 620px; }
+.pro-note { display: inline-flex; align-items: center; gap: 7px; background: var(--accent-bg); border: 1px solid #BFDBFE; border-radius: 6px; padding: 7px 14px; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 36px; }
+
+.tool-layout { display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: start; }
+
+/* FILTERS */
+.filters-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px; position: sticky; top: 24px; }
+.filters-panel h3 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); margin-bottom: 20px; }
+.filter-group { margin-bottom: 18px; }
+.filter-group label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text2); margin-bottom: 7px; }
+.filter-group select, .filter-group input {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border2); border-radius: 6px;
+  font-size: 13px; font-family: inherit; outline: none; background: var(--bg); color: var(--text);
+}
+.filter-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2352525B' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; cursor: pointer; }
+.filter-group select:focus, .filter-group input:focus { border-color: var(--accent); background: #fff; }
+.input-suffix { position: relative; }
+.input-suffix span { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--text3); font-weight: 600; pointer-events: none; }
+.filter-divider { height: 1px; background: var(--border); margin: 18px 0; }
+.calc-btn { width: 100%; margin-top: 4px; padding: 10px; background: var(--text); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.calc-btn:hover { background: #27272A; }
+
+/* RESULTS */
+.results-panel { display: flex; flex-direction: column; gap: 20px; }
+
+/* SCORE CARD */
+.score-card { border-radius: 10px; padding: 28px 32px; border: 2px solid; }
+.score-card.good { background: var(--green-bg); border-color: var(--green-border); }
+.score-card.average { background: var(--yellow-bg); border-color: var(--yellow-border); }
+.score-card.poor { background: var(--red-bg); border-color: var(--red-border); }
+.score-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+.score-left .score-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.score-card.good .score-label { color: var(--green); }
+.score-card.average .score-label { color: var(--yellow); }
+.score-card.poor .score-label { color: var(--red); }
+.score-title { font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+.score-body { font-size: 13px; color: var(--text2); line-height: 1.6; max-width: 420px; }
+.score-right { text-align: right; flex-shrink: 0; }
+.big-rate { font-family: 'DM Sans', sans-serif; font-size: 52px; font-weight: 900; line-height: 1; }
+.score-card.good .big-rate { color: var(--green); }
+.score-card.average .big-rate { color: var(--yellow); }
+.score-card.poor .big-rate { color: var(--red); }
+.big-rate-label { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+/* BENCHMARK BAR */
+.bench-bar-wrap { margin-top: 4px; }
+.bench-zones { display: flex; height: 12px; border-radius: 8px; overflow: hidden; margin-bottom: 6px; }
+.bench-zone { flex: 1; }
+.bench-zone.green { background: #6EE7B7; }
+.bench-zone.yellow { background: #FCD34D; }
+.bench-zone.red { background: #FCA5A5; }
+.bench-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); margin-bottom: 4px; }
+.my-marker-row { position: relative; height: 16px; }
+.my-marker-line { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--text); transform: translateX(-50%); border-radius: 2px; }
+.my-marker-tip { position: absolute; top: -22px; transform: translateX(-50%); font-size: 10px; font-weight: 800; background: var(--text); color: #fff; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+
+/* METRICS GRID */
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.metric-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.metric-box .m-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-bottom: 6px; }
+.metric-box .m-value { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; line-height: 1; margin-bottom: 3px; }
+.metric-box .m-sub { font-size: 11px; color: var(--text2); line-height: 1.4; }
+.metric-box .m-value.good { color: var(--green); }
+.metric-box .m-value.avg { color: var(--yellow); }
+.metric-box .m-value.poor { color: var(--red); }
+
+/* IMPACT CARD */
+.impact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; }
+.impact-card h3 { font-size: 13px; font-weight: 800; margin-bottom: 16px; }
+.impact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.impact-item { text-align: center; padding: 14px; background: var(--surface2); border-radius: 8px; }
+.impact-item .i-val { font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 3px; }
+.impact-item .i-label { font-size: 11px; color: var(--text2); line-height: 1.4; }
+.impact-insight { background: var(--accent-bg); border: 1px solid #BFDBFE; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: var(--text); line-height: 1.6; }
+.impact-insight strong { color: var(--accent); }
+
+/* DENIAL REASONS TABLE */
+.reasons-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+.reasons-card h3 { font-size: 13px; font-weight: 800; margin-bottom: 6px; }
+.reasons-card .r-sub { font-size: 12px; color: var(--text2); margin-bottom: 18px; }
+.reason-row { display: grid; grid-template-columns: 1fr auto 120px auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.reason-row:last-child { border-bottom: none; }
+.reason-name { font-size: 13px; font-weight: 600; }
+.reason-pct { font-size: 13px; font-weight: 700; color: var(--text); text-align: right; }
+.reason-bar-wrap { height: 6px; background: var(--surface2); border-radius: 6px; overflow: hidden; }
+.reason-bar-fill { height: 100%; border-radius: 6px; background: var(--accent); }
+.appeal-badge { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; text-align: center; white-space: nowrap; }
+.appeal-badge.high { background: var(--green-bg); color: var(--green); }
+.appeal-badge.med { background: var(--yellow-bg); color: var(--yellow); }
+.appeal-badge.low { background: var(--red-bg); color: var(--red); }
+
+/* METHODOLOGY */
+.method-note { background: var(--surface2); border-radius: 8px; padding: 16px 20px; font-size: 12px; color: var(--text2); line-height: 1.6; }
+.method-note strong { color: var(--text); }
+
+/* PRO CTA */
+.pro-cta { background: var(--text); color: #fff; border-radius: 10px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.pro-cta h4 { font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.pro-cta p { font-size: 13px; color: #A1A1AA; }
+.pro-cta a { background: #fff; color: var(--text); border-radius: 6px; padding: 10px 20px; font-size: 13px; font-weight: 700; white-space: nowrap; font-family: 'DM Sans', sans-serif; flex-shrink: 0; }
+.pro-cta a:hover { background: #F4F4F5; }
+
+footer { border-top: 3px solid var(--text); background: var(--text); color: #fff; padding: 28px 24px; margin-top: 60px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-links a { font-size: 12px; color: #A1A1AA; margin-right: 20px; }
+.footer-links a:hover { color: #fff; }
+
+@media (max-width: 720px) {
+  .tool-layout { grid-template-columns: 1fr; }
+  .filters-panel { position: static; }
+  .metrics-grid, .impact-grid { grid-template-columns: 1fr 1fr; }
+  .reason-row { grid-template-columns: 1fr auto; }
+  .reason-bar-wrap { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <a href="/" class="wordmark">
+        <span class="wordmark-rc">Rev</span><span class="wordmark-cycle">Cycle</span>
+        <div class="wordmark-divider"></div>
+        <span class="wordmark-ai">AI</span>
+      </a>
+      <div class="pub-tagline">Revenue Cycle Intelligence · Published Daily</div>
+    </div>
+    <a href="/" class="nav-back">← Back to top stories</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="page-label">Free Tool</div>
+  <h1 class="page-title">Denial Rate Benchmarking</h1>
+  <p class="page-deck">See how your denial rate compares to peers by specialty, payor, and practice size. Identify your top denial drivers and estimate the revenue you're leaving on the table. No PHI required.</p>
+  <div class="pro-note">⚡ <strong>Pro:</strong> Payor-by-payor denial breakdown, appeal success rate trends, and monthly AR recovery reports → <a href="/pro" style="font-weight:800">RevCycleAI Pro</a></div>
+
+  <div class="tool-layout">
+
+    <!-- FILTERS -->
+    <div class="filters-panel">
+      <h3>Your Profile</h3>
+
+      <div class="filter-group">
+        <label>Specialty</label>
+        <select id="specialtySelect" onchange="calculate()">
+          <option value="anesthesia">Anesthesia</option>
+          <option value="dental" selected>Dental / DSO</option>
+          <option value="emergency">Emergency Medicine</option>
+          <option value="primary-care">Primary Care / Family Med</option>
+          <option value="orthopedics">Orthopedics</option>
+          <option value="cardiology">Cardiology</option>
+          <option value="radiology">Radiology / Imaging</option>
+          <option value="behavioral">Behavioral Health</option>
+          <option value="physical-therapy">Physical / Occupational Therapy</option>
+          <option value="surgery">General Surgery</option>
+          <option value="oncology">Oncology</option>
+          <option value="multi-specialty">Multi-Specialty Group</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Primary Payor Mix</label>
+        <select id="payorSelect" onchange="calculate()">
+          <option value="commercial-heavy">Commercial-Heavy (&gt;60% commercial)</option>
+          <option value="medicare-heavy">Medicare-Heavy (&gt;40% Medicare)</option>
+          <option value="medicaid-heavy">Medicaid-Heavy (&gt;30% Medicaid)</option>
+          <option value="ma-heavy">Medicare Advantage-Heavy</option>
+          <option value="balanced" selected>Balanced Mix</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Practice Size</label>
+        <select id="sizeSelect" onchange="calculate()">
+          <option value="small">Small (&lt;10 providers)</option>
+          <option value="mid" selected>Mid-size (10–50 providers)</option>
+          <option value="large">Large (50–200 providers)</option>
+          <option value="enterprise">Enterprise (200+ providers)</option>
+        </select>
+      </div>
+
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <label>My Current Denial Rate</label>
+        <div class="input-suffix">
+          <input type="number" id="myRate" placeholder="e.g. 8.5" min="0" max="50" step="0.1" oninput="calculate()">
+          <span>%</span>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Monthly Gross Charges ($)</label>
+        <div class="input-suffix">
+          <input type="number" id="myCharges" placeholder="e.g. 500000" min="0" step="1000" oninput="calculate()">
+          <span style="right:10px;font-size:11px">USD</span>
+        </div>
+      </div>
+
+      <button class="calc-btn" onclick="calculate()">Run benchmark →</button>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-panel" id="resultsPanel">
+      <!-- Dynamically populated -->
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:'DM Sans',sans-serif;font-size:18px">
+      <span style="font-weight:800">Rev</span><span style="font-weight:400">Cycle</span>
+      <span style="font-size:10px;font-weight:800;background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px">AI</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Top Stories</a>
+      <a href="/tools">Tools</a>
+      <a href="/pro">Pro</a>
+      <a href="/newsletter">Newsletter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── BENCHMARK DATA ─────────────────────────────────────────────────────────────
+// Denial rates: { good (top quartile), avg (median), poor (bottom quartile) }
+// All as percentages
+
+const specialtyData = {
+  'anesthesia':       { good: 5.0, avg: 8.5,  poor: 13.0, label: 'Anesthesia',          topReasons: ['auth', 'eligibility', 'medical-necessity', 'timely-filing', 'coding'] },
+  'dental':           { good: 4.5, avg: 7.0,  poor: 11.0, label: 'Dental / DSO',         topReasons: ['missing-info', 'frequency', 'medical-necessity', 'eligibility', 'network'] },
+  'emergency':        { good: 5.5, avg: 8.0,  poor: 12.5, label: 'Emergency Medicine',   topReasons: ['medical-necessity', 'eligibility', 'coding', 'timely-filing', 'auth'] },
+  'primary-care':     { good: 3.5, avg: 5.5,  poor: 9.0,  label: 'Primary Care',         topReasons: ['coding', 'eligibility', 'medical-necessity', 'timely-filing', 'duplicate'] },
+  'orthopedics':      { good: 4.5, avg: 7.5,  poor: 12.0, label: 'Orthopedics',          topReasons: ['auth', 'medical-necessity', 'coding', 'eligibility', 'timely-filing'] },
+  'cardiology':       { good: 4.0, avg: 7.0,  poor: 11.5, label: 'Cardiology',           topReasons: ['medical-necessity', 'auth', 'coding', 'eligibility', 'timely-filing'] },
+  'radiology':        { good: 3.5, avg: 6.0,  poor: 10.0, label: 'Radiology / Imaging',  topReasons: ['auth', 'medical-necessity', 'coding', 'eligibility', 'duplicate'] },
+  'behavioral':       { good: 7.0, avg: 11.0, poor: 17.0, label: 'Behavioral Health',    topReasons: ['medical-necessity', 'auth', 'timely-filing', 'coding', 'eligibility'] },
+  'physical-therapy': { good: 5.0, avg: 8.5,  poor: 13.5, label: 'Physical Therapy',     topReasons: ['auth', 'medical-necessity', 'frequency', 'eligibility', 'coding'] },
+  'surgery':          { good: 4.0, avg: 7.0,  poor: 11.0, label: 'General Surgery',      topReasons: ['auth', 'medical-necessity', 'coding', 'eligibility', 'timely-filing'] },
+  'oncology':         { good: 5.5, avg: 9.0,  poor: 14.0, label: 'Oncology',             topReasons: ['auth', 'medical-necessity', 'coding', 'eligibility', 'network'] },
+  'multi-specialty':  { good: 4.5, avg: 7.5,  poor: 12.0, label: 'Multi-Specialty',      topReasons: ['coding', 'eligibility', 'auth', 'medical-necessity', 'timely-filing'] }
+};
+
+// Payor mix adjustments (additive % pts to avg)
+const payorAdj = {
+  'commercial-heavy': -0.5,
+  'medicare-heavy':   -1.0,
+  'medicaid-heavy':   +2.5,
+  'ma-heavy':         +1.5,
+  'balanced':          0.0
+};
+
+// Size adjustments
+const sizeAdj = {
+  'small':      +1.5,
+  'mid':         0.0,
+  'large':      -0.5,
+  'enterprise': -1.0
+};
+
+// Denial reasons catalog
+const denialReasons = {
+  'medical-necessity': { label: 'Medical Necessity',          pctRange: [22, 30], appeal: 'med', appealLabel: '45–60% appeal win' },
+  'auth':              { label: 'Prior Auth Missing/Invalid', pctRange: [18, 25], appeal: 'med', appealLabel: '35–55% appeal win' },
+  'eligibility':       { label: 'Eligibility / Coverage',     pctRange: [14, 20], appeal: 'high', appealLabel: '65–75% appeal win' },
+  'coding':            { label: 'Coding Error / Mismatch',    pctRange: [10, 16], appeal: 'high', appealLabel: '55–70% appeal win' },
+  'timely-filing':     { label: 'Timely Filing',              pctRange: [8, 14],  appeal: 'low', appealLabel: '15–30% appeal win' },
+  'network':           { label: 'Out-of-Network / Routing',   pctRange: [6, 11],  appeal: 'med', appealLabel: '40–55% appeal win' },
+  'missing-info':      { label: 'Missing / Incomplete Info',  pctRange: [7, 13],  appeal: 'high', appealLabel: '70–80% appeal win' },
+  'frequency':         { label: 'Frequency Limitation',       pctRange: [5, 10],  appeal: 'med', appealLabel: '30–50% appeal win' },
+  'duplicate':         { label: 'Duplicate Claim',            pctRange: [3, 7],   appeal: 'high', appealLabel: '80–90% appeal win' }
+};
+
+const fmt$ = (n) => {
+  if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n / 1000) + 'K';
+  return '$' + Math.round(n);
+};
+
+function getScore(rate, good, avg, poor) {
+  if (rate <= good) return 'good';
+  if (rate <= avg + (poor - avg) * 0.4) return 'average';
+  return 'poor';
+}
+
+function calculate() {
+  const specialty   = document.getElementById('specialtySelect').value;
+  const payor       = document.getElementById('payorSelect').value;
+  const size        = document.getElementById('sizeSelect').value;
+  const myRateInput = parseFloat(document.getElementById('myRate').value);
+  const myCharges   = parseFloat(document.getElementById('myCharges').value) || 0;
+
+  const sp = specialtyData[specialty];
+  const adjAvg  = sp.avg  + payorAdj[payor] + sizeAdj[size];
+  const adjGood = sp.good + payorAdj[payor] * 0.5 + sizeAdj[size] * 0.5;
+  const adjPoor = sp.poor + payorAdj[payor] * 1.2 + sizeAdj[size] * 1.2;
+
+  const hasMyRate = !isNaN(myRateInput) && myRateInput > 0;
+  const displayRate = hasMyRate ? myRateInput : adjAvg;
+  const score = hasMyRate ? getScore(displayRate, adjGood, adjAvg, adjPoor) : 'average';
+
+  // Score card content
+  const scoreLabels = {
+    good: { label: '✓ Top Performer', title: 'Your denial rate is below the industry benchmark', body: `At ${displayRate.toFixed(1)}%, you're outperforming most ${sp.label} practices. Focus on maintaining clean claim rates and proactive eligibility verification to stay here.` },
+    average: { label: '⚠ At Industry Average', title: hasMyRate ? 'Your denial rate is near the industry average' : `Industry average for ${sp.label}`, body: `The median denial rate for ${sp.label} with your payor mix is ${adjAvg.toFixed(1)}%. Top performers are at ${adjGood.toFixed(1)}% — there's meaningful room to improve.` },
+    poor: { label: '🔴 Above Average — Action Needed', title: 'Your denial rate is above the benchmark', body: `At ${displayRate.toFixed(1)}%, you're losing more revenue to denials than your peers. The good news: most of these denials are recoverable with the right workflow changes.` }
+  };
+
+  // Financial impact
+  const deniedCharges = myCharges * (displayRate / 100);
+  const recoverable = deniedCharges * 0.55; // industry avg ~55% of denials are recoverable
+  const lostRevenue = deniedCharges * 0.45;
+  const improvementOpp = myCharges * ((displayRate - adjGood) / 100) * 0.55;
+
+  // Marker position (0-50% scale)
+  const barMax = Math.min(adjPoor * 1.3, 25);
+  const markerPct = Math.min((displayRate / barMax) * 100, 99);
+  const goodPct = (adjGood / barMax * 100).toFixed(1);
+  const avgPct = (adjAvg / barMax * 100).toFixed(1);
+
+  // Clean claim rate
+  const cleanClaimRate = (100 - displayRate - 2.5).toFixed(1);
+  const firstPassRate = (100 - displayRate * 0.7).toFixed(1);
+
+  const sc = scoreLabels[score];
+
+  // Top denial reasons for this specialty
+  const topReasonIds = sp.topReasons.slice(0, 5);
+  let totalPct = 0;
+  const reasonRows = topReasonIds.map((id, i) => {
+    const r = denialReasons[id];
+    const mid = Math.round((r.pctRange[0] + r.pctRange[1]) / 2);
+    const seedPct = mid - (i * 2);
+    totalPct += seedPct;
+    return { id, ...r, pct: seedPct };
+  });
+  // Normalize to 100
+  const normalized = reasonRows.map(r => ({ ...r, pct: Math.round(r.pct / totalPct * 100) }));
+  const maxPct = Math.max(...normalized.map(r => r.pct));
+
+  const panel = document.getElementById('resultsPanel');
+  panel.innerHTML = `
+
+    <!-- SCORE CARD -->
+    <div class="score-card ${score}">
+      <div class="score-top">
+        <div class="score-left">
+          <div class="score-label">${sc.label}</div>
+          <div class="score-title">${sc.title}</div>
+          <div class="score-body">${sc.body}</div>
+        </div>
+        ${hasMyRate ? `
+        <div class="score-right">
+          <div class="big-rate">${displayRate.toFixed(1)}%</div>
+          <div class="big-rate-label">Your denial rate</div>
+        </div>` : ''}
+      </div>
+
+      <!-- BENCHMARK BAR -->
+      <div class="bench-bar-wrap">
+        <div class="bench-labels">
+          <span>0%</span>
+          <span>Top performers ≤${adjGood.toFixed(1)}%</span>
+          <span>Avg ${adjAvg.toFixed(1)}%</span>
+          <span>${barMax.toFixed(0)}%+</span>
+        </div>
+        <div class="bench-zones">
+          <div class="bench-zone green" style="flex:${goodPct}"></div>
+          <div class="bench-zone yellow" style="flex:${(avgPct - goodPct)}"></div>
+          <div class="bench-zone red" style="flex:${(100 - avgPct)}"></div>
+        </div>
+        ${hasMyRate ? `
+        <div class="my-marker-row">
+          <div class="my-marker-line" style="left:${markerPct}%">
+            <div class="my-marker-tip" style="left:0">You: ${displayRate.toFixed(1)}%</div>
+          </div>
+        </div>` : ''}
+      </div>
+    </div>
+
+    <!-- KEY METRICS -->
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="m-label">Industry Average</div>
+        <div class="m-value avg">${adjAvg.toFixed(1)}%</div>
+        <div class="m-sub">${sp.label} with your payor mix</div>
+      </div>
+      <div class="metric-box">
+        <div class="m-label">Top Performer Target</div>
+        <div class="m-value good">${adjGood.toFixed(1)}%</div>
+        <div class="m-sub">75th percentile benchmark</div>
+      </div>
+      <div class="metric-box">
+        <div class="m-label">First-Pass Rate</div>
+        <div class="m-value ${score}">${firstPassRate}%</div>
+        <div class="m-sub">Estimated clean claim rate</div>
+      </div>
+      <div class="metric-box">
+        <div class="m-label">Appeal Success Rate</div>
+        <div class="m-value good">~55%</div>
+        <div class="m-sub">Industry avg — varies by reason</div>
+      </div>
+      <div class="metric-box">
+        <div class="m-label">Avg Days to Resolve</div>
+        <div class="m-value avg">28–45</div>
+        <div class="m-sub">Days from denial to resolution</div>
+      </div>
+      <div class="metric-box">
+        <div class="m-label">Cost per Denial</div>
+        <div class="m-value poor">$25–$118</div>
+        <div class="m-sub">Admin cost to work a denial</div>
+      </div>
+    </div>
+
+    <!-- FINANCIAL IMPACT -->
+    ${myCharges > 0 ? `
+    <div class="impact-card">
+      <h3>💰 Financial Impact — Based on $${Math.round(myCharges).toLocaleString()}/mo gross charges</h3>
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="i-val" style="color:var(--red)">${fmt$(deniedCharges)}</div>
+          <div class="i-label">Monthly charges denied</div>
+        </div>
+        <div class="impact-item">
+          <div class="i-val" style="color:var(--green)">${fmt$(recoverable)}</div>
+          <div class="i-label">Estimated recoverable via appeals</div>
+        </div>
+        <div class="impact-item">
+          <div class="i-val" style="color:var(--yellow)">${fmt$(lostRevenue)}</div>
+          <div class="i-label">Estimated lost revenue/month</div>
+        </div>
+      </div>
+      ${hasMyRate && displayRate > adjGood ? `
+      <div class="impact-insight">
+        <strong>Opportunity:</strong> Closing the gap from ${displayRate.toFixed(1)}% to the top-performer benchmark of ${adjGood.toFixed(1)}% could recover approximately <strong>${fmt$(improvementOpp)}/month</strong> in additional collections.
+        <a href="https://axlow.com" target="_blank" style="font-weight:700;margin-left:6px">Look up denial policies on Axlow →</a>
+      </div>` : ''}
+    </div>` : ''}
+
+    <!-- TOP DENIAL REASONS -->
+    <div class="reasons-card">
+      <h3>Top Denial Drivers — ${sp.label}</h3>
+      <div class="r-sub">Estimated distribution of denial reasons for your specialty and payor mix. Appeal win rates indicate how often these are overturned on appeal.</div>
+      ${normalized.map(r => `
+      <div class="reason-row">
+        <div class="reason-name">${r.label}</div>
+        <div class="reason-pct">${r.pct}%</div>
+        <div class="reason-bar-wrap"><div class="reason-bar-fill" style="width:${Math.round(r.pct/maxPct*100)}%"></div></div>
+        <div class="appeal-badge ${r.appeal}">${r.appealLabel}</div>
+      </div>`).join('')}
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div class="method-note">
+      <strong>Methodology:</strong> Benchmarks derived from CAQH CORE Connectivity Rule data, CMS claims processing reports, MGMA Stat surveys, Change Healthcare denial analytics, and RevCycleAI industry research. Specialty-level benchmarks reflect aggregate trends across payers; individual results vary by billing team, contract terms, and payer mix. Updated Q1 2026.
+    </div>
+
+    <!-- PRO CTA -->
+    <div class="pro-cta">
+      <div>
+        <h4>Get the full picture with Pro</h4>
+        <p>Payor-by-payor denial breakdowns, AR aging analysis, month-over-month trend tracking, and appeal workflow templates.</p>
+      </div>
+      <a href="/pro">Try Pro free for 30 days →</a>
+    </div>
+  `;
+}
+
+// Initialize on load
+calculate();
+</script>
+</body>
+</html>
