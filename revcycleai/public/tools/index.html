@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCM Tools — RevCycleAI</title>
+<meta name="description" content="Tools for revenue cycle teams. Payor policy search, PPO network routing intelligence, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0F1E;--surface:#111827;--border:#1F2937;--border2:#374151;--accent:#3B82F6;--accent2:#60A5FA;--text:#F9FAFB;--text2:#9CA3AF;--text3:#6B7280;--green:#10B981}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}a{color:var(--accent2);text-decoration:none}
+nav{max-width:1100px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:18px;font-weight:800}.nav-logo span{color:var(--accent2)}
+.nav-links{display:flex;gap:28px}.nav-links a{color:var(--text2);font-size:14px;font-weight:500}
+.nav-cta{background:var(--accent);color:#fff !important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:14px}
+.container{max-width:900px;margin:0 auto;padding:60px 24px 80px}
+h1{font-size:42px;font-weight:900;margin-bottom:12px}
+.sub{font-size:18px;color:var(--text2);margin-bottom:50px}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative;overflow:hidden}
+.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.tool-card.blue::before{background:linear-gradient(90deg,#3B82F6,#60A5FA)}
+.tool-card.green::before{background:linear-gradient(90deg,#10B981,#34D399)}
+.tool-icon{font-size:36px;margin-bottom:16px}
+.tool-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.tool-card.blue .tool-badge{background:rgba(59,130,246,0.15);color:var(--accent2)}
+.tool-card.green .tool-badge{background:rgba(16,185,129,0.15);color:var(--green)}
+.tool-card h2{font-size:22px;font-weight:800;margin-bottom:10px}
+.tool-card p{font-size:15px;color:var(--text2);line-height:1.6;margin-bottom:20px}
+.tool-features{list-style:none;margin-bottom:24px}
+.tool-features li{font-size:14px;color:var(--text2);padding:4px 0;display:flex;align-items:center;gap:8px}
+.tool-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:13px}
+.tool-btn{display:inline-flex;align-items:center;gap:6px;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;transition:all 0.2s}
+.tool-card.blue .tool-btn{background:var(--accent);color:#fff}
+.tool-card.blue .tool-btn:hover{background:#2563EB;text-decoration:none}
+.tool-card.green .tool-btn{background:var(--green);color:#fff}
+.tool-card.green .tool-btn:hover{background:#059669;text-decoration:none}
+.coming-soon{opacity:0.5;filter:grayscale(0.5);pointer-events:none}
+.cs-badge{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--text3);font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;margin-left:8px}
+@media(max-width:768px){.tools-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">RevCycle<span>AI</span></a>
+  <div class="nav-links">
+    <a href="/blog">Intelligence</a>
+    <a href="/tools" style="color:#F9FAFB">Tools</a>
+    <a href="/free">Free Resources</a>
+    <a href="/newsletter">Newsletter</a>
+  </div>
+  <a href="/newsletter" class="nav-links nav-cta">Get Weekly Intel →</a>
+</nav>
+
+<div class="container">
+  <h1>RCM Tools</h1>
+  <p class="sub">Put intelligence into action. Built for billing teams, DSOs, and revenue cycle leaders who don't have time to dig.</p>
+
+  <div class="tools-grid">
+    <div class="tool-card blue">
+      <div class="tool-icon">🔍</div>
+      <div class="tool-badge">Axlow</div>
+      <h2>Payor Policy Search</h2>
+      <p>Find any payor policy in 20 seconds. AI-powered search across UnitedHealthcare, Aetna, Cigna, Humana, BCBS, and 200+ payors.</p>
+      <ul class="tool-features">
+        <li>Search by CPT code, ICD-10, or plain English</li>
+        <li>Always current — policies updated in real time</li>
+        <li>Pull policy citations for denial appeals</li>
+        <li>No more PDF portal rabbit holes</li>
+      </ul>
+      <a href="https://axlow.com" class="tool-btn" target="_blank">Try Axlow Free → axlow.com ↗</a>
+    </div>
+
+    <div class="tool-card green">
+      <div class="tool-icon">🗺️</div>
+      <div class="tool-badge">PayorMap</div>
+      <h2>Dental PPO Routing Intelligence</h2>
+      <p>See exactly which network is repricing your dental claims. Identify umbrella network stacking, silent PPO exposure, and fee schedule leakage.</p>
+      <ul class="tool-features">
+        <li>Map Zelis, DenteMax, Careington, DNOA routing paths</li>
+        <li>CDT code allowable benchmarks (Medicaid / PPO / UCR)</li>
+        <li>State-by-state BCBS and DNOA routing overlay</li>
+        <li>PHI-free by design — no patient data required</li>
+      </ul>
+      <a href="https://payormap.com" class="tool-btn" target="_blank">Try PayorMap Free → payormap.com ↗</a>
+    </div>
+
+    <div class="tool-card blue coming-soon">
+      <div class="tool-icon">📋</div>
+      <div class="tool-badge">PPO Playbook <span class="cs-badge">Coming Soon</span></div>
+      <h2>Fee Schedule Negotiation System</h2>
+      <p>The step-by-step system for negotiating higher reimbursement rates. Built by RCM executives who've negotiated at scale.</p>
+      <ul class="tool-features">
+        <li>Payor-specific negotiation scripts</li>
+        <li>Market rate benchmarks by specialty and region</li>
+        <li>Contract language templates</li>
+        <li>Appeals and escalation playbook</li>
+      </ul>
+      <a href="/newsletter" class="tool-btn" style="pointer-events:all;opacity:1">Get notified when it launches →</a>
+    </div>
+
+    <div class="tool-card green coming-soon">
+      <div class="tool-icon">📧</div>
+      <div class="tool-badge">RCM Intel Newsletter <span class="cs-badge">Free</span></div>
+      <h2>Weekly Signal Report</h2>
+      <p>Every Tuesday: the top 3 RCM trends from the past week, what they mean for your team, and exactly what to do about it.</p>
+      <ul class="tool-features">
+        <li>Payor policy changes within 24–48 hours</li>
+        <li>Denial spike alerts and root cause analysis</li>
+        <li>Network routing intelligence for DSOs</li>
+        <li>Free downloadable resources monthly</li>
+      </ul>
+      <a href="/newsletter" class="tool-btn" style="pointer-events:all;opacity:1;background:var(--green)">Subscribe Free →</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

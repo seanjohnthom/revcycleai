@@ -1,0 +1,20 @@
+{
+  "type": "Cheat Sheet",
+  "title": "RCM Cheat Sheet: MetLife PDP Plus Network Changes: What DSOs Need to Know Before Q2 2026",
+  "description": "1-page quick reference for your billing team",
+  "format": "PDF (1-2 pages)",
+  "gate": "Email capture at revcycleai.com/free/",
+  "content_outline": [
+    "WHAT'S CHANGING: [2-3 bullet summary]",
+    "WHO IT AFFECTS: [Specific roles and claim types]",
+    "KEY DATES: [Timeline]",
+    "ACTION ITEMS: [5-7 specific steps]",
+    "RED FLAGS TO WATCH: [Warning signs]",
+    "WHERE TO GET MORE INFO: [Sources]",
+    "PRODUCT TOOLS: [Axlow/PayorMap links]"
+  ],
+  "product_cta": "payormap.com \u2014 Map your claim routing instantly",
+  "estimated_downloads": "200-500 in first 30 days if distributed in RCM Facebook groups",
+  "email_sequence_trigger": "After download: 3-email nurture sequence \u2192 product trial offer",
+  "created_at": "2026-02-19T08:52:47.169302"
+}

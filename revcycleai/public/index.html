@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevCycleAI — RCM Intelligence for Healthcare Finance Teams</title>
+<meta name="description" content="Daily RCM intelligence. Payor policy changes, denial management insights, and network routing analysis — before they hit your AR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAFA; --surface: #fff; --surface2: #F4F4F5;
+  --border: #E4E4E7; --border2: #D4D4D8;
+  --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+  --accent: #1D4ED8; --accent-bg: #EFF6FF;
+  --red: #DC2626; --red-bg: #FEF2F2;
+  --yellow: #D97706; --yellow-bg: #FFFBEB;
+  --green: #059669; --green-bg: #ECFDF5;
+  --masthead-border: 3px solid var(--text);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+
+/* ── TOPBAR ── */
+.topbar { background: var(--text); color: #fff; padding: 7px 0; font-size: 12px; font-weight: 500; overflow: hidden; }
+.topbar-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 12px; }
+.topbar-label { background: var(--red); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; }
+.ticker-wrap { flex: 1; overflow: hidden; }
+.ticker { display: flex; gap: 48px; animation: tick 50s linear infinite; white-space: nowrap; color: #D4D4D8; }
+.ticker-item { display: flex; align-items: center; gap: 6px; }
+.tick-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+@keyframes tick { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── MASTHEAD ── */
+.masthead { max-width: 1200px; margin: 0 auto; padding: 20px 24px 16px; border-bottom: var(--masthead-border); }
+.masthead-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.masthead-left { flex: 1; }
+
+/* Wordmark */
+.wordmark { display: inline-flex; align-items: center; gap: 0; line-height: 1; }
+.wordmark-rc { font-family: 'DM Sans', 'Inter', sans-serif; font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+.wordmark-cycle { font-family: 'DM Sans', 'Inter', sans-serif; font-size: 26px; font-weight: 400; color: var(--text); letter-spacing: -0.5px; }
+.wordmark-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 10px; }
+.wordmark-ai { font-family: 'DM Sans', 'Inter', sans-serif; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+.pub-tagline { font-size: 11px; color: var(--text3); margin-top: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+.masthead-right { text-align: right; }
+.masthead-date { font-size: 12px; color: var(--text2); margin-bottom: 8px; }
+.subscribe-inline { display: flex; gap: 8px; }
+.subscribe-inline input { padding: 8px 12px; border: 1px solid var(--border2); border-radius: 5px; font-size: 13px; font-family: inherit; outline: none; width: 200px; }
+.subscribe-inline input:focus { border-color: var(--accent); }
+.subscribe-inline button { background: var(--text); color: #fff; border: none; border-radius: 5px; padding: 8px 16px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.subscribe-inline button:hover { background: #27272A; }
+
+/* ── NAV ── */
+.site-nav { max-width: 1200px; margin: 0 auto; padding: 0 24px; border-bottom: 1px solid var(--border); }
+.site-nav ul { display: flex; gap: 0; list-style: none; }
+.site-nav li a { display: block; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px; }
+.site-nav li a:hover, .site-nav li.active a { color: var(--text); border-bottom-color: var(--text); }
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 28px 24px 60px; }
+.content-grid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; }
+
+/* ── LEAD STORY ── */
+.lead-story { border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 24px; }
+.story-urgency { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+.story-urgency.immediate { color: var(--red); }
+.story-urgency.high { color: var(--yellow); }
+.story-urgency.medium { color: var(--green); }
+.story-urgency.regulatory { color: var(--accent); }
+.lead-story h2 { font-family: 'DM Sans', 'Inter', sans-serif; font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.3px; }
+.lead-story h2 a:hover { color: var(--accent); }
+.lead-story .deck { font-size: 16px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+.story-meta { font-size: 12px; color: var(--text3); display: flex; gap: 12px; align-items: center; }
+.story-meta .source { font-weight: 600; color: var(--text2); }
+.inline-cta { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--accent); padding: 3px 10px; background: var(--accent-bg); border-radius: 4px; margin-left: 8px; }
+
+/* ── STORY GRID ── */
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; border-bottom: 1px solid var(--border); padding-bottom: 28px; }
+.story-card h3 { font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 6px; }
+.story-card h3 a:hover { color: var(--accent); }
+.story-card .deck { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+.story-card .story-meta { font-size: 11px; }
+
+/* ── SECTION HEADER ── */
+.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.section-header h3 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text2); }
+.section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ── MORE STORIES ── */
+.story-list { display: flex; flex-direction: column; gap: 0; }
+.story-row { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start; }
+.story-row:last-child { border-bottom: none; }
+.story-num { font-size: 24px; font-weight: 900; color: var(--border2); line-height: 1; padding-top: 2px; min-width: 24px; }
+.story-row h4 { font-size: 14px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+.story-row h4 a:hover { color: var(--accent); }
+.story-row p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.story-row .story-meta { font-size: 11px; margin-top: 5px; }
+
+/* ── SIDEBAR ── */
+.sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+.sidebar-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.sidebar-block-header { padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--surface2); }
+.sidebar-block-header h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); }
+.sidebar-block-body { padding: 16px; }
+
+/* Newsletter signup sidebar */
+.nl-signup p { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 14px; }
+.nl-signup input { width: 100%; padding: 9px 12px; border: 1px solid var(--border2); border-radius: 5px; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 8px; }
+.nl-signup input:focus { border-color: var(--accent); }
+.nl-signup button { width: 100%; padding: 9px; background: var(--text); color: #fff; border: none; border-radius: 5px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.nl-signup button:hover { background: #27272A; }
+.nl-signup .fine-print { font-size: 11px; color: var(--text3); margin-top: 8px; }
+
+/* Tools sidebar */
+.tool-link { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.tool-link:last-child { border-bottom: none; padding-bottom: 0; }
+.tool-icon-sm { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.tool-icon-sm.blue { background: var(--accent-bg); }
+.tool-icon-sm.green { background: var(--green-bg); }
+.tool-link-text strong { font-size: 13px; font-weight: 700; display: block; margin-bottom: 2px; }
+.tool-link-text span { font-size: 12px; color: var(--text2); line-height: 1.4; }
+.tool-link-cta { font-size: 11px; font-weight: 700; color: var(--accent); margin-top: 4px; display: block; }
+
+/* Urgency sidebar */
+.urgency-item { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+.urgency-item:last-child { border-bottom: none; padding-bottom: 0; }
+.urgency-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+.urgency-dot.red { background: var(--red); }
+.urgency-dot.yellow { background: var(--yellow); }
+.urgency-dot.green { background: var(--green); }
+.urgency-item p { font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--text); }
+.urgency-item .urgency-src { font-size: 11px; color: var(--text3); margin-top: 3px; }
+
+/* ── FOOTER ── */
+footer { border-top: var(--masthead-border); background: var(--text); color: #fff; padding: 32px 24px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-pub { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: #A1A1AA; font-weight: 500; }
+.footer-links a:hover { color: #fff; }
+.footer-copy { font-size: 11px; color: #71717A; }
+
+@media (max-width: 900px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .pub-name { font-size: 32px; }
+  .subscribe-inline { display: none; }
+  .story-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- BREAKING TICKER -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="topbar-label">Breaking</span>
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span class="ticker-item"><span class="tick-dot"></span>CMS finalizes prior auth requirements for Medicare Advantage plans — effective 2026</span>
+        <span class="ticker-item"><span class="tick-dot"></span>UnitedHealthcare expands prior auth for outpatient procedures — March 1 deadline</span>
+        <span class="ticker-item"><span class="tick-dot"></span>MetLife PDP Plus network changes — DSOs must verify coverage paths before Q2</span>
+        <span class="ticker-item"><span class="tick-dot"></span>Cigna expands Zelis repricing arrangement — dental and medical claims affected</span>
+        <span class="ticker-item"><span class="tick-dot"></span>CAQH Index: denial rates hit 5-year high, up 18% YoY</span>
+        <span class="ticker-item"><span class="tick-dot"></span>CMS finalizes prior auth requirements for Medicare Advantage plans — effective 2026</span>
+        <span class="ticker-item"><span class="tick-dot"></span>UnitedHealthcare expands prior auth for outpatient procedures — March 1 deadline</span>
+        <span class="ticker-item"><span class="tick-dot"></span>MetLife PDP Plus network changes — DSOs must verify coverage paths before Q2</span>
+        <span class="ticker-item"><span class="tick-dot"></span>Cigna expands Zelis repricing arrangement — dental and medical claims affected</span>
+        <span class="ticker-item"><span class="tick-dot"></span>CAQH Index: denial rates hit 5-year high, up 18% YoY</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-left">
+      <a href="/" style="text-decoration:none">
+        <div class="wordmark">
+          <span class="wordmark-rc">Rev</span><span class="wordmark-cycle">Cycle</span>
+          <div class="wordmark-divider"></div>
+          <span class="wordmark-ai">AI</span>
+        </div>
+        <div class="pub-tagline">Revenue Cycle Intelligence · Published Daily</div>
+      </a>
+    </div>
+    <div class="masthead-right">
+      <div class="masthead-date" id="pubDate"></div>
+      <form class="subscribe-inline" data-subscribe-form data-subscribe-source="masthead">
+        <input type="email" name="email" placeholder="your@email.com" required>
+        <button type="submit">Get weekly intel →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <ul>
+    <li class="active"><a href="/">Top Stories</a></li>
+    <li><a href="/blog">All Intelligence</a></li>
+    <li><a href="/blog#regulatory">Regulatory</a></li>
+    <li><a href="/blog#denials">Denial Management</a></li>
+    <li><a href="/blog#network">Network & PPO</a></li>
+    <li><a href="/tools">Tools</a></li>
+    <li><a href="/free">Free Resources</a></li>
+    <li><a href="/newsletter">Newsletter</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="page-wrap">
+  <div class="content-grid">
+
+    <!-- MAIN COLUMN -->
+    <main>
+
+      <!-- LEAD STORY -->
+      <div class="lead-story">
+        <div class="story-urgency immediate">🔴 Immediate Action Required</div>
+        <h2><a href="/blog/cms-prior-auth-medicare-advantage-2026">CMS Finalizes Prior Authorization Requirements for Medicare Advantage Plans Effective 2026</a></h2>
+        <p class="deck">Plans must now respond to urgent prior authorization requests within 72 hours and standard requests within 7 days. The rule affects every billing team touching Medicare Advantage — here's the plain-English breakdown and your 48-hour action plan.</p>
+        <div class="story-meta">
+          <span class="source">CMS News</span>
+          <span>February 18, 2026</span>
+          <span>8 min read</span>
+          <a href="https://axlow.com" class="inline-cta" target="_blank">Find updated policy → Axlow ↗</a>
+        </div>
+      </div>
+
+      <!-- STORY GRID -->
+      <div class="section-header"><h3>Also developing</h3></div>
+      <div class="story-grid">
+        <div class="story-card">
+          <div class="story-urgency immediate">🔴 Immediate · Network</div>
+          <h3><a href="/blog/metlife-pdp-plus-changes-dso-2026">MetLife PDP Plus Network Changes: The DSO Revenue Leak Nobody's Talking About</a></h3>
+          <p class="deck">DSOs with Careington umbrella contracts are being repriced at PDP rates without realizing it. Here's how to audit your EOBs before Q2.</p>
+          <div class="story-meta">
+            <span class="source">Becker's Dental Review</span>
+            <span>Feb 17, 2026</span>
+            <a href="https://payormap.com" class="inline-cta" target="_blank">Map routing → PayorMap ↗</a>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-urgency immediate">🔴 Immediate · Regulatory</div>
+          <h3><a href="/blog/uhc-prior-auth-march-2026">UnitedHealthcare Expands Prior Auth for Outpatient Procedures: The March 1 Deadline</a></h3>
+          <p class="deck">New requirements hit additional outpatient surgical procedures and imaging. Check which codes are affected and update your workflow now.</p>
+          <div class="story-meta">
+            <span class="source">RevCycle Intelligence</span>
+            <span>Feb 18, 2026</span>
+            <a href="https://axlow.com" class="inline-cta" target="_blank">Policy lookup → Axlow ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MORE STORIES -->
+      <div class="section-header"><h3>More intelligence</h3></div>
+      <div class="story-list">
+        <div class="story-row">
+          <div class="story-num">1</div>
+          <div>
+            <div class="story-urgency high">🟡 24h · Network</div>
+            <h4><a href="#">Cigna Expands Zelis/Maverest Network Access: How to Tell If Your Claims Are Affected</a></h4>
+            <p>Cigna's expanded Zelis arrangement now covers additional dental and medical procedures. Practices with direct Cigna contracts should audit EOBs immediately.</p>
+            <div class="story-meta"><span class="source">Dental Economics</span> · Feb 16, 2026 · <a href="https://payormap.com" style="color:var(--accent);font-weight:600">Map your routing → payormap.com</a></div>
+          </div>
+        </div>
+        <div class="story-row">
+          <div class="story-num">2</div>
+          <div>
+            <div class="story-urgency high">🟡 24h · Denial Management</div>
+            <h4><a href="#">Denial Rates Hit 5-Year High: What the 2026 CAQH Index Means for Your AR</a></h4>
+            <p>Medical necessity denials up 18% year-over-year. $39B in annual administrative waste. Here's what's driving it and the appeal strategy that's working.</p>
+            <div class="story-meta"><span class="source">RevCycle Intelligence</span> · Feb 15, 2026 · <a href="https://axlow.com" style="color:var(--accent);font-weight:600">Policy citation tool → axlow.com</a></div>
+          </div>
+        </div>
+        <div class="story-row">
+          <div class="story-num">3</div>
+          <div>
+            <div class="story-urgency high">🟡 24h · Network</div>
+            <h4><a href="#">Humana Dental Transitions Plans to Zelis Repricing: Which Plans and What It Costs Per Claim</a></h4>
+            <p>Humana is moving additional plan types to Zelis. We break down which plans are affected, the fee schedule delta, and how to verify your position.</p>
+            <div class="story-meta"><span class="source">NADP</span> · Feb 14, 2026</div>
+          </div>
+        </div>
+        <div class="story-row">
+          <div class="story-num">4</div>
+          <div>
+            <div class="story-urgency medium">🟢 48h · Regulatory</div>
+            <h4><a href="#">BCBS Texas Moves to DNOA for Dental Claims: Major Routing Change for Texas DSOs</a></h4>
+            <p>BCBS Texas has completed its migration to Dental Network of America. Texas DSO billing teams need to update network participation verification procedures immediately.</p>
+            <div class="story-meta"><span class="source">ADA News</span> · Feb 11, 2026</div>
+          </div>
+        </div>
+        <div class="story-row">
+          <div class="story-num">5</div>
+          <div>
+            <div class="story-urgency regulatory">⚖️ Regulatory</div>
+            <h4><a href="#">CMS Proposed Rule: Medicare Physician Fee Schedule Updates for 2027 — What Changes</a></h4>
+            <p>CMS published its proposed 2027 Physician Fee Schedule with changes to work RVUs, conversion factors, and E/M code valuations. Comment period open.</p>
+            <div class="story-meta"><span class="source">Federal Register</span> · Feb 13, 2026</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Newsletter -->
+      <div class="sidebar-block">
+        <div class="sidebar-block-header"><h4>📧 This Week in RCM</h4></div>
+        <div class="sidebar-block-body nl-signup">
+          <p>The top 3 RCM signals from the past week — what changed, what it means, and what to do. Every Tuesday morning.</p>
+          <form data-subscribe-form data-subscribe-source="sidebar">
+            <input type="email" name="email" placeholder="your@email.com" required>
+            <button type="submit">Subscribe Free →</button>
+          </form>
+          <p class="fine-print">500+ RCM professionals. Free. Unsubscribe anytime.</p>
+        </div>
+      </div>
+
+      <!-- Urgency tracker -->
+      <div class="sidebar-block">
+        <div class="sidebar-block-header"><h4>⚡ Action Required</h4></div>
+        <div class="sidebar-block-body">
+          <div class="urgency-item">
+            <div class="urgency-dot red"></div>
+            <div>
+              <p>CMS prior auth requirements — MA plans</p>
+              <div class="urgency-src">Publish/act today</div>
+            </div>
+          </div>
+          <div class="urgency-item">
+            <div class="urgency-dot red"></div>
+            <div>
+              <p>UHC outpatient prior auth — March 1 deadline</p>
+              <div class="urgency-src">Workflow update needed now</div>
+            </div>
+          </div>
+          <div class="urgency-item">
+            <div class="urgency-dot red"></div>
+            <div>
+              <p>MetLife PDP Plus network repricing</p>
+              <div class="urgency-src">Audit EOBs before Q2</div>
+            </div>
+          </div>
+          <div class="urgency-item">
+            <div class="urgency-dot yellow"></div>
+            <div>
+              <p>Cigna / Zelis network expansion</p>
+              <div class="urgency-src">Review within 24 hours</div>
+            </div>
+          </div>
+          <div class="urgency-item">
+            <div class="urgency-dot yellow"></div>
+            <div>
+              <p>Humana Dental — Zelis plan transition</p>
+              <div class="urgency-src">Verify plan participation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="sidebar-block">
+        <div class="sidebar-block-header"><h4>🛠 Intelligence Tools</h4></div>
+        <div class="sidebar-block-body">
+          <div class="tool-link">
+            <div class="tool-icon-sm blue">🔍</div>
+            <div class="tool-link-text">
+              <strong>Axlow — Payor Policy Search</strong>
+              <span>Find any payor policy in 20 seconds. UHC, Aetna, Cigna, 200+ payors.</span>
+              <a href="https://axlow.com" class="tool-link-cta" target="_blank">Try free → axlow.com ↗</a>
+            </div>
+          </div>
+          <div class="tool-link">
+            <div class="tool-icon-sm green">🗺️</div>
+            <div class="tool-link-text">
+              <strong>PayorMap — PPO Routing</strong>
+              <span>See which network is repricing your dental claims. Zelis, DenteMax, DNOA.</span>
+              <a href="https://payormap.com" class="tool-link-cta" target="_blank">Try free → payormap.com ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free resources -->
+      <div class="sidebar-block">
+        <div class="sidebar-block-header"><h4>📥 Free Resources</h4></div>
+        <div class="sidebar-block-body">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="/free" style="font-size:13px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+              2026 Prior Auth Compliance Checklist
+              <span style="font-size:11px;color:var(--accent);font-weight:700">Free →</span>
+            </a>
+            <a href="/free" style="font-size:13px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+              Umbrella Network Revenue Leakage Calculator
+              <span style="font-size:11px;color:var(--accent);font-weight:700">Free →</span>
+            </a>
+            <a href="/free" style="font-size:13px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+              Denial Appeal Letter Template
+              <span style="font-size:11px;color:var(--accent);font-weight:700">Free →</span>
+            </a>
+            <a href="/free" style="font-size:13px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;padding:8px 0">
+              Dental PPO Network Map Cheat Sheet
+              <span style="font-size:11px;color:var(--accent);font-weight:700">Free →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-pub" style="font-family:'DM Sans','Inter',sans-serif;font-size:18px">
+      <span style="font-weight:800">Rev</span><span style="font-weight:400">Cycle</span>
+      <span style="font-size:10px;font-weight:800;background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px">AI</span>
+    </div>
+    <div class="footer-links">
+      <a href="/blog">Intelligence</a>
+      <a href="/tools">Tools</a>
+      <a href="/free">Free Resources</a>
+      <a href="/newsletter">Newsletter</a>
+      <a href="https://axlow.com" target="_blank">Axlow</a>
+      <a href="https://payormap.com" target="_blank">PayorMap</a>
+    </div>
+    <div class="footer-copy">© 2026 RevCycleAI. Revenue Cycle Intelligence, published daily.</div>
+  </div>
+</footer>
+
+<script>
+  // Set today's date in masthead
+  document.getElementById('pubDate').textContent =
+    new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+</script>
+<script src="/subscribe.js"></script>
+</body>
+</html>

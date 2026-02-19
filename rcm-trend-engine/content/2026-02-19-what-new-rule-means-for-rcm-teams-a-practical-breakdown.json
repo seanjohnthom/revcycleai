@@ -1,0 +1,69 @@
+{
+  "source_article": {
+    "title": "CMS Finalizes Prior Authorization Requirements for Medicare Advantage Plans Effective 2026",
+    "url": "https://www.cms.gov/newsroom/press-releases/cms-finalizes-prior-auth-requirements",
+    "source": "CMS News",
+    "score": 38,
+    "urgency": "immediate",
+    "published": "2026-02-18T14:00:00+00:00"
+  },
+  "content_angle": "regulatory",
+  "urgency": "immediate",
+  "title_options": [
+    "What New Rule Means for RCM Teams: A Practical Breakdown",
+    "Major Payors Just Changed Policy \u2014 Here's What to Do Before Q2 2026",
+    "CMS Finalizes New Rule: 5 Things Revenue Cycle Leaders Must Do Now"
+  ],
+  "recommended_title": "What New Rule Means for RCM Teams: A Practical Breakdown",
+  "primary_keywords": [
+    "prior authorization",
+    "CMS",
+    "revenue cycle"
+  ],
+  "secondary_keywords": [
+    "prior authorization",
+    "CMS",
+    "Medicare Advantage",
+    "revenue cycle",
+    "billing",
+    "payor policy"
+  ],
+  "target_audience": "VP Revenue Cycle, RCM Managers, Billing Directors, Practice Managers",
+  "word_count_target": "1,200-1,800 words",
+  "outline": [
+    "1. What changed: Plain-English summary of the rule",
+    "2. Who is affected: Which provider types, payors, and claim categories",
+    "3. Effective date and implementation timeline",
+    "4. What you need to do RIGHT NOW: Specific action items",
+    "5. How to check current policies with [product CTA]",
+    "6. Key takeaways and summary checklist"
+  ],
+  "product_ctas": [
+    {
+      "product": "Axlow",
+      "url": "https://axlow.com",
+      "inline_cta": "Search any payor policy instantly \u2192 axlow.com",
+      "section_cta": "Find the exact payor policy in 20 seconds \u2014 no PDFs, no portals."
+    }
+  ],
+  "distribution": [
+    "blog_post",
+    "linkedin_article",
+    "linkedin_post",
+    "x_thread",
+    "email_alert"
+  ],
+  "meta_description": "Expert analysis: CMS Finalizes Prior Authorization Requirements for Medicare Advantage Plans Effective 2026. What RCM teams need to know and what to do now.",
+  "internal_links": [
+    {
+      "anchor": "payor policy search",
+      "url": "https://axlow.com"
+    },
+    {
+      "anchor": "find any payor policy in seconds",
+      "url": "https://axlow.com"
+    }
+  ],
+  "created_at": "2026-02-19T08:52:47.167551",
+  "status": "draft"
+}

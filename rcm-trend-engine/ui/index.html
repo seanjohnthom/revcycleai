@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCM Trend Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F1F5F9; --surface: #fff; --surface2: #F8FAFC; --border: #E2E8F0;
+  --header: #0D1F37; --accent: #1D4ED8; --accent-light: #EFF6FF;
+  --text: #0F172A; --text2: #64748B; --text3: #94A3B8;
+  --green: #059669; --green-bg: #ECFDF5; --green-border: #A7F3D0;
+  --yellow: #D97706; --yellow-bg: #FFFBEB; --yellow-border: #FDE68A;
+  --red: #DC2626; --red-bg: #FEF2F2; --red-border: #FECACA;
+  --purple: #7C3AED; --purple-bg: #F5F3FF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.07);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; }
+header { background: var(--header); height: 60px; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.logo { color: #fff; font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+.logo-icon { background: var(--accent); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.logo span { color: #60A5FA; }
+.nav-tabs { display: flex; gap: 2px; }
+.nav-tab { padding: 7px 16px; border-radius: 7px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid transparent; color: #94A3B8; background: none; transition: all 0.15s; }
+.nav-tab:hover { color: #E2E8F0; background: rgba(255,255,255,0.07); }
+.nav-tab.active { background: rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.4); color: #93C5FD; font-weight: 600; }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.scan-btn { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; }
+.scan-btn:hover { background: #1E40AF; }
+.scan-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.container { max-width: 1200px; margin: 0 auto; padding: 28px 24px; }
+.page { display: none; }
+.page.active { display: block; }
+
+/* Stats Row */
+.stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow-sm); }
+.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); font-weight: 700; margin-bottom: 8px; }
+.stat-value { font-size: 28px; font-weight: 800; color: var(--text); }
+.stat-sub { font-size: 11px; color: var(--text2); margin-top: 4px; }
+.stat-card.urgent .stat-value { color: var(--red); }
+.stat-card.high .stat-value { color: var(--yellow); }
+.stat-card.ok .stat-value { color: var(--green); }
+
+/* Filter bar */
+.filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+.filter-btn { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text2); transition: all 0.15s; }
+.filter-btn:hover, .filter-btn.active { background: var(--accent-light); border-color: #93C5FD; color: var(--accent); }
+.filter-btn.red.active { background: var(--red-bg); border-color: var(--red-border); color: var(--red); }
+.filter-btn.yellow.active { background: var(--yellow-bg); border-color: var(--yellow-border); color: var(--yellow); }
+.filter-btn.green.active { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+
+/* Article cards */
+.article-list { display: flex; flex-direction: column; gap: 12px; }
+.article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; }
+.article-card.urgent { border-left: 3px solid var(--red); }
+.article-card.high { border-left: 3px solid var(--yellow); }
+.article-card.medium { border-left: 3px solid var(--green); }
+.article-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+.article-title a { color: inherit; text-decoration: none; }
+.article-title a:hover { color: var(--accent); }
+.article-meta { font-size: 12px; color: var(--text2); margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.article-keywords { display: flex; flex-wrap: wrap; gap: 5px; }
+.kw-tag { background: var(--accent-light); border: 1px solid #BFDBFE; color: var(--accent); padding: 1px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.product-tag { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.product-tag.axlow { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.product-tag.payormap { background: var(--purple-bg); color: var(--purple); border: 1px solid #DDD6FE; }
+.product-tag.ppo_playbook { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+.urgency-badge { padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.urgency-badge.immediate { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+.urgency-badge.\\34 8h { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+.urgency-badge.48h { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.urgency-badge.72h, .urgency-badge.low { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+.score-badge { background: var(--text); color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+.article-actions { display: flex; flex-direction: column; gap: 6px; min-width: 140px; }
+.action-btn { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--text); transition: all 0.15s; text-align: center; font-family: inherit; }
+.action-btn:hover { background: var(--accent-light); border-color: #93C5FD; color: var(--accent); }
+.action-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.action-btn.primary:hover { background: #1E40AF; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--surface); border-radius: 16px; max-width: 700px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+.modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.modal-title { font-size: 18px; font-weight: 800; }
+.modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text2); padding: 0 4px; }
+.content-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.content-block h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); font-weight: 700; margin-bottom: 10px; }
+.content-block pre { white-space: pre-wrap; font-family: inherit; font-size: 13px; line-height: 1.6; color: var(--text); }
+.copy-btn { background: var(--accent-light); border: 1px solid #BFDBFE; color: var(--accent); padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 8px; font-family: inherit; }
+
+.empty-state { text-align: center; padding: 60px; color: var(--text2); }
+.empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+.empty-state h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.loading { text-align: center; padding: 40px; color: var(--text2); font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="logo-icon">📡</div>
+    <div>
+      <div class="logo">RCM <span>Trend Engine</span></div>
+      <div style="font-size:11px;color:#94A3B8;font-weight:400">Detect · Create · Monetize</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('trends')">📡 Live Trends</button>
+    <button class="nav-tab" onclick="showPage('briefs')">📝 Content Queue</button>
+    <button class="nav-tab" onclick="showPage('sources')">🔗 Sources</button>
+  </div>
+  <div class="header-right">
+    <button class="scan-btn" onclick="runScan()" id="scanBtn">🔍 Scan Now</button>
+  </div>
+</header>
+
+<!-- ── TRENDS PAGE ── -->
+<div class="container page active" id="page-trends">
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card"><div class="stat-label">Total Tracked</div><div class="stat-value" id="statTotal">—</div><div class="stat-sub">all articles</div></div>
+    <div class="stat-card urgent"><div class="stat-label">🔴 Immediate</div><div class="stat-value" id="statImmediate">—</div><div class="stat-sub">publish now</div></div>
+    <div class="stat-card high"><div class="stat-label">🟡 High Priority</div><div class="stat-value" id="statHigh">—</div><div class="stat-sub">publish &lt;24h</div></div>
+    <div class="stat-card ok"><div class="stat-label">Briefs Generated</div><div class="stat-value" id="statBriefs">—</div><div class="stat-sub">content ready</div></div>
+    <div class="stat-card"><div class="stat-label">Sources Active</div><div class="stat-value" id="statSources">—</div><div class="stat-sub">feeds monitored</div></div>
+  </div>
+
+  <div class="filter-bar">
+    <span style="font-size:12px;font-weight:600;color:var(--text2)">Filter:</span>
+    <button class="filter-btn red active" onclick="filterTrends('all', this)">All</button>
+    <button class="filter-btn red" onclick="filterTrends('immediate', this)">🔴 Immediate</button>
+    <button class="filter-btn yellow" onclick="filterTrends('24h', this)">🟡 24h</button>
+    <button class="filter-btn green" onclick="filterTrends('48h', this)">🟢 48h</button>
+    <button class="filter-btn" onclick="filterTrends('regulatory', this)">⚖️ Regulatory</button>
+    <button class="filter-btn" onclick="filterTrends('dental', this)">🦷 Dental</button>
+    <button class="filter-btn" onclick="filterTrends('industry', this)">📰 Industry</button>
+  </div>
+
+  <div class="article-list" id="articleList">
+    <div class="loading">Loading trends... run a scan to populate.</div>
+  </div>
+</div>
+
+<!-- ── CONTENT QUEUE ── -->
+<div class="container page" id="page-briefs">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <div>
+      <h2 style="font-size:20px;font-weight:800">Content Queue</h2>
+      <p style="font-size:13px;color:var(--text2);margin-top:4px">Generated briefs ready to write and publish</p>
+    </div>
+  </div>
+  <div id="briefsList"><div class="loading">No briefs yet. Generate one from the Trends tab.</div></div>
+</div>
+
+<!-- ── SOURCES ── -->
+<div class="container page" id="page-sources">
+  <div style="margin-bottom:20px">
+    <h2 style="font-size:20px;font-weight:800">Signal Sources</h2>
+    <p style="font-size:13px;color:var(--text2);margin-top:4px">All monitored RSS feeds by category and priority</p>
+  </div>
+  <div id="sourcesList"><div class="loading">Loading...</div></div>
+</div>
+
+<!-- ── CONTENT MODAL ── -->
+<div class="modal-overlay" id="contentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Content Brief</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+let currentFilter = 'all';
+let allArticles = [];
+
+// ── Page navigation ──────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'briefs') loadBriefs();
+  if (id === 'sources') loadSources();
+}
+
+// ── Stats ────────────────────────────────────────────────────────────────────
+async function loadStats() {
+  const r = await fetch('/api/stats');
+  const d = await r.json();
+  document.getElementById('statTotal').textContent     = d.total_tracked || 0;
+  document.getElementById('statImmediate').textContent = d.immediate || 0;
+  document.getElementById('statHigh').textContent      = d.high_priority || 0;
+  document.getElementById('statBriefs').textContent    = d.briefs_generated || 0;
+  document.getElementById('statSources').textContent   = d.sources_active || 0;
+}
+
+// ── Trends ───────────────────────────────────────────────────────────────────
+async function loadTrends(urgency='', category='') {
+  const params = new URLSearchParams();
+  if (urgency && urgency !== 'all') {
+    if (['immediate','24h','48h','72h','low'].includes(urgency)) params.set('urgency', urgency);
+    else params.set('category', urgency);
+  }
+  if (category) params.set('category', category);
+
+  const r = await fetch('/api/trends?' + params);
+  const d = await r.json();
+  allArticles = d.articles || [];
+  renderArticles(allArticles);
+}
+
+function renderArticles(articles) {
+  const el = document.getElementById('articleList');
+  if (!articles.length) {
+    el.innerHTML = `<div class="empty-state"><div class="icon">📡</div><h3>No trends yet</h3><p>Click "Scan Now" to pull the latest signals from all sources</p></div>`;
+    return;
+  }
+  const urgencyClass = {immediate:'urgent','24h':'high','48h':'medium'};
+  el.innerHTML = articles.map(a => `
+    <div class="article-card ${urgencyClass[a.urgency]||''}">
+      <div>
+        <div class="article-title"><a href="${a.url}" target="_blank">${a.title}</a></div>
+        <div class="article-meta">
+          <span style="font-weight:600">${a.source}</span>
+          <span>·</span><span>${a.date?.split('T')[0]||''}</span>
+          <span>·</span><span class="urgency-badge ${a.urgency}">${a.urgency}</span>
+          <span class="score-badge">${a.score}</span>
+          ${(a.products||[]).map(p=>`<span class="product-tag ${p}">${p==='ppo_playbook'?'PPO Playbook':p==='axlow'?'Axlow':'PayorMap'}</span>`).join('')}
+        </div>
+        <div class="article-keywords">
+          ${(a.keywords||[]).slice(0,6).map(k=>`<span class="kw-tag">${k}</span>`).join('')}
+        </div>
+      </div>
+      <div class="article-actions">
+        <button class="action-btn primary" onclick="generateBrief('${a.id}')">📝 Brief</button>
+        <button class="action-btn" onclick="generateLinkedIn('${a.id}')">💼 LinkedIn</button>
+        <button class="action-btn" onclick="generateThread('${a.id}')">𝕏 Thread</button>
+      </div>
+    </div>`).join('');
+}
+
+function filterTrends(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = type;
+  loadTrends(type);
+}
+
+// ── Scan ─────────────────────────────────────────────────────────────────────
+async function runScan() {
+  const btn = document.getElementById('scanBtn');
+  btn.disabled = true; btn.textContent = '⏳ Scanning...';
+  try {
+    const r = await fetch('/api/scan', {method:'POST'});
+    const d = await r.json();
+    btn.textContent = `✅ ${d.total_new} new`;
+    await loadStats();
+    await loadTrends(currentFilter);
+    setTimeout(() => { btn.disabled = false; btn.textContent = '🔍 Scan Now'; }, 3000);
+  } catch(e) {
+    btn.disabled = false; btn.textContent = '❌ Failed';
+    setTimeout(() => { btn.textContent = '🔍 Scan Now'; }, 2000);
+  }
+}
+
+// ── Content Generation ───────────────────────────────────────────────────────
+async function generateBrief(id) {
+  const r = await fetch(`/api/trends/${id}/brief`, {method:'POST'});
+  const d = await r.json();
+  showModal('📝 Content Brief', renderBriefModal(d));
+  await loadStats();
+}
+
+async function generateLinkedIn(id) {
+  const r = await fetch(`/api/trends/${id}/linkedin`, {method:'POST'});
+  const d = await r.json();
+  showModal('💼 LinkedIn Post', `
+    <div class="content-block">
+      <h4>LinkedIn Post Draft</h4>
+      <pre id="liPost">${d.post}</pre>
+      <button class="copy-btn" onclick="copyText('liPost')">Copy to Clipboard</button>
+    </div>
+    <div class="content-block">
+      <h4>Monetization</h4>
+      ${(d.brief?.product_ctas||[]).map(c=>`<div style="margin-bottom:8px"><strong>${c.product}</strong><br><span style="font-size:12px;color:var(--text2)">${c.section_cta}</span><br><a href="${c.url}" target="_blank" style="font-size:12px;color:var(--accent)">${c.url}</a></div>`).join('')}
+    </div>`);
+}
+
+async function generateThread(id) {
+  const r = await fetch(`/api/trends/${id}/thread`, {method:'POST'});
+  const d = await r.json();
+  showModal('𝕏 X/Twitter Thread', `
+    <div class="content-block">
+      <h4>X/Twitter Thread Draft</h4>
+      <pre id="xThread">${d.thread}</pre>
+      <button class="copy-btn" onclick="copyText('xThread')">Copy to Clipboard</button>
+    </div>`);
+}
+
+function renderBriefModal(b) {
+  return `
+    <div class="content-block">
+      <h4>Recommended Title</h4>
+      <div style="font-size:16px;font-weight:700;margin-bottom:8px">${b.recommended_title}</div>
+      <h4 style="margin-top:12px">Alt Titles</h4>
+      ${(b.title_options||[]).slice(1).map(t=>`<div style="font-size:13px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border)">${t}</div>`).join('')}
+    </div>
+    <div class="content-block">
+      <h4>Article Outline</h4>
+      ${(b.outline||[]).map(s=>`<div style="font-size:13px;padding:4px 0;border-bottom:1px solid var(--border)">${s}</div>`).join('')}
+    </div>
+    <div class="content-block">
+      <h4>SEO Keywords</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${(b.primary_keywords||[]).map(k=>`<span class="kw-tag">${k}</span>`).join('')}</div>
+    </div>
+    <div class="content-block">
+      <h4>Target Audience</h4>
+      <div style="font-size:13px">${b.target_audience}</div>
+    </div>
+    <div class="content-block">
+      <h4>Product CTAs</h4>
+      ${(b.product_ctas||[]).map(c=>`<div style="margin-bottom:10px"><div style="font-weight:700">${c.product}</div><div style="font-size:12px;color:var(--text2)">${c.section_cta}</div></div>`).join('')}
+    </div>
+    <div class="content-block">
+      <h4>Distribution Channels</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${(b.distribution||[]).map(d=>`<span class="kw-tag">${d.replace(/_/g,' ')}</span>`).join('')}</div>
+    </div>`;
+}
+
+// ── Briefs ───────────────────────────────────────────────────────────────────
+async function loadBriefs() {
+  const r = await fetch('/api/briefs');
+  const d = await r.json();
+  const el = document.getElementById('briefsList');
+  if (!d.briefs?.length) {
+    el.innerHTML = `<div class="empty-state"><div class="icon">📝</div><h3>No briefs yet</h3><p>Click "Brief" on any trending article to generate a content brief</p></div>`;
+    return;
+  }
+  el.innerHTML = d.briefs.map(b => `
+    <div class="article-card medium" style="margin-bottom:12px">
+      <div>
+        <div class="article-title">${b.recommended_title}</div>
+        <div class="article-meta">
+          <span>${b.content_angle}</span>·
+          <span class="urgency-badge ${b.urgency}">${b.urgency}</span>
+          ${(b.product_ctas||[]).map(c=>`<span class="product-tag axlow">${c.product}</span>`).join('')}
+        </div>
+        <div style="font-size:12px;color:var(--text2);margin-top:6px">${b.meta_description}</div>
+      </div>
+      <div class="article-actions">
+        <button class="action-btn primary" onclick="showModal('📝 Brief', ${JSON.stringify(renderBriefModal(b)).replace(/'/g,"&#39;")})">View</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── Sources ──────────────────────────────────────────────────────────────────
+async function loadSources() {
+  const sources = [
+    {name:'CMS News',category:'regulatory',priority:10,urgency:'Immediate'},
+    {name:'OIG HHS',category:'regulatory',priority:9,urgency:'Immediate'},
+    {name:'Federal Register',category:'regulatory',priority:9,urgency:'Immediate'},
+    {name:'RevCycle Intelligence',category:'industry',priority:8,urgency:'24h'},
+    {name:"Becker's Hospital Review",category:'industry',priority:7,urgency:'24h'},
+    {name:'HFMA News',category:'industry',priority:8,urgency:'48h'},
+    {name:'ADA News',category:'dental',priority:8,urgency:'48h'},
+    {name:"Becker's Dental Review",category:'dental',priority:8,urgency:'48h'},
+    {name:'Healthcare Finance News',category:'industry',priority:7,urgency:'48h'},
+    {name:'Modern Healthcare',category:'industry',priority:7,urgency:'48h'},
+    {name:'Dental Economics',category:'dental',priority:7,urgency:'48h'},
+    {name:'NADP',category:'dental',priority:7,urgency:'48h'},
+    {name:'MGMA Insights',category:'industry',priority:6,urgency:'72h'},
+  ];
+  const catColor = {regulatory:'var(--red)',industry:'var(--accent)',dental:'var(--purple)'};
+  document.getElementById('sourcesList').innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+      ${sources.map(s=>`
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow-sm)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div style="font-size:14px;font-weight:700">${s.name}</div>
+            <span style="font-size:10px;font-weight:700;text-transform:uppercase;color:${catColor[s.category]||'var(--text2)'};">${s.category}</span>
+          </div>
+          <div style="display:flex;gap:8px;font-size:12px">
+            <span style="color:var(--text2)">Priority: <strong style="color:var(--text)">${s.priority}/10</strong></span>
+            <span>·</span>
+            <span style="color:var(--text2)">Urgency: <strong style="color:var(--text)">${s.urgency}</strong></span>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ── Modal ────────────────────────────────────────────────────────────────────
+function showModal(title, body) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('contentModal').classList.add('open');
+}
+function closeModal() { document.getElementById('contentModal').classList.remove('open'); }
+document.getElementById('contentModal').addEventListener('click', e => { if(e.target === e.currentTarget) closeModal(); });
+
+function copyText(id) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    event.target.textContent = '✅ Copied!';
+    setTimeout(() => { event.target.textContent = 'Copy to Clipboard'; }, 2000);
+  });
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+loadStats();
+loadTrends();
+</script>
+</body>
+</html>
