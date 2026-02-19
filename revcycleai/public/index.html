@@ -105,6 +105,28 @@ a:hover { color: var(--accent); }
 .sidebar-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
 .sidebar-block-header { padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--surface2); }
 .sidebar-block-header h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); }
+
+/* ── AD UNITS ── */
+.ad-unit { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.ad-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); padding: 5px 12px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.ad-label a { font-size: 9px; color: var(--text3); text-decoration: none; }
+.ad-label a:hover { color: var(--accent); }
+.ad-body { padding: 16px; }
+.ad-logo { font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 7px; }
+.ad-tagline { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 14px; }
+.ad-cta { display: block; width: 100%; padding: 9px; text-align: center; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; border: none; text-decoration: none; }
+.ad-cta.blue { background: var(--accent); color: #fff; }
+.ad-cta.blue:hover { background: #1E40AF; }
+.ad-cta.green { background: #059669; color: #fff; }
+.ad-cta.green:hover { background: #047857; }
+.ad-proof { font-size: 11px; color: var(--text3); text-align: center; margin-top: 8px; }
+
+/* ── INLINE SPONSORED BLOCK ── */
+.sponsored-block { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; background: var(--surface); padding: 14px 16px; margin: 4px 0; }
+.sponsored-block .sp-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-bottom: 8px; }
+.sponsored-block h4 { font-size: 14px; font-weight: 700; margin-bottom: 5px; line-height: 1.4; }
+.sponsored-block p { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 10px; }
+.sponsored-block a.sp-cta { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--accent); }
 .sidebar-block-body { padding: 16px; }
 
 /* Newsletter signup sidebar */
@@ -279,6 +301,14 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
             <div class="story-meta"><span class="source">RevCycle Intelligence</span> · Feb 15, 2026 · <a href="https://axlow.com" style="color:var(--accent);font-weight:600">Policy citation tool → axlow.com</a></div>
           </div>
         </div>
+        <!-- Sponsored inline unit -->
+        <div class="sponsored-block">
+          <div class="sp-label">Sponsored · Axlow</div>
+          <h4>How long does your team spend looking up payor policies each week?</h4>
+          <p>Axlow answers any payor policy question in 20 seconds. Natural language search across UHC, Aetna, Cigna, BCBS, and 200+ payors — no more PDF diving.</p>
+          <a href="https://axlow.com" class="sp-cta" target="_blank">See how it works → axlow.com ↗</a>
+        </div>
+
         <div class="story-row">
           <div class="story-num">3</div>
           <div>
@@ -322,7 +352,7 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
             <input type="email" name="email" placeholder="your@email.com" required>
             <button type="submit">Subscribe Free →</button>
           </form>
-          <p class="fine-print">500+ RCM professionals. Free. Unsubscribe anytime.</p>
+          <p class="fine-print">Join RCM professionals. Free. Unsubscribe anytime.</p>
         </div>
       </div>
 
@@ -368,26 +398,37 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
         </div>
       </div>
 
-      <!-- Tools -->
-      <div class="sidebar-block">
-        <div class="sidebar-block-header"><h4>🛠 Intelligence Tools</h4></div>
-        <div class="sidebar-block-body">
-          <div class="tool-link">
-            <div class="tool-icon-sm blue">🔍</div>
-            <div class="tool-link-text">
-              <strong>Axlow — Payor Policy Search</strong>
-              <span>Find any payor policy in 20 seconds. UHC, Aetna, Cigna, 200+ payors.</span>
-              <a href="https://axlow.com" class="tool-link-cta" target="_blank">Try free → axlow.com ↗</a>
-            </div>
+      <!-- Axlow Ad -->
+      <div class="ad-unit">
+        <div class="ad-label">
+          <span>Sponsored</span>
+          <a href="/advertise">Your ad here →</a>
+        </div>
+        <div class="ad-body">
+          <div class="ad-logo">
+            <span style="background:var(--accent-bg);color:var(--accent);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px">🔍</span>
+            Axlow
           </div>
-          <div class="tool-link">
-            <div class="tool-icon-sm green">🗺️</div>
-            <div class="tool-link-text">
-              <strong>PayorMap — PPO Routing</strong>
-              <span>See which network is repricing your dental claims. Zelis, DenteMax, DNOA.</span>
-              <a href="https://payormap.com" class="tool-link-cta" target="_blank">Try free → payormap.com ↗</a>
-            </div>
+          <div class="ad-tagline">Stop digging through PDFs. Find any payor policy in 20 seconds — UHC, Aetna, Cigna, and 200+ more payors.</div>
+          <a href="https://axlow.com" class="ad-cta blue" target="_blank">Try free — no credit card →</a>
+          <div class="ad-proof">Used by RCM teams at DSOs and billing companies</div>
+        </div>
+      </div>
+
+      <!-- PayorMap Ad -->
+      <div class="ad-unit">
+        <div class="ad-label">
+          <span>Sponsored</span>
+          <a href="/advertise">Your ad here →</a>
+        </div>
+        <div class="ad-body">
+          <div class="ad-logo">
+            <span style="background:var(--green-bg);color:var(--green);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px">🗺️</span>
+            PayorMap
           </div>
+          <div class="ad-tagline">Is Zelis repricing your dental claims without you knowing? Map your PPO routing by payor and state — free.</div>
+          <a href="https://payormap.com" class="ad-cta green" target="_blank">Check your routing →</a>
+          <div class="ad-proof">Covers 40+ networks · Dental PPO intelligence</div>
         </div>
       </div>
 
