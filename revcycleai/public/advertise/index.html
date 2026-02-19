@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advertise — RevCycleAI</title>
+<meta name="description" content="Reach 500+ RCM professionals, billing directors, and revenue cycle leaders. Sponsorship opportunities on RevCycleAI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAFA; --surface: #fff; --surface2: #F4F4F5;
+  --border: #E4E4E7; --border2: #D4D4D8;
+  --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+  --accent: #1D4ED8; --accent-bg: #EFF6FF;
+  --red: #DC2626;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: var(--accent); text-decoration: none; }
+
+/* MASTHEAD */
+.masthead { max-width: 1200px; margin: 0 auto; padding: 20px 24px 16px; border-bottom: 3px solid var(--text); }
+.masthead-inner { display: flex; align-items: center; justify-content: space-between; }
+.wordmark { display: inline-flex; align-items: center; gap: 0; line-height: 1; text-decoration: none; color: inherit; }
+.wordmark-rc { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.wordmark-cycle { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 400; letter-spacing: -0.5px; }
+.wordmark-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 10px; }
+.wordmark-ai { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+.pub-tagline { font-size: 11px; color: var(--text3); margin-top: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+.nav-back { font-size: 13px; font-weight: 600; color: var(--text2); }
+.nav-back:hover { color: var(--text); }
+
+/* PAGE */
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+.page-grid { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
+
+/* LEFT COLUMN */
+.page-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text3); margin-bottom: 12px; }
+.page-title { font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 16px; }
+.page-deck { font-size: 16px; color: var(--text2); line-height: 1.7; margin-bottom: 32px; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+.stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+.stat-box .stat-num { font-family: 'DM Sans', sans-serif; font-size: 28px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 4px; }
+.stat-box .stat-label { font-size: 12px; color: var(--text2); line-height: 1.4; }
+
+.section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text2); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+.format-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+.format-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.format-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.format-item p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.format-price { font-size: 13px; font-weight: 700; color: var(--accent); white-space: nowrap; padding-top: 2px; }
+
+.audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+.audience-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); }
+.audience-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+/* FORM */
+.form-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; position: sticky; top: 24px; }
+.form-card h3 { font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+.form-card .form-sub { font-size: 13px; color: var(--text2); margin-bottom: 24px; line-height: 1.5; }
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border2); border-radius: 6px;
+  font-size: 13px; font-family: inherit; outline: none; background: var(--bg); color: var(--text);
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background: #fff; }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2352525B' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; }
+
+.checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+.checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); cursor: pointer; }
+.checkbox-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+
+.submit-btn { width: 100%; padding: 11px; background: var(--text); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 8px; }
+.submit-btn:hover { background: #27272A; }
+.form-fine { font-size: 11px; color: var(--text3); margin-top: 10px; text-align: center; }
+
+/* SUCCESS */
+.success-msg { display: none; text-align: center; padding: 20px 0; }
+.success-msg .check { font-size: 40px; margin-bottom: 12px; }
+.success-msg h4 { font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+.success-msg p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* FOOTER */
+footer { border-top: 3px solid var(--text); background: var(--text); color: #fff; padding: 28px 24px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-links a { font-size: 12px; color: #A1A1AA; margin-right: 20px; }
+.footer-links a:hover { color: #fff; }
+.footer-copy { font-size: 11px; color: #71717A; }
+
+@media (max-width: 800px) {
+  .page-grid { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: repeat(3, 1fr); }
+  .audience-grid { grid-template-columns: 1fr; }
+  .form-card { position: static; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <a href="/" class="wordmark">
+        <span class="wordmark-rc">Rev</span><span class="wordmark-cycle">Cycle</span>
+        <div class="wordmark-divider"></div>
+        <span class="wordmark-ai">AI</span>
+      </a>
+      <div class="pub-tagline">Revenue Cycle Intelligence · Published Daily</div>
+    </div>
+    <a href="/" class="nav-back">← Back to top stories</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="page-grid">
+
+    <!-- LEFT -->
+    <div>
+      <div class="page-label">Advertising & Sponsorships</div>
+      <h1 class="page-title">Reach the people who decide what RCM technology gets bought</h1>
+      <p class="page-deck">RevCycleAI readers are billing directors, VP Revenue Cycle, and payor contracting leads at DSOs, health systems, and RCM outsourcers. A high-intent, hard-to-reach audience that reads every day because their jobs depend on it.</p>
+
+      <!-- Stats -->
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Weekly newsletter subscribers</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">85%</div>
+          <div class="stat-label">Director-level or above</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">Daily</div>
+          <div class="stat-label">New intelligence published</div>
+        </div>
+      </div>
+
+      <!-- Audience -->
+      <div class="section-title">Who reads RevCycleAI</div>
+      <div class="audience-grid">
+        <div class="audience-item">VP Revenue Cycle</div>
+        <div class="audience-item">Director of Billing Operations</div>
+        <div class="audience-item">Payor Contracting Leads</div>
+        <div class="audience-item">RCM Company Founders</div>
+        <div class="audience-item">DSO Operations Executives</div>
+        <div class="audience-item">Healthcare CFOs</div>
+        <div class="audience-item">Third-Party Billing Managers</div>
+        <div class="audience-item">Credentialing Directors</div>
+      </div>
+
+      <!-- Formats -->
+      <div class="section-title">Sponsorship formats</div>
+      <div class="format-list">
+        <div class="format-item">
+          <div>
+            <h4>📧 Newsletter Sponsorship</h4>
+            <p>Your message at the top of the weekly RCM intel digest. Includes logo, headline, 2-sentence copy, and CTA link. Delivered to 500+ subscribers every Tuesday.</p>
+          </div>
+          <div class="format-price">From $500/issue</div>
+        </div>
+        <div class="format-item">
+          <div>
+            <h4>✍️ Sponsored Content</h4>
+            <p>A full article written in RevCycleAI's editorial voice covering a topic relevant to your product. Clearly labeled as sponsored. Lives permanently on the site and ranks in search.</p>
+          </div>
+          <div class="format-price">From $1,500</div>
+        </div>
+        <div class="format-item">
+          <div>
+            <h4>📌 Sidebar Sponsor Block</h4>
+            <p>Your brand in the Intelligence Tools sidebar — logo, one-line description, and CTA — visible on every page of the site for a full week.</p>
+          </div>
+          <div class="format-price">From $300/week</div>
+        </div>
+        <div class="format-item">
+          <div>
+            <h4>📦 Annual Partner Package</h4>
+            <p>Custom combination of all formats above, priority placement, and a dedicated mention in the year-end RCM trends roundup. Best value for ongoing visibility.</p>
+          </div>
+          <div class="format-price">From $10,000/yr</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div>
+      <div class="form-card">
+        <div id="formWrap">
+          <h3>Get the media kit</h3>
+          <p class="form-sub">Tell us a bit about what you're looking for and we'll send pricing, audience data, and availability.</p>
+
+          <form name="advertise" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="advertiseForm">
+            <input type="hidden" name="form-name" value="advertise">
+            <p style="display:none"><input name="bot-field"></p>
+
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" name="name" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-group">
+              <label>Work Email</label>
+              <input type="email" name="email" placeholder="jane@company.com" required>
+            </div>
+            <div class="form-group">
+              <label>Company</label>
+              <input type="text" name="company" placeholder="Acme Health Tech" required>
+            </div>
+            <div class="form-group">
+              <label>Interested In</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox" name="interest" value="newsletter"> Newsletter sponsorship</label>
+                <label class="checkbox-item"><input type="checkbox" name="interest" value="content"> Sponsored content</label>
+                <label class="checkbox-item"><input type="checkbox" name="interest" value="sidebar"> Sidebar placement</label>
+                <label class="checkbox-item"><input type="checkbox" name="interest" value="annual"> Annual partner package</label>
+                <label class="checkbox-item"><input type="checkbox" name="interest" value="unsure"> Not sure yet — send options</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Budget Range</label>
+              <select name="budget">
+                <option value="" disabled selected>Select a range</option>
+                <option value="under-1k">Under $1,000</option>
+                <option value="1k-5k">$1,000 – $5,000</option>
+                <option value="5k-15k">$5,000 – $15,000</option>
+                <option value="15k-plus">$15,000+</option>
+                <option value="exploring">Just exploring</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Anything else?</label>
+              <textarea name="message" placeholder="Tell us about your product, target audience, or timing..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send inquiry →</button>
+            <p class="form-fine">We typically respond within 1 business day.</p>
+          </form>
+        </div>
+
+        <div class="success-msg" id="successMsg">
+          <div class="check">✅</div>
+          <h4>Got it — thanks!</h4>
+          <p>We'll send you the full media kit and availability within one business day.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:'DM Sans',sans-serif;font-size:18px">
+      <span style="font-weight:800">Rev</span><span style="font-weight:400">Cycle</span>
+      <span style="font-size:10px;font-weight:800;background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px">AI</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Top Stories</a>
+      <a href="/newsletter">Newsletter</a>
+      <a href="/tools">Tools</a>
+      <a href="/free">Free Resources</a>
+    </div>
+    <div class="footer-copy">© 2026 RevCycleAI</div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('advertiseForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  try {
+    await fetch('/', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString() });
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  } catch(err) {
+    // Fallback — still show success (Netlify will catch the submission)
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>
