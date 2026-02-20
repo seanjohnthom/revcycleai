@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MetLife PDP Plus Network Changes: The DSO Revenue Leak Nobody's Talking About — RevCycleAI</title>
+<meta name="description" content="DSOs with Careington umbrella contracts are being repriced at PDP rates without realizing it. Here's how to audit your EOBs before Q2.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #fff; color: #09090B; line-height: 1.7; }
+  a { color: #1D4ED8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  nav { background: #fff; border-bottom: 1px solid #E4E4E7; padding: 0 24px; }
+  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .wordmark { font-family: Arial, sans-serif; font-size: 18px; font-weight: 900; color: #09090B; letter-spacing: -0.3px; text-decoration: none; }
+  .wordmark span { font-weight: 400; }
+  .wordmark em { display: inline-block; background: #1D4ED8; color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle; font-style: normal; letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 20px; font-family: Arial, sans-serif; font-size: 13px; }
+  .nav-links a { color: #52525B; }
+  .article-wrap { max-width: 680px; margin: 0 auto; padding: 48px 24px 80px; }
+  .breadcrumb { font-family: Arial, sans-serif; font-size: 12px; color: #A1A1AA; margin-bottom: 20px; }
+  .breadcrumb a { color: #A1A1AA; }
+  .category-badge { display: inline-block; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #DC2626; margin-bottom: 12px; }
+  h1 { font-size: 32px; line-height: 1.25; font-weight: 700; color: #09090B; margin-bottom: 16px; }
+  .deck { font-size: 18px; line-height: 1.55; color: #52525B; margin-bottom: 24px; border-left: 3px solid #E4E4E7; padding-left: 16px; }
+  .meta { font-family: Arial, sans-serif; font-size: 13px; color: #A1A1AA; display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid #E4E4E7; }
+  .meta strong { color: #52525B; }
+  .article-body h2 { font-size: 22px; margin: 36px 0 12px; color: #09090B; line-height: 1.3; }
+  .article-body h3 { font-size: 17px; margin: 28px 0 10px; color: #09090B; }
+  .article-body p { margin-bottom: 18px; font-size: 17px; line-height: 1.75; }
+  .article-body ul, .article-body ol { margin: 0 0 18px 24px; font-size: 17px; line-height: 1.75; }
+  .article-body li { margin-bottom: 8px; }
+  .article-body strong { font-weight: 700; }
+  .callout { background: #EFF6FF; border-left: 4px solid #1D4ED8; padding: 16px 20px; border-radius: 0 6px 6px 0; margin: 28px 0; font-size: 15px; line-height: 1.6; }
+  .callout.action { background: #F0FDF4; border-left-color: #16A34A; }
+  .callout.warning { background: #FFFBEB; border-left-color: #D97706; }
+  .callout-label { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; color: #1D4ED8; }
+  .callout.action .callout-label { color: #16A34A; }
+  .callout.warning .callout-label { color: #D97706; }
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: Arial, sans-serif; font-size: 14px; }
+  th { background: #09090B; color: #fff; padding: 10px 12px; text-align: left; font-weight: 700; }
+  td { padding: 9px 12px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
+  tr:nth-child(even) td { background: #F4F4F5; }
+  .cta-box { background: #0D1F37; color: #fff; padding: 28px 32px; border-radius: 8px; margin: 40px 0; }
+  .cta-box h3 { font-size: 20px; margin-bottom: 8px; color: #fff; }
+  .cta-box p { font-size: 14px; color: #94A3B8; margin-bottom: 18px; font-family: Arial, sans-serif; line-height: 1.6; }
+  .cta-btn { display: inline-block; background: #1A6B5E; color: #fff; font-family: Arial, sans-serif; font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 6px; text-decoration: none; }
+  .cta-btn:hover { background: #145549; text-decoration: none; }
+  footer { background: #09090B; color: #71717A; padding: 32px 24px; font-family: Arial, sans-serif; font-size: 12px; text-align: center; }
+  footer a { color: #71717A; }
+  .footer-wordmark { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Rev<span>Cycle</span><em>AI</em></a>
+    <div class="nav-links">
+      <a href="/blog">Blog</a>
+      <a href="/tools">Tools</a>
+      <a href="/free">Free Resources</a>
+      <a href="/newsletter">Newsletter</a>
+    </div>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <div class="breadcrumb"><a href="/">Home</a> → <a href="/blog">Blog</a> → Network</div>
+  <div class="category-badge">🔴 Immediate · Network</div>
+
+  <h1>MetLife PDP Plus Network Changes: The DSO Revenue Leak Nobody's Talking About</h1>
+
+  <p class="deck">DSOs with Careington umbrella contracts are being repriced at PDP rates without realizing it. Here's how to audit your EOBs before Q2.</p>
+
+  <div class="meta">
+    <span><strong>Source:</strong> Becker's Dental Review</span>
+    <span>February 17, 2026</span>
+    <span>6 min read</span>
+  </div>
+
+  <div class="article-body">
+
+    <p>If your DSO has locations contracted through Careington, you may be getting paid at MetLife PDP Plus rates on MetLife claims — and you may not know it. This isn't a future risk. It's happening now, and the revenue impact compounds quietly across every affected location until someone audits the EOBs.</p>
+
+    <p>Here's what changed, why it matters, and how to identify if your group is affected before Q2 renewal season.</p>
+
+    <h2>The PDP Plus Problem</h2>
+
+    <p>MetLife's PDP Plus network is a leased access network — meaning MetLife accesses it through agreements with network aggregators like Careington. When a patient with MetLife dental comes to a practice that's in the Careington umbrella, MetLife can route that claim through PDP Plus.</p>
+
+    <p>The issue: <strong>PDP Plus fee schedules are typically lower than direct MetLife PPO fee schedules</strong>. If your practice signed with Careington thinking you'd see MetLife claims at standard PPO rates, you may be accepting a repriced payment without realizing the routing occurred.</p>
+
+    <div class="callout warning">
+      <div class="callout-label">The Core Problem</div>
+      The EOB will say MetLife. The payment will be at PDP Plus rates. Your practice management software records the payment as a MetLife claim. Unless someone is comparing the allowed amount to your MetLife fee schedule, the underpayment is invisible.
+    </div>
+
+    <h2>What Changed in 2026</h2>
+
+    <p>MetLife expanded PDP Plus access agreements with Careington and several regional network aggregators effective Q1 2026. This means more DSO locations that were previously seeing standard MetLife PPO routing are now being routed through PDP Plus — at lower reimbursement rates.</p>
+
+    <table>
+      <tr><th>Scenario</th><th>Routing</th><th>Rate Impact</th></tr>
+      <tr><td>Direct MetLife PPO contract</td><td>Direct — no leasing</td><td>Your negotiated PPO rate</td></tr>
+      <tr><td>Careington umbrella, pre-2026</td><td>May route to PDP Plus</td><td>PDP Plus rate (varies by code)</td></tr>
+      <tr><td>Careington umbrella, post-Q1 2026</td><td>More likely PDP Plus routing</td><td>PDP Plus rate — often 5–15% lower per code</td></tr>
+      <tr><td>No Careington contract</td><td>Out-of-network or direct</td><td>Not affected</td></tr>
+    </table>
+
+    <h2>How to Tell If You're Affected</h2>
+
+    <p>Pull 60–90 days of MetLife EOBs and look for these indicators:</p>
+
+    <ul>
+      <li>The "network" or "plan type" field on the EOB shows PDP, PDP Plus, or a Careington reference</li>
+      <li>The allowed amount for high-frequency codes (D0120, D0274, D1110, D2392) is lower than your MetLife fee schedule</li>
+      <li>The same patient, same code, same location shows different allowed amounts across different dates of service</li>
+    </ul>
+
+    <div class="callout action">
+      <div class="callout-label">Quick Audit — 3 Codes to Check First</div>
+      Pull your MetLife EOBs for the last 90 days and compare allowed amounts for:<br><br>
+      <strong>D0274</strong> (4 bitewing X-rays) · <strong>D1110</strong> (adult prophy) · <strong>D2392</strong> (2-surface posterior composite)<br><br>
+      If allowed amounts vary across EOBs by more than 10% for the same code at the same location, you likely have mixed routing — some claims coming through PDP Plus.
+    </div>
+
+    <h2>The Revenue Impact</h2>
+
+    <p>On a per-code basis the difference might look small — $8 less on a prophy, $15 less on a composite. Across a DSO with 20+ locations doing 300+ MetLife claims per month per location, the cumulative leak is material.</p>
+
+    <p>Example at 25 locations, 300 MetLife claims/month, average $12 underpayment per claim: <strong>$1.08M annual revenue leak</strong> that doesn't show up as a denial — it shows up as paid.</p>
+
+    <h2>What To Do</h2>
+
+    <ol>
+      <li><strong>Request your Careington contract and addenda.</strong> Look specifically for any MetLife PDP Plus access language — it's often buried in a network participation schedule or amendment.</li>
+      <li><strong>Run the EOB audit</strong> described above across your highest-volume MetLife locations first.</li>
+      <li><strong>Contact MetLife provider relations</strong> to confirm which network is being applied to your claims. Get the answer in writing.</li>
+      <li><strong>If PDP Plus routing is confirmed and unwanted,</strong> you may be able to opt out of PDP Plus access through Careington — but this requires contract review. Consult your payor contracting team before taking action.</li>
+      <li><strong>Escalate to your DSO's payor relations director</strong> if you find widespread underpayment — this is a contract renegotiation trigger, not just a billing correction.</li>
+    </ol>
+
+    <div class="cta-box">
+      <h3>Map your MetLife routing before Q2</h3>
+      <p>PayorMap shows which network aggregators have leased access to your payor relationships — so you can identify routing exposure before it shows up in your EOBs.</p>
+      <a href="https://payormap.com" class="cta-btn" target="_blank">Explore PayorMap →</a>
+    </div>
+
+    <h2>Bottom Line</h2>
+
+    <p>This is a payor routing issue masquerading as normal claims activity. The underpayment doesn't create a denial — it creates a paid claim at a lower rate. That's why it goes undetected for months.</p>
+
+    <p>Audit your EOBs now, confirm your routing with MetLife directly, and review your Careington contract language before Q2. The window to identify and challenge 2026 Q1 underpayments closes faster than you think.</p>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-wordmark">RevCycleAI</div>
+  <p>RCM intelligence for billing teams, directors, and DSO operators.</p>
+  <p style="margin-top: 8px;"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/newsletter">Newsletter</a> · <a href="/tools">Tools</a></p>
+</footer>
+
+</body>
+</html>

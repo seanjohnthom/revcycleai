@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCM Tools & Benchmarks — RevCycleAI</title>
+<meta name="description" content="Free RCM benchmarking tools + payor policy intelligence. Salary benchmarks, denial rate calculators, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #fff; --text: #09090B; --text2: #52525B; --text3: #A1A1AA; --border: #E4E4E7; --accent: #1D4ED8; --green: #16A34A; --teal: #1F4B43; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav { background: #fff; border-bottom: 1px solid var(--border); padding: 0 24px; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .wordmark { font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; }
+  .wordmark span { font-weight: 400; }
+  .wordmark em { display: inline-block; background: var(--accent); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.5px; vertical-align: middle; font-style: normal; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: var(--text2); }
+  .nav-links a:hover { color: var(--text); }
+
+  /* CONTAINER */
+  .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px 80px; }
+  h1 { font-size: 40px; font-weight: 900; margin-bottom: 12px; color: var(--text); }
+  .sub { font-size: 17px; color: var(--text2); margin-bottom: 50px; line-height: 1.6; }
+  
+  /* SECTION */
+  .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin: 50px 0 20px; }
+  .section-title:first-of-type { margin-top: 0; }
+
+  /* TOOLS GRID */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px; }
+  .tool-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; transition: all 0.2s; position: relative; overflow: hidden; }
+  .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .tool-card.free::before { background: linear-gradient(90deg, var(--accent), #60A5FA); }
+  .tool-card.product::before { background: linear-gradient(90deg, var(--teal), var(--green)); }
+  .tool-card:hover { border-color: var(--text3); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  
+  .tool-icon { font-size: 32px; margin-bottom: 14px; }
+  .tool-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 4px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.6px; }
+  .tool-card.free .tool-badge { background: #EFF6FF; color: var(--accent); }
+  .tool-card.product .tool-badge { background: #F0FDF4; color: var(--green); }
+  
+  .tool-card h2 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+  .tool-card p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 20px; flex: 1; }
+  
+  .tool-btn { display: inline-flex; align-items: center; gap: 6px; padding: 11px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; transition: all 0.15s; justify-content: center; }
+  .tool-card.free .tool-btn { background: var(--accent); color: #fff; }
+  .tool-card.free .tool-btn:hover { background: #1E40AF; }
+  .tool-card.product .tool-btn { background: var(--teal); color: #fff; }
+  .tool-card.product .tool-btn:hover { background: #17392f; }
+  
+  /* FOOTER */
+  footer { background: var(--text); color: #71717A; padding: 32px 24px; font-size: 12px; text-align: center; border-top: 1px solid var(--border); }
+  footer a { color: #71717A; }
+  .footer-wordmark { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+
+  @media (max-width: 768px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Rev<span>Cycle</span><em>AI</em></a>
+    <div class="nav-links">
+      <a href="/blog">Intelligence</a>
+      <a href="/tools" style="color:#09090B; font-weight: 700;">Tools</a>
+      <a href="/free">Free Resources</a>
+      <a href="/newsletter">Newsletter</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>RCM Tools & Benchmarks</h1>
+  <p class="sub">Put intelligence into action. Free benchmarking calculators, payor policy search, and network routing tools built for billing teams and DSO operators.</p>
+
+  <div class="section-title">Free Benchmarking Tools</div>
+  <div class="tools-grid">
+    
+    <div class="tool-card free">
+      <div class="tool-icon">💰</div>
+      <div class="tool-badge">Free Tool</div>
+      <h2>RCM Salary Benchmarking</h2>
+      <p>See market rates for 12 RCM roles by region, experience level, and practice type. Compare your salary to the 25th, 50th, and 75th percentile.</p>
+      <a href="/tools/salary/" class="tool-btn">Run salary benchmark →</a>
+    </div>
+
+    <div class="tool-card free">
+      <div class="tool-icon">📉</div>
+      <div class="tool-badge">Free Tool</div>
+      <h2>Denial Rate Benchmarking</h2>
+      <p>Compare your denial rate to specialty benchmarks. Get financial impact estimates and top denial drivers with appeal win rates.</p>
+      <a href="/tools/denials/" class="tool-btn">Check your denial rate →</a>
+    </div>
+
+  </div>
+
+  <div class="section-title">RCM Intelligence Products</div>
+  <div class="tools-grid">
+
+    <div class="tool-card product">
+      <div class="tool-icon">🔍</div>
+      <div class="tool-badge">Axlow</div>
+      <h2>Payor Policy Search</h2>
+      <p>Find any payor policy in 20 seconds. AI-powered search across UHC, Aetna, Cigna, BCBS, and 200+ payors. No more PDF hunting.</p>
+      <a href="https://axlow.com" class="tool-btn" target="_blank">Try Axlow free ↗</a>
+    </div>
+
+    <div class="tool-card product">
+      <div class="tool-icon">🗺️</div>
+      <div class="tool-badge">PayorMap</div>
+      <h2>Dental PPO Network Routing</h2>
+      <p>See which network is repricing your dental claims. Identify umbrella stacking, silent PPO exposure, and fee schedule leakage.</p>
+      <a href="https://payormap.com" class="tool-btn" target="_blank">Try PayorMap free ↗</a>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-wordmark">RevCycleAI</div>
+  <p>RCM intelligence for billing teams, directors, and DSO operators.</p>
+  <p style="margin-top: 8px;"><a href="/">Home</a> · <a href="/blog">Intelligence</a> · <a href="/newsletter">Newsletter</a> · <a href="/tools">Tools</a></p>
+</footer>
+
+</body>
+</html>
