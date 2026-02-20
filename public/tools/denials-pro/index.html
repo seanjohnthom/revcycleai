@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Denial Benchmarking — RevCycleAI Pro</title>
+<meta name="description" content="Multi-payor denial analysis with trend tracking, CPT-level breakdowns, and industry benchmarks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAFA; --surface: #fff; --border: #E4E4E7; --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+  --accent: #1D4ED8; --green: #16A34A; --red: #DC2626; --yellow: #F59E0B;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; }
+
+/* NAV */
+nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; }
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.wordmark { font-size: 18px; font-weight: 900; color: var(--text); }
+.wordmark span { font-weight: 400; }
+.wordmark em { display: inline-block; background: var(--accent); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.5px; vertical-align: middle; font-style: normal; text-transform: uppercase; }
+.nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+.nav-links a { color: var(--text2); text-decoration: none; }
+.nav-links a:hover { color: var(--text); }
+
+/* CONTAINER */
+.container { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
+.header { margin-bottom: 32px; }
+.header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
+.header .badge { display: inline-block; background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+.header p { font-size: 15px; color: var(--text2); }
+
+/* CONTROLS */
+.controls { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+.control-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.form-group { display: flex; flex-direction: column; }
+.form-group label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group select, .form-group input { padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; background: var(--surface); color: var(--text); }
+.form-group select:focus, .form-group input:focus { outline: none; border-color: var(--accent); }
+.btn-row { display: flex; gap: 12px; }
+.btn { padding: 11px 20px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #1E40AF; }
+.btn-secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text2); }
+.btn-secondary:hover { background: #F4F4F5; }
+
+/* STATS CARDS */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.stat-card .label { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.stat-card .value { font-size: 32px; font-weight: 900; margin-bottom: 4px; }
+.stat-card .value.green { color: var(--green); }
+.stat-card .value.red { color: var(--red); }
+.stat-card .value.yellow { color: var(--yellow); }
+.stat-card .change { font-size: 13px; color: var(--text3); }
+
+/* CHART */
+.chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+.chart-container h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+.chart { width: 100%; height: 300px; background: #F9FAFB; border-radius: 8px; display: flex; align-items: flex-end; justify-content: space-around; padding: 20px; }
+.bar { width: 60px; background: var(--accent); border-radius: 4px 4px 0 0; position: relative; transition: all 0.3s; }
+.bar:hover { opacity: 0.8; }
+.bar-label { position: absolute; bottom: -25px; width: 100%; text-align: center; font-size: 11px; color: var(--text3); font-weight: 600; }
+.bar-value { position: absolute; top: -20px; width: 100%; text-align: center; font-size: 12px; color: var(--text); font-weight: 700; }
+
+/* TABLE */
+.table-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+.table-container h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; }
+thead th { background: #F9FAFB; padding: 12px; text-align: left; font-size: 12px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
+tbody td { padding: 14px 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+tbody tr:hover { background: #F9FAFB; }
+.trend-up { color: var(--red); font-weight: 600; }
+.trend-down { color: var(--green); font-weight: 600; }
+
+/* EXPORT */
+.export-section { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 2px solid var(--accent); border-radius: 12px; padding: 24px; text-align: center; }
+.export-section h3 { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+.export-section p { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+
+@media (max-width: 768px) {
+  .control-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Rev<span>Cycle</span><em>AI</em></a>
+    <div class="nav-links">
+      <a href="/tools">← Back to Tools</a>
+      <a href="/pro">Pro</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  
+  <div class="header">
+    <div class="badge">⭐ Pro Tool</div>
+    <h1>Advanced Denial Benchmarking</h1>
+    <p>Multi-payor analysis with trend tracking, CPT-level breakdowns, and industry benchmarks</p>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="control-grid">
+      <div class="form-group">
+        <label>Time Period</label>
+        <select id="timePeriod">
+          <option value="30">Last 30 Days</option>
+          <option value="90" selected>Last 90 Days</option>
+          <option value="180">Last 6 Months</option>
+          <option value="365">Last 12 Months</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Payors</label>
+        <select id="payors" multiple style="height: 42px;">
+          <option value="all" selected>All Payors</option>
+          <option value="uhc">UnitedHealthcare</option>
+          <option value="aetna">Aetna</option>
+          <option value="cigna">Cigna</option>
+          <option value="bcbs">BCBS</option>
+          <option value="humana">Humana</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Specialty</label>
+        <select id="specialty">
+          <option value="general">General Practice</option>
+          <option value="dental">Dental</option>
+          <option value="cardiology">Cardiology</option>
+          <option value="orthopedics">Orthopedics</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Practice Size</label>
+        <select id="practiceSize">
+          <option value="1-10">1-10 Providers</option>
+          <option value="11-50" selected>11-50 Providers</option>
+          <option value="51-200">51-200 Providers</option>
+          <option value="201+">201+ Providers</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="runAnalysis()">Run Analysis</button>
+      <button class="btn btn-secondary" onclick="resetFilters()">Reset Filters</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="label">Overall Denial Rate</div>
+      <div class="value red" id="denialRate">8.2%</div>
+      <div class="change">↑ 1.3% vs last period</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Avg Days to Resolution</div>
+      <div class="value yellow" id="daysToResolve">42</div>
+      <div class="change">↓ 3 days vs last period</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Recovery Rate</div>
+      <div class="value green" id="recoveryRate">64%</div>
+      <div class="change">↑ 5% vs last period</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Industry Benchmark</div>
+      <div class="value" id="benchmark">7.1%</div>
+      <div class="change">You're 1.1% above avg</div>
+    </div>
+  </div>
+
+  <!-- TREND CHART -->
+  <div class="chart-container">
+    <h3>90-Day Denial Rate Trend</h3>
+    <div class="chart" id="trendChart">
+      <div class="bar" style="height: 60%;">
+        <div class="bar-value">7.8%</div>
+        <div class="bar-label">Jan</div>
+      </div>
+      <div class="bar" style="height: 75%;">
+        <div class="bar-value">8.5%</div>
+        <div class="bar-label">Feb</div>
+      </div>
+      <div class="bar" style="height: 72%;">
+        <div class="bar-value">8.2%</div>
+        <div class="bar-label">Mar</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DENIAL CODE BREAKDOWN -->
+  <div class="table-container">
+    <h3>Top Denial Codes (by Volume)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+          <th>Count</th>
+          <th>% of Total</th>
+          <th>Avg $ Amount</th>
+          <th>Trend</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CO-50</strong></td>
+          <td>Lack of medical necessity</td>
+          <td>142</td>
+          <td>28%</td>
+          <td>$385</td>
+          <td class="trend-up">↑ 12%</td>
+        </tr>
+        <tr>
+          <td><strong>CO-197</strong></td>
+          <td>Precertification/authorization missing</td>
+          <td>98</td>
+          <td>19%</td>
+          <td>$520</td>
+          <td class="trend-down">↓ 5%</td>
+        </tr>
+        <tr>
+          <td><strong>CO-16</strong></td>
+          <td>Claim lacks information</td>
+          <td>76</td>
+          <td>15%</td>
+          <td>$210</td>
+          <td class="trend-up">↑ 8%</td>
+        </tr>
+        <tr>
+          <td><strong>CO-B4</strong></td>
+          <td>Out of network</td>
+          <td>52</td>
+          <td>10%</td>
+          <td>$890</td>
+          <td>→ Flat</td>
+        </tr>
+        <tr>
+          <td><strong>CO-18</strong></td>
+          <td>Duplicate claim/service</td>
+          <td>41</td>
+          <td>8%</td>
+          <td>$165</td>
+          <td class="trend-down">↓ 3%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CPT BREAKDOWN -->
+  <div class="table-container">
+    <h3>Denial Rate by CPT Code</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>CPT Code</th>
+          <th>Description</th>
+          <th>Total Claims</th>
+          <th>Denials</th>
+          <th>Denial Rate</th>
+          <th>vs Benchmark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>99214</strong></td>
+          <td>Office visit, established patient, moderate</td>
+          <td>487</td>
+          <td>52</td>
+          <td>10.7%</td>
+          <td class="trend-up">+2.1%</td>
+        </tr>
+        <tr>
+          <td><strong>99213</strong></td>
+          <td>Office visit, established patient, low</td>
+          <td>822</td>
+          <td>58</td>
+          <td>7.1%</td>
+          <td class="trend-down">-0.3%</td>
+        </tr>
+        <tr>
+          <td><strong>99285</strong></td>
+          <td>Emergency department visit, high severity</td>
+          <td>156</td>
+          <td>28</td>
+          <td>17.9%</td>
+          <td class="trend-up">+5.2%</td>
+        </tr>
+        <tr>
+          <td><strong>93000</strong></td>
+          <td>Electrocardiogram, complete</td>
+          <td>203</td>
+          <td>14</td>
+          <td>6.9%</td>
+          <td>→ Baseline</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXPORT -->
+  <div class="export-section">
+    <h3>Export Full Report</h3>
+    <p>Download complete denial analysis with all payors, codes, and trend data</p>
+    <button class="btn btn-primary" onclick="exportReport()">Download Excel Report →</button>
+  </div>
+
+</div>
+
+<script>
+function runAnalysis() {
+  alert('Analysis running... (In production, this would fetch real data from your RCM system)');
+  // TODO: Connect to real data source
+}
+
+function resetFilters() {
+  document.getElementById('timePeriod').value = '90';
+  document.getElementById('payors').value = 'all';
+  document.getElementById('specialty').value = 'general';
+  document.getElementById('practiceSize').value = '11-50';
+}
+
+function exportReport() {
+  alert('Generating Excel export... (In production, this would create a downloadable .xlsx file)');
+  // TODO: Generate real Excel export with openpyxl or similar
+}
+</script>
+
+</body>
+</html>
