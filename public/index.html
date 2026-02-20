@@ -86,6 +86,9 @@ a:hover { color: var(--accent); }
 .site-nav ul { display: flex; gap: 0; list-style: none; }
 .site-nav li a { display: block; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px; }
 .site-nav li a:hover, .site-nav li.active a { color: var(--text); border-bottom-color: var(--text); }
+.site-nav li a.nav-highlight { color: #16A34A; font-weight: 700; position: relative; }
+.site-nav li a.nav-highlight::after { content: "FREE"; font-size: 8px; background: #16A34A; color: #fff; padding: 2px 4px; border-radius: 3px; margin-left: 5px; letter-spacing: 0.3px; vertical-align: middle; }
+.site-nav li a.nav-highlight:hover { color: #15803D; border-bottom-color: #16A34A; }
 
 /* ── LAYOUT ── */
 .page-wrap { max-width: 1200px; margin: 0 auto; padding: 28px 24px 60px; }
@@ -292,7 +295,7 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
     <li><a href="/blog#denials">Denial Management</a></li>
     <li><a href="/blog#network">Network & PPO</a></li>
     <li><a href="/tools">Tools</a></li>
-    <li><a href="/free">Free Resources</a></li>
+    <li><a href="/free" class="nav-highlight">Free Resources</a></li>
     <li><a href="/newsletter">Newsletter</a></li>
   </ul>
 </nav>
