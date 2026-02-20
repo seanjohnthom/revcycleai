@@ -6,45 +6,77 @@
 <title>RCM Intelligence Blog — RevCycleAI</title>
 <meta name="description" content="Expert RCM trend analysis. Payor policy changes, denial management, network routing — published within 24 hours of every major change.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#0A0F1E;--surface:#111827;--surface2:#1F2937;--border:#1F2937;--border2:#374151;--accent:#3B82F6;--accent2:#60A5FA;--text:#F9FAFB;--text2:#9CA3AF;--text3:#6B7280;--green:#10B981;--yellow:#F59E0B;--red:#EF4444; }
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}a{color:var(--accent2);text-decoration:none}
-nav{max-width:1100px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-size:18px;font-weight:800;color:var(--text)}.nav-logo span{color:var(--accent2)}
-.nav-links{display:flex;gap:28px}.nav-links a{color:var(--text2);font-size:14px;font-weight:500}
-.nav-cta{background:var(--accent);color:#fff !important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:14px}
-.hero{max-width:800px;margin:60px auto 50px;padding:0 24px}
-.hero h1{font-size:42px;font-weight:900;margin-bottom:12px}.hero p{font-size:18px;color:var(--text2)}
-.filter-bar{max-width:1100px;margin:0 auto 32px;padding:0 24px;display:flex;gap:10px;flex-wrap:wrap}
-.filter{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;border:1px solid var(--border2);color:var(--text2);cursor:pointer;background:none;font-family:inherit;transition:all 0.15s}
-.filter.active,.filter:hover{background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.4);color:var(--accent2)}
-.posts{max-width:1100px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.post-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column}
-.post-card:hover{border-color:var(--border2)}
-.post-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px}
-.post-tag.immediate{color:var(--red)}.post-tag.high{color:var(--yellow)}.post-tag.medium{color:var(--green)}.post-tag.industry{color:var(--accent2)}
-.post-card h2{font-size:18px;font-weight:700;line-height:1.4;margin-bottom:10px}
-.post-card p{font-size:14px;color:var(--text2);line-height:1.6;flex:1;margin-bottom:16px}
-.post-meta{font-size:12px;color:var(--text3);margin-bottom:12px}
-.post-cta{font-size:13px;font-weight:700;color:var(--accent2)}
-.post-products{display:flex;gap:6px;margin-top:12px}
-.prod-tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px}
-.prod-tag.axlow{background:rgba(59,130,246,0.1);color:var(--accent2)}
-.prod-tag.payormap{background:rgba(16,185,129,0.1);color:var(--green)}
-@media(max-width:768px){.posts{grid-template-columns:1fr}}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #fff; --text: #09090B; --text2: #52525B; --text3: #A1A1AA; --border: #E4E4E7; --accent: #1D4ED8; --red: #DC2626; --yellow: #D97706; --green: #16A34A; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav { background: #fff; border-bottom: 1px solid var(--border); padding: 0 24px; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .wordmark { font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; }
+  .wordmark span { font-weight: 400; }
+  .wordmark em { display: inline-block; background: var(--accent); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.5px; vertical-align: middle; font-style: normal; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: var(--text2); }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero { max-width: 800px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+  .hero h1 { font-size: 40px; font-weight: 900; margin-bottom: 12px; color: var(--text); }
+  .hero p { font-size: 17px; color: var(--text2); line-height: 1.6; }
+
+  /* FILTER BAR */
+  .filter-bar { max-width: 1100px; margin: 0 auto 32px; padding: 0 24px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .filter { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid var(--border); color: var(--text2); cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
+  .filter.active, .filter:hover { background: #EFF6FF; border-color: var(--accent); color: var(--accent); }
+
+  /* POSTS GRID */
+  .posts { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+  .post-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; transition: all 0.2s; }
+  .post-card:hover { border-color: var(--text3); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+  .post-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .post-tag.immediate { color: var(--red); }
+  .post-tag.high { color: var(--yellow); }
+  .post-tag.medium { color: var(--green); }
+  .post-tag.industry { color: var(--accent); }
+  .post-card h2 { font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: var(--text); }
+  .post-card h2 a { color: inherit; }
+  .post-card h2 a:hover { color: var(--accent); }
+  .post-card p { font-size: 14px; color: var(--text2); line-height: 1.6; flex: 1; margin-bottom: 16px; }
+  .post-meta { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
+  .post-cta { font-size: 13px; font-weight: 700; color: var(--accent); }
+  .post-cta:hover { text-decoration: underline; }
+  .post-products { display: flex; gap: 6px; margin-top: 12px; }
+  .prod-tag { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 4px; }
+  .prod-tag.axlow { background: #F0FDF4; color: #16A34A; }
+  .prod-tag.payormap { background: #EFF6FF; color: #1D4ED8; }
+
+  /* FOOTER */
+  footer { background: var(--text); color: #71717A; padding: 32px 24px; font-size: 12px; text-align: center; border-top: 1px solid var(--border); }
+  footer a { color: #71717A; }
+  .footer-wordmark { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+
+  @media (max-width: 768px) {
+    .posts { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 32px; }
+  }
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="/" class="nav-logo">RevCycle<span>AI</span></a>
-  <div class="nav-links">
-    <a href="/blog" style="color:#F9FAFB">Intelligence</a>
-    <a href="/tools">Tools</a>
-    <a href="/free">Free Resources</a>
-    <a href="/newsletter">Newsletter</a>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Rev<span>Cycle</span><em>AI</em></a>
+    <div class="nav-links">
+      <a href="/blog" style="color:#09090B; font-weight: 700;">Intelligence</a>
+      <a href="/tools">Tools</a>
+      <a href="/free">Free Resources</a>
+      <a href="/newsletter">Newsletter</a>
+    </div>
   </div>
-  <a href="/newsletter" class="nav-links nav-cta">Get Weekly Intel →</a>
 </nav>
 
 <div class="hero">
@@ -62,59 +94,41 @@ nav{max-width:1100px;margin:0 auto;padding:20px 24px;display:flex;align-items:ce
 </div>
 
 <div class="posts">
+
   <div class="post-card">
-    <div class="post-tag immediate">🔴 Immediate — Regulatory</div>
-    <div class="post-meta">Feb 19, 2026 · CMS News · 8 min read</div>
-    <h2>CMS Finalizes Prior Auth Requirements for Medicare Advantage Plans: What Your Billing Team Needs to Do Now</h2>
-    <p>Plans must now respond to urgent prior authorization requests within 72 hours and standard requests within 7 days. Here's the plain-English breakdown and your 48-hour action plan.</p>
-    <a href="#" class="post-cta">Read full analysis →</a>
+    <div class="post-tag immediate">🔴 Immediate · Regulatory</div>
+    <div class="post-meta">Feb 18, 2026 · CMS News · 8 min read</div>
+    <h2><a href="/blog/cms-prior-auth-medicare-advantage-2026">CMS Finalizes Prior Authorization Requirements for Medicare Advantage Plans Effective 2026</a></h2>
+    <p>Plans must now respond to urgent prior authorization requests within 72 hours and standard requests within 7 days. The rule affects every billing team touching Medicare Advantage — here's the plain-English breakdown and your 48-hour action plan.</p>
+    <a href="/blog/cms-prior-auth-medicare-advantage-2026" class="post-cta">Read full analysis →</a>
     <div class="post-products"><span class="prod-tag axlow">Axlow</span></div>
   </div>
 
   <div class="post-card">
-    <div class="post-tag immediate">🔴 Immediate — Network</div>
-    <div class="post-meta">Feb 17, 2026 · Becker's Dental Review · 10 min read</div>
-    <h2>MetLife PDP Plus Network Changes: The DSO Revenue Leak Nobody's Talking About</h2>
-    <p>DSOs with Careington umbrella contracts are getting repriced at PDP rates without knowing it. Here's how to audit your claims and what to do before Q2.</p>
-    <a href="#" class="post-cta">Read full analysis →</a>
+    <div class="post-tag immediate">🔴 Immediate · Network</div>
+    <div class="post-meta">Feb 17, 2026 · Becker's Dental Review · 6 min read</div>
+    <h2><a href="/blog/metlife-pdp-plus-changes-dso-2026">MetLife PDP Plus Network Changes: The DSO Revenue Leak Nobody's Talking About</a></h2>
+    <p>DSOs with Careington umbrella contracts are being repriced at PDP rates without realizing it. Here's how to audit your EOBs before Q2.</p>
+    <a href="/blog/metlife-pdp-plus-changes-dso-2026" class="post-cta">Read full analysis →</a>
     <div class="post-products"><span class="prod-tag payormap">PayorMap</span></div>
   </div>
 
   <div class="post-card">
-    <div class="post-tag immediate">🔴 Immediate — Regulatory</div>
+    <div class="post-tag immediate">🔴 Immediate · Regulatory</div>
     <div class="post-meta">Feb 18, 2026 · RevCycle Intelligence · 7 min read</div>
-    <h2>UnitedHealthcare Expands Prior Auth for Outpatient Procedures: The March 1 Deadline Your Team Needs to Know</h2>
-    <p>New prior authorization requirements hit additional outpatient surgical procedures and imaging studies on March 1. Check which codes are affected and update your workflow now.</p>
-    <a href="#" class="post-cta">Read full analysis →</a>
+    <h2><a href="/blog/uhc-prior-auth-march-2026">UnitedHealthcare Expands Prior Auth for Outpatient Procedures: The March 1 Deadline</a></h2>
+    <p>New requirements hit additional outpatient surgical procedures and imaging. Check which codes are affected and update your workflow now.</p>
+    <a href="/blog/uhc-prior-auth-march-2026" class="post-cta">Read full analysis →</a>
     <div class="post-products"><span class="prod-tag axlow">Axlow</span></div>
   </div>
 
-  <div class="post-card">
-    <div class="post-tag high">🟡 24h — Network / Dental</div>
-    <div class="post-meta">Feb 16, 2026 · Dental Economics · 9 min read</div>
-    <h2>Cigna Expands Zelis Network Access: How to Tell If Your Dental Claims Are Being Repriced</h2>
-    <p>Cigna's expanded Zelis arrangement now includes additional dental and medical procedures. Practices with direct Cigna contracts should audit recent EOBs immediately.</p>
-    <a href="#" class="post-cta">Read full analysis →</a>
-    <div class="post-products"><span class="prod-tag payormap">PayorMap</span></div>
-  </div>
-
-  <div class="post-card">
-    <div class="post-tag high">🟡 24h — Denial Management</div>
-    <div class="post-meta">Feb 15, 2026 · RevCycle Intelligence · 6 min read</div>
-    <h2>Denial Rates at a 5-Year High: What the 2026 CAQH Index Means and How to Fight Back</h2>
-    <p>Medical necessity denials up 18% YoY. $39B in annual admin waste. Here's what's driving it and the specific appeal strategy that's working.</p>
-    <a href="#" class="post-cta">Read full analysis →</a>
-    <div class="post-products"><span class="prod-tag axlow">Axlow</span></div>
-  </div>
-
-  <div class="post-card">
-    <div class="post-tag high">🟡 24h — Network / Dental</div>
-    <div class="post-meta">Feb 14, 2026 · NADP · 8 min read</div>
-    <h2>Humana Dental's Zelis Expansion: Which Plans Are Now Leased and What It Costs You Per Claim</h2>
-    <p>Humana is transitioning additional plan types to Zelis repricing. We break down which plans, the fee schedule delta, and how to verify your position.</p>
-    <a href="#" class="post-cta">Read full analysis →</a>
-    <div class="post-products"><span class="prod-tag payormap">PayorMap</span></div>
-  </div>
 </div>
+
+<footer>
+  <div class="footer-wordmark">RevCycleAI</div>
+  <p>RCM intelligence for billing teams, directors, and DSO operators.</p>
+  <p style="margin-top: 8px;"><a href="/">Home</a> · <a href="/blog">Intelligence</a> · <a href="/newsletter">Newsletter</a> · <a href="/tools">Tools</a></p>
+</footer>
+
 </body>
 </html>
