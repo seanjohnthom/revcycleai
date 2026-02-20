@@ -19,7 +19,9 @@
   --masthead-border: 3px solid var(--text);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+html { overflow-x: hidden; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; overflow-x: hidden; max-width: 100vw; }
+img { max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--accent); }
 
@@ -172,6 +174,21 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
   .pub-name { font-size: 32px; }
   .subscribe-inline { display: none; }
   .story-grid { grid-template-columns: 1fr; }
+  
+  /* Prevent overflow */
+  .topbar-inner { padding: 0 16px; }
+  .masthead-inner { padding: 16px; }
+  .nav-inner { padding: 0 16px; }
+  .main-story, .story-card { padding: 20px; }
+  .sidebar-block-body { padding: 16px; }
+  
+  /* Constrain widths */
+  .masthead, .nav, .content-wrap, .footer-inner { max-width: 100vw; padding-left: 16px; padding-right: 16px; }
+  .ticker { font-size: 11px; }
+  
+  /* Adjust typography */
+  .main-story h1 { font-size: 28px; line-height: 1.2; }
+  .story-card h2 { font-size: 16px; }
 }
 </style>
 </head>
