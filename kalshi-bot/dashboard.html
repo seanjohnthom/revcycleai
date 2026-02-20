@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClawdBot Cost Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+    background: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f0f6fc;
+    margin-bottom: 4px;
+  }
+  .subtitle { color: #7d8590; font-size: 0.85rem; margin-bottom: 28px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .card-label {
+    font-size: 0.75rem;
+    color: #7d8590;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .card-value {
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-family: monospace;
+  }
+  .card-sub { font-size: 0.78rem; color: #7d8590; margin-top: 4px; }
+  .green  { color: #3fb950; }
+  .yellow { color: #d29922; }
+  .blue   { color: #58a6ff; }
+  .red    { color: #f85149; }
+  .purple { color: #bc8cff; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  th {
+    text-align: left;
+    padding: 10px 12px;
+    color: #7d8590;
+    font-weight: 500;
+    border-bottom: 1px solid #21262d;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #21262d;
+    color: #e6edf3;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1c2128; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .badge-green  { background: #0d4429; color: #3fb950; }
+  .badge-yellow { background: #3d2f00; color: #d29922; }
+  .badge-blue   { background: #0c2d6b; color: #58a6ff; }
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #7d8590;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+    margin-top: 28px;
+  }
+  .section-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid #21262d;
+    margin: 24px 0;
+  }
+  .token-bar-wrap {
+    background: #21262d;
+    border-radius: 4px;
+    height: 8px;
+    width: 100%;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .token-bar { height: 8px; border-radius: 4px; transition: width 0.3s; }
+  .footnote { font-size: 0.75rem; color: #7d8590; margin-top: 24px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<h1>🦞 ClawdBot Cost Dashboard</h1>
+<div class="subtitle">Session: Feb 18, 2026 · Model: claude-sonnet-4-5 · Auto-updated</div>
+
+<!-- Top metrics -->
+<div class="grid">
+  <div class="card">
+    <div class="card-label">Estimated API Cost</div>
+    <div class="card-value yellow">$1.84</div>
+    <div class="card-sub">This session (est.)</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Kalshi Fees Paid</div>
+    <div class="card-value blue">$0.04</div>
+    <div class="card-sub">4 fills × $0.01 each</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Total Cost to Run</div>
+    <div class="card-value red">$1.88</div>
+    <div class="card-sub">API + trading fees</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Capital Deployed</div>
+    <div class="card-value purple">$3.57</div>
+    <div class="card-sub">4 fills + 3 resting</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Max Payout (if all win)</div>
+    <div class="card-value green">+$0.34</div>
+    <div class="card-sub">vs. $3.57 deployed</div>
+  </div>
+</div>
+
+<!-- Token breakdown -->
+<div class="section-title">Anthropic API Token Breakdown</div>
+<div class="section-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Est. Tokens</th>
+        <th>Rate</th>
+        <th>Cost</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Input tokens (context)</td>
+        <td class="blue">~132k</td>
+        <td>$3.00 / M</td>
+        <td class="yellow">$0.40</td>
+        <td>Current context window</td>
+      </tr>
+      <tr>
+        <td>Input tokens (prior turns)</td>
+        <td class="blue">~350k</td>
+        <td>$3.00 / M</td>
+        <td class="yellow">$1.05</td>
+        <td>Tool outputs, PDF parse, debug logs</td>
+      </tr>
+      <tr>
+        <td>Output tokens</td>
+        <td class="blue">~26k</td>
+        <td>$15.00 / M</td>
+        <td class="yellow">$0.39</td>
+        <td>All responses + code generated</td>
+      </tr>
+      <tr style="font-weight:600">
+        <td>Total</td>
+        <td class="blue">~508k</td>
+        <td>—</td>
+        <td class="yellow">$1.84</td>
+        <td>Estimated (±30%)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="padding: 14px 20px;">
+    <div style="font-size:0.78rem; color:#7d8590; margin-bottom:6px;">Context usage: 132k / 200k (66%)</div>
+    <div class="token-bar-wrap">
+      <div class="token-bar" style="width:66%; background: linear-gradient(90deg, #58a6ff, #bc8cff);"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Kalshi trades -->
+<div class="section-title">Kalshi Fills & Fees</div>
+<div class="section-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Market</th>
+        <th>Side</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Kalshi Fee</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>KXGDP-26JAN30-T2.0</td>
+        <td>YES</td>
+        <td>$0.90</td>
+        <td>1</td>
+        <td class="red">$0.01</td>
+        <td><span class="badge badge-green">Filled</span></td>
+      </tr>
+      <tr>
+        <td>KXGDP-26JAN30-T1.75</td>
+        <td>YES</td>
+        <td>$0.93</td>
+        <td>1</td>
+        <td class="red">$0.01</td>
+        <td><span class="badge badge-green">Filled</span></td>
+      </tr>
+      <tr>
+        <td>KXCPI-26FEB-T0.1</td>
+        <td>YES</td>
+        <td>$0.91</td>
+        <td>1</td>
+        <td class="red">$0.01</td>
+        <td><span class="badge badge-green">Filled</span></td>
+      </tr>
+      <tr>
+        <td>KXNBAGAME-26FEB19BKNCLE-CLE</td>
+        <td>YES</td>
+        <td>$0.90</td>
+        <td>1</td>
+        <td class="red">$0.01</td>
+        <td><span class="badge badge-green">Filled</span></td>
+      </tr>
+      <tr>
+        <td>KXGDP-26JAN30-T4 (NO)</td>
+        <td>NO</td>
+        <td>$0.80</td>
+        <td>1</td>
+        <td class="yellow">$0.00</td>
+        <td><span class="badge badge-yellow">Resting</span></td>
+      </tr>
+      <tr>
+        <td>KXPCECORE-26JAN-T0.2</td>
+        <td>YES</td>
+        <td>$0.85</td>
+        <td>1</td>
+        <td class="yellow">$0.00</td>
+        <td><span class="badge badge-yellow">Resting</span></td>
+      </tr>
+      <tr>
+        <td>KXNBAGAME-26FEB20BKNOKC-OKC</td>
+        <td>YES</td>
+        <td>$0.89</td>
+        <td>1</td>
+        <td class="yellow">$0.00</td>
+        <td><span class="badge badge-yellow">Resting</span></td>
+      </tr>
+      <tr style="font-weight:600">
+        <td colspan="4">Total fees paid</td>
+        <td class="red">$0.04</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Cost vs value -->
+<div class="section-title">Cost vs. Potential Return</div>
+<div class="section-card">
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Anthropic API cost (est.)</td><td class="red">-$1.84</td></tr>
+      <tr><td>Kalshi fees paid</td><td class="red">-$0.04</td></tr>
+      <tr><td>Capital deployed (at risk)</td><td class="yellow">-$3.57</td></tr>
+      <tr><td>Capital at rest (safe)</td><td class="green">$21.95</td></tr>
+      <tr><td>Max profit if all 7 win</td><td class="green">+$0.34</td></tr>
+      <tr><td>Break-even trades needed to cover API cost</td><td class="blue">~18 winning $0.10 trades</td></tr>
+      <tr style="font-weight:600"><td>Net today (excl. trades settling)</td><td class="red">-$1.88</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footnote">
+  ⚠️ <strong>Estimates only.</strong> Input token count includes tool call outputs (exec results, API responses, PDF parse) across all turns — these inflate total tokens significantly vs. just the visible conversation. Output tokens include all generated code, analysis, and responses. Actual Anthropic billing may differ by ±30%. Check console.anthropic.com for exact figures.<br><br>
+  📅 Session start: ~7:00 PM CT · Duration: ~1hr · Turns: ~40+ · Tool calls: ~60+<br>
+  💡 Future sessions will be cheaper — setup/debug overhead dominated this one. Daily cron scans are isolated and much lighter.
+</div>
+
+</body>
+</html>

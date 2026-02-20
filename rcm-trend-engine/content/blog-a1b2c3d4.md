@@ -1,6 +1,6 @@
 # What New Rule Means for RCM Teams: A Practical Breakdown
 
-*Published: February 19, 2026 | For: VP Revenue Cycle, RCM Managers, Billing Directors, Practice Managers*
+*Published: February 20, 2026 | For: VP Revenue Cycle, RCM Managers, Billing Directors, Practice Managers*
 
 ---
 
@@ -72,6 +72,6 @@ Find the exact payor policy in 20 seconds — no PDFs, no portals.<br>
 
 ---
 
-*What New Rule Means for RCM Teams: A Practical Breakdown. Published February 19, 2026. For RCM professionals managing payor policy complexity at scale.*
+*What New Rule Means for RCM Teams: A Practical Breakdown. Published February 20, 2026. For RCM professionals managing payor policy complexity at scale.*
 
 *Keywords: prior authorization, CMS, revenue cycle*

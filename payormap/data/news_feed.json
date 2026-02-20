@@ -1,0 +1,47 @@
+{
+  "feed_sources": [
+    {"name": "Becker's Dental Review", "rss": "https://www.beckersasc.com/rss/dental-review.rss", "type": "industry"},
+    {"name": "ADA News", "rss": "https://www.ada.org/publications/ada-news/rss", "type": "regulatory"},
+    {"name": "NADP", "rss": "https://www.nadp.org/rss", "type": "payor"},
+    {"name": "ADSO", "rss": "https://www.theadso.org/rss", "type": "dso"},
+    {"name": "Dental Economics", "rss": "https://www.dentaleconomics.com/rss", "type": "industry"}
+  ],
+  "network_alerts": [
+    {
+      "id": "alert_001",
+      "date": "2026-02-19",
+      "type": "network_change",
+      "severity": "high",
+      "title": "Zelis/Maverest rebranding complete — verify your contract entity",
+      "body": "Zelis Healthcare has completed its consolidation of Stratose, 4Most, PPOPlus, HFN, Maverest, and NPPN under the unified Zelis brand. Practices with legacy Maverest or Stratose contracts should verify their participation agreement has been migrated. Claims repricing may be affected during transition.",
+      "affected_payors": ["Humana", "Principal"],
+      "affected_networks": ["zelis"],
+      "action_required": true,
+      "action": "Verify your Zelis contract entity and confirm participation status has transferred"
+    },
+    {
+      "id": "alert_002",
+      "date": "2026-02-15",
+      "type": "payor_update",
+      "severity": "medium",
+      "title": "MetLife PDP Plus credentialing — new participation requirements",
+      "body": "MetLife has issued updated credentialing requirements for PDP Plus network participation effective Q2 2026. Practices accessing MetLife PDP Plus via Careington should confirm their Careington contract covers the updated requirements.",
+      "affected_payors": ["MetLife"],
+      "affected_networks": ["careington"],
+      "action_required": true,
+      "action": "Confirm Careington contract covers updated MetLife PDP Plus requirements"
+    },
+    {
+      "id": "alert_003",
+      "date": "2026-02-10",
+      "type": "industry_news",
+      "severity": "low",
+      "title": "DenteMax reports 75M+ covered members — network continues to grow",
+      "body": "DenteMax announced it now covers over 75 million members through its leased network relationships, adding several new payor relationships in Q1 2026. Beam Dental, Renaissance, and Mutual of Omaha remain primary leasors.",
+      "affected_payors": ["Beam Dental", "Renaissance", "Mutual of Omaha"],
+      "affected_networks": ["dentemax"],
+      "action_required": false,
+      "action": null
+    }
+  ]
+}

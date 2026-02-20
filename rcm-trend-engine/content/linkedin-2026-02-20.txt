@@ -1,0 +1,25 @@
+CMS just finalized new prior authorization requirements for Medicare Advantage plans—and they're effective now for 2026.
+
+The changes:
+• Urgent prior auth requests → 72-hour max response time (down from 14 days)
+• Standard requests → 7-day max response time (down from 14 days)
+• Real-time electronic prior auth required where available (FHIR-based APIs)
+• Denials must include specific clinical reasoning, not just codes
+
+What this means for RCM teams:
+
+If you touch Medicare Advantage billing, your authorization workflows need updating immediately. The timeline compression alone will stress existing processes.
+
+The transparency requirement is bigger than it looks. Vague denials won't fly anymore—plans have to show their work. That's leverage for appeals, but you need systems to track and cite the new requirements.
+
+The electronic mandate is the long-term play. FHIR integration isn't optional for MA plans anymore. If your EHR/PM system doesn't support real-time prior auth, start the vendor conversation now.
+
+Action items for this week:
+1. Audit your current MA authorization turnaround times
+2. Update staff training on new timelines
+3. Document any denials that don't meet transparency requirements
+4. Review your appeals process to leverage the new rules
+
+Full policy text: cms.gov/medicare → Prior Authorization Final Rule (CMS-4201-F)
+
+#RevenueCycle #MedicalBilling #PriorAuthorization #MedicareAdvantage

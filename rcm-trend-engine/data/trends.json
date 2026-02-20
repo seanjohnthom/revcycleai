@@ -1,0 +1,52 @@
+[
+  {
+    "title": "CMS Finalizes Prior Authorization Requirements for Medicare Advantage Plans Effective 2026",
+    "summary": "Plans must now respond to urgent prior authorization requests within 72 hours and standard requests within 7 days. The rule affects every billing team touching Medicare Advantage.",
+    "description": "Plans must now respond to urgent prior authorization requests within 72 hours and standard requests within 7 days. The rule affects every billing team touching Medicare Advantage — here's the plain-English breakdown and your 48-hour action plan.",
+    "category": "regulatory",
+    "urgency": "immediate",
+    "score": 15,
+    "detected_at": "2026-02-18T10:00:00",
+    "source": "CMS News"
+  },
+  {
+    "title": "MetLife PDP Plus Network Changes: The DSO Revenue Leak Nobody's Talking About",
+    "summary": "DSOs with Careington umbrella contracts are being repriced at PDP rates without realizing it. Here's how to audit your EOBs before Q2.",
+    "description": "DSOs with Careington umbrella contracts are being repriced at PDP rates without realizing it. Here's how to audit your EOBs before Q2.",
+    "category": "network",
+    "urgency": "high",
+    "score": 12,
+    "detected_at": "2026-02-17T14:30:00",
+    "source": "Becker's Dental Review"
+  },
+  {
+    "title": "UHC Expands Prior Auth Requirements March 2026: What You Need to Know",
+    "summary": "UnitedHealthcare is adding 47 new CPT codes to prior authorization requirements effective March 1. Medical necessity denials expected to jump 20-30%.",
+    "description": "UnitedHealthcare is adding 47 new CPT codes to prior authorization requirements effective March 1. Medical necessity denials expected to jump 20-30%.",
+    "category": "regulatory",
+    "urgency": "high",
+    "score": 11,
+    "detected_at": "2026-02-16T09:15:00",
+    "source": "Federal Register"
+  },
+  {
+    "title": "Zelis-Cigna DPPO Integration Complete: Fee Schedule Changes Impact $2.1B in Annual Claims",
+    "summary": "Zelis has finalized integration of Cigna's DPPO network. Practices seeing 8-12% repricing on select procedure codes. No prior notice was provided.",
+    "description": "Zelis has finalized integration of Cigna's DPPO network. Practices seeing 8-12% repricing on select procedure codes. No prior notice was provided.",
+    "category": "network",
+    "urgency": "medium",
+    "score": 9,
+    "detected_at": "2026-02-15T11:45:00",
+    "source": "RevCycle Intelligence"
+  },
+  {
+    "title": "BCBS Texas Transitions 120K Members to DNOA Network",
+    "summary": "Blue Cross Blue Shield of Texas is moving employer group members to the DNOA leased network. Expect fee schedule changes for D2000-D4000 series codes.",
+    "description": "Blue Cross Blue Shield of Texas is moving employer group members to the DNOA leased network. Expect fee schedule changes for D2000-D4000 series codes.",
+    "category": "network",
+    "urgency": "medium",
+    "score": 8,
+    "detected_at": "2026-02-14T16:20:00",
+    "source": "BCBS Texas Provider Bulletin"
+  }
+]

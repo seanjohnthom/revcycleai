@@ -1,0 +1,76 @@
+{
+  "state_notes": {
+    "AL": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS of Alabama operates own dental network"},
+    "AK": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS of Alaska"},
+    "AZ": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS of Arizona"},
+    "AR": {"bcbs_network": "direct", "dnoa": false, "notes": "Arkansas BCBS"},
+    "CA": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS California. Large Careington presence."},
+    "CO": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Colorado"},
+    "CT": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Connecticut"},
+    "DE": {"bcbs_network": "direct", "dnoa": false, "notes": "Highmark BCBS Delaware"},
+    "FL": {"bcbs_network": "direct", "dnoa": false, "notes": "Florida Blue. High Careington/Zelis activity."},
+    "GA": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Georgia"},
+    "HI": {"bcbs_network": "direct", "dnoa": false, "notes": "HMSA (BCBS Hawaii)"},
+    "ID": {"bcbs_network": "direct", "dnoa": false, "notes": "Regence BCBS Idaho"},
+    "IL": {"bcbs_network": "dnoa", "dnoa": true, "notes": "HCSC state — BCBS Illinois routes through DNOA (Dental Network of America). Critical routing distinction."},
+    "IN": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Indiana"},
+    "IA": {"bcbs_network": "direct", "dnoa": false, "notes": "Wellmark BCBS Iowa"},
+    "KS": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS of Kansas"},
+    "KY": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Kentucky"},
+    "LA": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS of Louisiana"},
+    "ME": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Maine"},
+    "MD": {"bcbs_network": "direct", "dnoa": false, "notes": "CareFirst BCBS Maryland"},
+    "MA": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Massachusetts"},
+    "MI": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Michigan"},
+    "MN": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Minnesota"},
+    "MS": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Mississippi"},
+    "MO": {"bcbs_network": "dnoa", "dnoa": true, "notes": "HCSC state (Kansas City area) — BCBS routes through DNOA. Geographic carve-out — St. Louis area may differ."},
+    "MT": {"bcbs_network": "dnoa", "dnoa": true, "notes": "HCSC state — BCBS Montana routes through DNOA."},
+    "NE": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Nebraska"},
+    "NV": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Nevada"},
+    "NH": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS New Hampshire"},
+    "NJ": {"bcbs_network": "direct", "dnoa": false, "notes": "Horizon BCBS New Jersey"},
+    "NM": {"bcbs_network": "dnoa", "dnoa": true, "notes": "HCSC state — BCBS New Mexico routes through DNOA."},
+    "NY": {"bcbs_network": "direct", "dnoa": false, "notes": "Excellus/Empire BCBS New York"},
+    "NC": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS North Carolina"},
+    "ND": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS North Dakota"},
+    "OH": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Ohio"},
+    "OK": {"bcbs_network": "dnoa", "dnoa": true, "notes": "HCSC state — BCBS Oklahoma routes through DNOA."},
+    "OR": {"bcbs_network": "direct", "dnoa": false, "notes": "Regence BCBS Oregon"},
+    "PA": {"bcbs_network": "direct", "dnoa": false, "notes": "Highmark/Independence BCBS Pennsylvania"},
+    "RI": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Rhode Island"},
+    "SC": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS South Carolina"},
+    "SD": {"bcbs_network": "direct", "dnoa": false, "notes": "Wellmark BCBS South Dakota"},
+    "TN": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Tennessee"},
+    "TX": {"bcbs_network": "dnoa", "dnoa": true, "notes": "HCSC state — BCBS Texas routes through DNOA. Largest DNOA state. High impact for TX-heavy DSOs."},
+    "UT": {"bcbs_network": "direct", "dnoa": false, "notes": "Regence BCBS Utah"},
+    "VT": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Vermont"},
+    "VA": {"bcbs_network": "direct", "dnoa": false, "notes": "Anthem BCBS Virginia"},
+    "WA": {"bcbs_network": "direct", "dnoa": false, "notes": "Regence/Premera BCBS Washington"},
+    "WV": {"bcbs_network": "direct", "dnoa": false, "notes": "Highmark BCBS West Virginia"},
+    "WI": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Wisconsin"},
+    "WY": {"bcbs_network": "direct", "dnoa": false, "notes": "BCBS Wyoming"}
+  },
+  "payor_state_risks": {
+    "cigna": {
+      "high_risk_states": ["TX", "FL", "CA", "IL", "OH"],
+      "notes": "Careington lease most active in high-population states"
+    },
+    "uhc": {
+      "high_risk_states": ["TX", "FL", "CA", "GA", "NC", "OH", "PA"],
+      "notes": "UHC silent PPO via Careington most prevalent in large employer markets"
+    },
+    "humana": {
+      "high_risk_states": ["TX", "FL", "GA", "TN", "KY", "OH"],
+      "notes": "Zelis/Maverest repricing most active in Southern states where Humana has large presence"
+    },
+    "metlife": {
+      "high_risk_states": ["ALL"],
+      "notes": "PDP vs PDP Plus confusion is national — affects all states equally"
+    },
+    "anthem_bcbs": {
+      "high_risk_states": ["CA", "OH", "IN", "GA", "VA", "CO", "CT", "ME", "NH", "NV"],
+      "notes": "Anthem states — Careington leasing varies by state market"
+    }
+  }
+}

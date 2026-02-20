@@ -6,10 +6,13 @@
       "side": "yes",
       "entry_price_cents": 90,
       "count": 1,
-      "capital_deployed": 0.90,
+      "capital_deployed": 0.9,
       "thesis": "Favorite-longshot bias: market implies 90%, estimate 96% (6% edge). Buy YES @ $0.90.",
       "edge_at_entry": 0.06,
-      "data_sources": ["kalshi_market_data", "favorite_longshot_bias"],
+      "data_sources": [
+        "kalshi_market_data",
+        "favorite_longshot_bias"
+      ],
       "status": "open",
       "entry_time": "2026-02-19T01:36:11.191958+00:00",
       "exit_price_cents": null,
@@ -24,10 +27,13 @@
       "side": "yes",
       "entry_price_cents": 90,
       "count": 1,
-      "capital_deployed": 0.90,
+      "capital_deployed": 0.9,
       "thesis": "Favorite-longshot bias: market implies 89%, estimate 95% (6% edge). Buy YES @ $0.90.",
       "edge_at_entry": 0.06,
-      "data_sources": ["kalshi_market_data", "favorite_longshot_bias"],
+      "data_sources": [
+        "kalshi_market_data",
+        "favorite_longshot_bias"
+      ],
       "status": "open",
       "entry_time": "2026-02-19T01:36:12.486264+00:00",
       "exit_price_cents": null,
@@ -45,7 +51,10 @@
       "capital_deployed": 0.89,
       "thesis": "OKC favored vs BKN. Favorite-longshot bias play.",
       "edge_at_entry": 0.05,
-      "data_sources": ["kalshi_market_data", "favorite_longshot_bias"],
+      "data_sources": [
+        "kalshi_market_data",
+        "favorite_longshot_bias"
+      ],
       "status": "open",
       "entry_time": "2026-02-19T01:36:00.000000+00:00",
       "exit_price_cents": null,
@@ -60,17 +69,20 @@
       "side": "yes",
       "entry_price_cents": 90,
       "count": 1,
-      "capital_deployed": 0.90,
+      "capital_deployed": 0.9,
       "thesis": "CLE favored vs BKN. Favorite-longshot bias play.",
       "edge_at_entry": 0.05,
-      "data_sources": ["kalshi_market_data", "favorite_longshot_bias"],
-      "status": "open",
+      "data_sources": [
+        "kalshi_market_data",
+        "favorite_longshot_bias"
+      ],
+      "status": "settled",
       "entry_time": "2026-02-19T01:36:00.000000+00:00",
-      "exit_price_cents": null,
-      "pnl": null,
-      "exit_time": null,
+      "exit_price_cents": 100,
+      "pnl": 0.1,
+      "exit_time": "2026-02-20T03:00:07.669463+00:00",
       "settlement": null,
-      "notes": "Real trade. Game Feb 19 — check settlement."
+      "notes": "Real trade. Game Feb 19 \u2014 check settlement."
     },
     {
       "id": "accidental-short-cpi",
@@ -78,10 +90,12 @@
       "side": "no",
       "entry_price_cents": 10,
       "count": 32,
-      "capital_deployed": 3.20,
-      "thesis": "ACCIDENTAL SHORT — bot attempted to close ghost position. Max loss $3.84. Riding out.",
+      "capital_deployed": 3.2,
+      "thesis": "ACCIDENTAL SHORT \u2014 bot attempted to close ghost position. Max loss $3.84. Riding out.",
       "edge_at_entry": 0.0,
-      "data_sources": ["ledger_correction"],
+      "data_sources": [
+        "ledger_correction"
+      ],
       "status": "open",
       "entry_time": "2026-02-19T14:00:48.220384+00:00",
       "exit_price_cents": null,
@@ -97,9 +111,11 @@
       "entry_price_cents": 22,
       "count": 4,
       "capital_deployed": 0.88,
-      "thesis": "ACCIDENTAL SHORT — bot attempted to close ghost position. Max loss $0.88. Riding out.",
+      "thesis": "ACCIDENTAL SHORT \u2014 bot attempted to close ghost position. Max loss $0.88. Riding out.",
       "edge_at_entry": 0.0,
-      "data_sources": ["ledger_correction"],
+      "data_sources": [
+        "ledger_correction"
+      ],
       "status": "open",
       "entry_time": "2026-02-19T14:00:48.312617+00:00",
       "exit_price_cents": null,

@@ -1,0 +1,560 @@
+{
+  "payors": [
+    {
+      "id": "cigna",
+      "name": "Cigna",
+      "aka": ["Cigna DPPO", "Cigna Dental", "Cigna Total Behavioral Health"],
+      "market_segment": ["commercial", "employer", "marketplace"],
+      "network_paths": [
+        {
+          "path_id": "cigna_direct",
+          "type": "direct",
+          "label": "Cigna DPPO Direct",
+          "plan_types": ["DPPO", "DHMO", "Indemnity"],
+          "base_probability": 0.55,
+          "notes": "Standard direct contract. Applies to most employer-sponsored DPPO plans."
+        },
+        {
+          "path_id": "cigna_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "Cigna via Careington",
+          "plan_types": ["DPPO"],
+          "base_probability": 0.30,
+          "notes": "Careington leases to Cigna DPPO. Triggers when practice has Careington contract but no direct Cigna contract, OR when Careington rate is lower and contract allows override.",
+          "override_risk": "medium"
+        },
+        {
+          "path_id": "cigna_via_connection_dental",
+          "type": "leased",
+          "umbrella": "connection_dental",
+          "label": "Cigna via Connection Dental",
+          "plan_types": ["FEDVIP", "Government"],
+          "base_probability": 0.15,
+          "notes": "Federal employee plans (FEDVIP) may route through Connection Dental.",
+          "override_risk": "low"
+        }
+      ],
+      "routing_rules": [
+        "Direct contract is primary for commercial DPPO if practice has it",
+        "Careington path fires for federal/government plans when Connection Dental not present",
+        "Check plan ID prefix: DPPO vs DHMO vs FEDVIP — each routes differently"
+      ],
+      "silent_ppo_risk": "high",
+      "confusion_score": 7
+    },
+    {
+      "id": "uhc",
+      "name": "UnitedHealthcare",
+      "aka": ["UHC", "United Healthcare", "UnitedHealth Group", "UHC Dental", "United Concordia (UHC-affiliated)"],
+      "market_segment": ["commercial", "employer", "medicare", "medicaid", "marketplace"],
+      "network_paths": [
+        {
+          "path_id": "uhc_direct_ppo",
+          "type": "direct",
+          "label": "UHC Dental PPO Direct",
+          "plan_types": ["Dental PPO", "Select Plus", "Core"],
+          "base_probability": 0.50,
+          "notes": "Standard UHC Dental PPO. Practice must have direct UHC Dental contract."
+        },
+        {
+          "path_id": "uhc_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "UHC via Careington",
+          "plan_types": ["Dental PPO", "Select Plus"],
+          "base_probability": 0.35,
+          "notes": "UHC accesses Careington network for many employer group plans. This is a major silent PPO risk — practice may not realize UHC is repricing via Careington rates.",
+          "override_risk": "high",
+          "silent_ppo_alert": true
+        },
+        {
+          "path_id": "uhc_mac",
+          "type": "direct",
+          "label": "UHC MAC (Maximum Allowable Charge)",
+          "plan_types": ["Indemnity", "Out-of-network"],
+          "base_probability": 0.15,
+          "notes": "Some UHC plans use MAC pricing — not network-based but still discounted."
+        }
+      ],
+      "routing_rules": [
+        "CRITICAL: UHC is one of the most common silent PPO offenders — always verify which path a UHC claim takes",
+        "Plan name containing 'Select' or 'Core' more likely to route via Careington",
+        "Large employer groups more likely to have direct UHC contract",
+        "Individual/marketplace plans most likely direct"
+      ],
+      "silent_ppo_risk": "very_high",
+      "confusion_score": 9
+    },
+    {
+      "id": "metlife",
+      "name": "MetLife",
+      "aka": ["MetLife Dental", "MetLife PDP", "MetLife PDP Plus", "MetLife FEDVIP"],
+      "market_segment": ["commercial", "employer", "federal"],
+      "network_paths": [
+        {
+          "path_id": "metlife_direct_pdp",
+          "type": "direct",
+          "label": "MetLife Standard PDP (Direct)",
+          "plan_types": ["PDP", "MetLife Preferred Dentist Program"],
+          "base_probability": 0.55,
+          "notes": "Standard MetLife PDP contract. Direct negotiated rates. Most employer-sponsored MetLife plans."
+        },
+        {
+          "path_id": "metlife_pdp_plus_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "MetLife PDP Plus via Careington",
+          "plan_types": ["PDP Plus"],
+          "base_probability": 0.30,
+          "notes": "CRITICAL: Careington only accesses MetLife PDP Plus — NOT standard PDP. If practice only has Careington contract (no direct MetLife), PDP Plus patients are accessible but standard PDP patients are out-of-network.",
+          "override_risk": "high",
+          "plan_type_critical": true
+        },
+        {
+          "path_id": "metlife_fedvip_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "MetLife FEDVIP via Careington",
+          "plan_types": ["FEDVIP", "Federal Employee Dental"],
+          "base_probability": 0.15,
+          "notes": "Federal employee MetLife dental plans route via Careington."
+        }
+      ],
+      "routing_rules": [
+        "CRITICAL RULE: Careington = PDP Plus + FEDVIP ONLY. Standard PDP requires direct MetLife contract.",
+        "Always identify plan type before assuming Careington covers MetLife patients",
+        "PDP Plus patients: if practice has Careington but not direct MetLife, they ARE in-network",
+        "Standard PDP patients: if practice has Careington but not direct MetLife, they are OUT-of-network"
+      ],
+      "silent_ppo_risk": "high",
+      "confusion_score": 10
+    },
+    {
+      "id": "aetna",
+      "name": "Aetna",
+      "aka": ["Aetna Dental", "Aetna DMO", "Aetna PPO", "CVS Health Dental"],
+      "market_segment": ["commercial", "employer", "medicare", "marketplace"],
+      "network_paths": [
+        {
+          "path_id": "aetna_direct_ppo",
+          "type": "direct",
+          "label": "Aetna PPO Direct",
+          "plan_types": ["PPO", "Aetna Dental PPO"],
+          "base_probability": 0.75,
+          "notes": "Aetna operates mostly direct — does not commonly lease to major umbrella networks. Direct contract is primary path."
+        },
+        {
+          "path_id": "aetna_via_connection_dental",
+          "type": "leased",
+          "umbrella": "connection_dental",
+          "label": "Aetna via Connection Dental",
+          "plan_types": ["FEDVIP"],
+          "base_probability": 0.15,
+          "notes": "Limited Aetna FEDVIP plans may access Connection Dental."
+        },
+        {
+          "path_id": "aetna_dmo",
+          "type": "direct",
+          "label": "Aetna DMO (DHMO)",
+          "plan_types": ["DMO", "DHMO"],
+          "base_probability": 0.10,
+          "notes": "Closed panel — requires separate DMO credentialing. Not leased."
+        }
+      ],
+      "routing_rules": [
+        "Aetna is relatively clean — mostly direct contracting",
+        "Verify FEDVIP separately — may access Connection Dental",
+        "DMO plans always direct — separate credentialing required"
+      ],
+      "silent_ppo_risk": "low",
+      "confusion_score": 4
+    },
+    {
+      "id": "delta_dental",
+      "name": "Delta Dental",
+      "aka": ["Delta Dental PPO", "Delta Dental Premier", "Delta Dental DHMO", "Delta Care USA"],
+      "market_segment": ["commercial", "employer", "marketplace", "medicaid"],
+      "network_paths": [
+        {
+          "path_id": "delta_ppo_direct",
+          "type": "direct",
+          "label": "Delta Dental PPO (Direct)",
+          "plan_types": ["Delta Dental PPO"],
+          "base_probability": 0.50,
+          "notes": "Delta Dental PPO — negotiated reduced rates. Most common Delta plan."
+        },
+        {
+          "path_id": "delta_premier_direct",
+          "type": "direct",
+          "label": "Delta Dental Premier (Direct)",
+          "plan_types": ["Delta Dental Premier"],
+          "base_probability": 0.40,
+          "notes": "Delta Premier — higher rates than PPO, broader acceptance. Practice accepts UCR limited to Premier fee schedule."
+        },
+        {
+          "path_id": "delta_dhmo",
+          "type": "direct",
+          "label": "Delta Dental DHMO / DeltaCare USA",
+          "plan_types": ["DHMO", "DeltaCare USA"],
+          "base_probability": 0.10,
+          "notes": "Closed panel DHMO. Separate credentialing."
+        }
+      ],
+      "routing_rules": [
+        "Delta Dental does NOT participate in umbrella network leasing — always direct",
+        "Premier vs PPO determination critical: Premier patients using PPO-only providers pay more OOP",
+        "Delta networks are state-specific — Delta of CA is separate entity from Delta of NY",
+        "PPO patients at Premier-only providers treated as out-of-network for PPO benefits"
+      ],
+      "silent_ppo_risk": "none",
+      "confusion_score": 5
+    },
+    {
+      "id": "humana",
+      "name": "Humana",
+      "aka": ["Humana Dental", "Humana Loyalty Plus", "Humana Complete Care", "CompDent"],
+      "market_segment": ["commercial", "employer", "medicare", "marketplace"],
+      "network_paths": [
+        {
+          "path_id": "humana_direct",
+          "type": "direct",
+          "label": "Humana Direct (Loyalty Plus / Complete Care)",
+          "plan_types": ["Loyalty Plus", "Complete Care", "Humana PPO"],
+          "base_probability": 0.40,
+          "notes": "Direct Humana contract. Loyalty Plus and Complete Care are the primary direct plan types."
+        },
+        {
+          "path_id": "humana_via_zelis",
+          "type": "leased",
+          "umbrella": "zelis",
+          "label": "Humana via Zelis/Maverest",
+          "plan_types": ["PPO", "Value", "CompDent"],
+          "base_probability": 0.45,
+          "notes": "Humana leases heavily through Zelis/Maverest network. Many Humana plans reprice through Zelis. This is a major leased network path — practice may not realize Zelis is repricing.",
+          "override_risk": "high",
+          "silent_ppo_alert": true
+        },
+        {
+          "path_id": "humana_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "Humana via Careington (via Zelis sub-lease)",
+          "plan_types": ["PPO"],
+          "base_probability": 0.15,
+          "notes": "Some Humana plans access Careington providers through a Zelis sub-lease arrangement."
+        }
+      ],
+      "routing_rules": [
+        "Humana is one of the heaviest umbrella network users — assume leased path until proven otherwise",
+        "Zelis is the primary Humana leasing conduit",
+        "Check plan name carefully: Loyalty Plus = more likely direct; CompDent = more likely Zelis"
+      ],
+      "silent_ppo_risk": "very_high",
+      "confusion_score": 8
+    },
+    {
+      "id": "guardian",
+      "name": "Guardian",
+      "aka": ["Guardian Dental", "Guardian DentalGuard"],
+      "market_segment": ["commercial", "employer", "voluntary"],
+      "network_paths": [
+        {
+          "path_id": "guardian_direct",
+          "type": "direct",
+          "label": "Guardian DentalGuard Direct",
+          "plan_types": ["DentalGuard Preferred", "DentalGuard Plus"],
+          "base_probability": 0.60,
+          "notes": "Standard direct Guardian contract. DentalGuard Preferred is the main employer plan."
+        },
+        {
+          "path_id": "guardian_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "Guardian via Careington",
+          "plan_types": ["DentalGuard Preferred"],
+          "base_probability": 0.30,
+          "notes": "Some Guardian plans access Careington network, particularly in markets where Guardian network density is low.",
+          "override_risk": "medium"
+        },
+        {
+          "path_id": "guardian_via_dentemax",
+          "type": "leased",
+          "umbrella": "dentemax",
+          "label": "Guardian via DenteMax",
+          "plan_types": ["Voluntary"],
+          "base_probability": 0.10,
+          "notes": "Some voluntary Guardian plans may access DenteMax."
+        }
+      ],
+      "routing_rules": [
+        "Guardian is moderately complex — direct is most common but Careington leasing is real",
+        "Verify by calling Guardian for specific group numbers if uncertain"
+      ],
+      "silent_ppo_risk": "medium",
+      "confusion_score": 6
+    },
+    {
+      "id": "anthem_bcbs",
+      "name": "Anthem / BCBS",
+      "aka": ["Anthem Blue Cross Blue Shield", "Anthem Dental", "BCBS Dental", "Blue Cross Dental"],
+      "market_segment": ["commercial", "employer", "marketplace", "medicaid"],
+      "network_paths": [
+        {
+          "path_id": "anthem_direct",
+          "type": "direct",
+          "label": "Anthem/BCBS Direct",
+          "plan_types": ["PPO", "Blue Dental PPO", "Preferred"],
+          "base_probability": 0.50,
+          "notes": "Standard direct Anthem/BCBS contract."
+        },
+        {
+          "path_id": "anthem_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "Anthem via Careington",
+          "plan_types": ["PPO"],
+          "base_probability": 0.25,
+          "notes": "Anthem accesses Careington in some state markets. State-specific — not all BCBS plans participate.",
+          "override_risk": "medium",
+          "geographic_restriction": "State-specific — verify by state"
+        },
+        {
+          "path_id": "anthem_via_dnoa",
+          "type": "leased",
+          "umbrella": "dnoa",
+          "label": "BCBS via DNOA",
+          "plan_types": ["PPO"],
+          "base_probability": 0.25,
+          "notes": "BCBS plans in TX, IL, NM, Kansas City, OK, MT route through DNOA (Dental Network of America, owned by HCSC).",
+          "geographic_restriction": "TX, IL, NM, Kansas City MO, OK, MT only"
+        }
+      ],
+      "routing_rules": [
+        "BCBS is highly state-specific — a BCBS plan in Texas routes completely differently than New York",
+        "HCSC states (TX, IL, NM, OK, MT) = DNOA path",
+        "Anthem states = may have Careington access",
+        "Always identify which BCBS entity issued the plan — each is independent"
+      ],
+      "silent_ppo_risk": "medium",
+      "confusion_score": 7
+    },
+    {
+      "id": "principal",
+      "name": "Principal",
+      "aka": ["Principal Financial", "Principal Dental", "Principal Life Insurance"],
+      "market_segment": ["commercial", "employer", "voluntary"],
+      "network_paths": [
+        {
+          "path_id": "principal_direct",
+          "type": "direct",
+          "label": "Principal Dental Direct",
+          "plan_types": ["PPO"],
+          "base_probability": 0.55,
+          "notes": "Direct Principal contract."
+        },
+        {
+          "path_id": "principal_via_zelis",
+          "type": "leased",
+          "umbrella": "zelis",
+          "label": "Principal via Zelis",
+          "plan_types": ["PPO"],
+          "base_probability": 0.35,
+          "notes": "Principal uses Zelis/Maverest for network access in many markets.",
+          "override_risk": "medium"
+        },
+        {
+          "path_id": "principal_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "Principal via Careington",
+          "plan_types": ["PPO"],
+          "base_probability": 0.10,
+          "notes": "Some Principal plans access Careington network."
+        }
+      ],
+      "routing_rules": [
+        "Principal is a moderately complex leaser — Zelis is the primary path after direct"
+      ],
+      "silent_ppo_risk": "medium",
+      "confusion_score": 6
+    },
+    {
+      "id": "beam",
+      "name": "Beam Dental",
+      "aka": ["Beam Benefits", "Beam Insurance"],
+      "market_segment": ["commercial", "employer", "voluntary", "small_group"],
+      "network_paths": [
+        {
+          "path_id": "beam_via_dentemax",
+          "type": "leased",
+          "umbrella": "dentemax",
+          "label": "Beam via DenteMax",
+          "plan_types": ["PPO"],
+          "base_probability": 0.90,
+          "notes": "Beam Dental operates almost entirely through DenteMax network. Practice must have DenteMax contract to be in-network for Beam.",
+          "override_risk": "low"
+        },
+        {
+          "path_id": "beam_direct",
+          "type": "direct",
+          "label": "Beam Direct",
+          "plan_types": ["PPO"],
+          "base_probability": 0.10,
+          "notes": "Limited direct contracting in some markets."
+        }
+      ],
+      "routing_rules": [
+        "Beam = DenteMax. Full stop in most cases.",
+        "Practice without DenteMax contract is effectively out-of-network for Beam"
+      ],
+      "silent_ppo_risk": "low",
+      "confusion_score": 2
+    },
+    {
+      "id": "renaissance",
+      "name": "Renaissance Dental",
+      "aka": ["Renaissance Dental Insurance"],
+      "market_segment": ["commercial", "employer", "voluntary"],
+      "network_paths": [
+        {
+          "path_id": "renaissance_via_dentemax",
+          "type": "leased",
+          "umbrella": "dentemax",
+          "label": "Renaissance via DenteMax",
+          "plan_types": ["PPO"],
+          "base_probability": 0.85,
+          "notes": "Renaissance primarily operates through DenteMax.",
+          "override_risk": "low"
+        }
+      ],
+      "routing_rules": ["Renaissance = DenteMax in most cases"],
+      "silent_ppo_risk": "low",
+      "confusion_score": 2
+    },
+    {
+      "id": "mutual_of_omaha",
+      "name": "Mutual of Omaha",
+      "aka": ["Mutual of Omaha Dental", "United of Omaha"],
+      "market_segment": ["commercial", "employer", "voluntary"],
+      "network_paths": [
+        {
+          "path_id": "mutual_via_dentemax",
+          "type": "leased",
+          "umbrella": "dentemax",
+          "label": "Mutual of Omaha via DenteMax",
+          "plan_types": ["PPO"],
+          "base_probability": 0.80,
+          "notes": "Mutual of Omaha dental primarily routes through DenteMax.",
+          "override_risk": "low"
+        },
+        {
+          "path_id": "mutual_direct",
+          "type": "direct",
+          "label": "Mutual of Omaha Direct",
+          "plan_types": ["PPO"],
+          "base_probability": 0.20,
+          "notes": "Some direct contracting."
+        }
+      ],
+      "routing_rules": ["DenteMax is the primary path for Mutual of Omaha dental"],
+      "silent_ppo_risk": "low",
+      "confusion_score": 3
+    },
+    {
+      "id": "unum",
+      "name": "Unum",
+      "aka": ["Unum Dental", "Unum Group"],
+      "market_segment": ["voluntary", "employer"],
+      "network_paths": [
+        {
+          "path_id": "unum_via_dentemax",
+          "type": "leased",
+          "umbrella": "dentemax",
+          "label": "Unum via DenteMax",
+          "plan_types": ["PPO"],
+          "base_probability": 0.90,
+          "notes": "Unum dental is almost entirely DenteMax.",
+          "override_risk": "low"
+        }
+      ],
+      "routing_rules": ["Unum = DenteMax"],
+      "silent_ppo_risk": "low",
+      "confusion_score": 2
+    },
+    {
+      "id": "colonial_life",
+      "name": "Colonial Life",
+      "aka": ["Colonial Life & Accident Insurance"],
+      "market_segment": ["voluntary", "employer"],
+      "network_paths": [
+        {
+          "path_id": "colonial_via_dentemax",
+          "type": "leased",
+          "umbrella": "dentemax",
+          "label": "Colonial Life via DenteMax",
+          "plan_types": ["PPO"],
+          "base_probability": 0.90,
+          "notes": "Colonial Life dental routes primarily through DenteMax.",
+          "override_risk": "low"
+        }
+      ],
+      "routing_rules": ["Colonial Life = DenteMax"],
+      "silent_ppo_risk": "low",
+      "confusion_score": 2
+    },
+    {
+      "id": "sun_life",
+      "name": "Sun Life Financial",
+      "aka": ["Sun Life Dental", "Assurant", "DHA"],
+      "market_segment": ["commercial", "employer", "voluntary"],
+      "network_paths": [
+        {
+          "path_id": "sun_life_via_careington",
+          "type": "leased",
+          "umbrella": "careington",
+          "label": "Sun Life via Careington",
+          "plan_types": ["PPO"],
+          "base_probability": 0.50,
+          "notes": "Sun Life accesses Careington in many markets.",
+          "override_risk": "medium"
+        },
+        {
+          "path_id": "sun_life_direct",
+          "type": "direct",
+          "label": "Sun Life Direct",
+          "plan_types": ["PPO"],
+          "base_probability": 0.50,
+          "notes": "Direct Sun Life contracting where available."
+        }
+      ],
+      "routing_rules": ["Sun Life uses Careington frequently — verify by market"],
+      "silent_ppo_risk": "medium",
+      "confusion_score": 5
+    },
+    {
+      "id": "geha",
+      "name": "GEHA",
+      "aka": ["GEHA Dental", "Government Employees Health Association", "GEHA FEDVIP"],
+      "market_segment": ["federal", "government"],
+      "network_paths": [
+        {
+          "path_id": "geha_via_connection_dental",
+          "type": "leased",
+          "umbrella": "connection_dental",
+          "label": "GEHA via Connection Dental",
+          "plan_types": ["FEDVIP", "GEHA Dental"],
+          "base_probability": 0.95,
+          "notes": "GEHA owns Connection Dental — their plans exclusively route through Connection Dental network.",
+          "override_risk": "low"
+        }
+      ],
+      "routing_rules": [
+        "GEHA = Connection Dental. Always.",
+        "Federal employee plan — practice must be credentialed with Connection Dental"
+      ],
+      "silent_ppo_risk": "low",
+      "confusion_score": 2
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Axlow LinkedIn Autopilot - Python Dependencies
+
+# Core dependencies
+anthropic>=0.18.0         # Claude AI API for content generation
+requests>=2.31.0          # HTTP requests for API calls
+python-dotenv>=1.0.0      # Environment variable management
+
+# Optional dependencies (uncomment if using)
+# pycanva>=0.1.0          # Canva API integration (if available)
+# buffer>=0.1.0           # Buffer API for scheduling (if available)
+# pillow>=10.0.0          # Image processing (if needed)

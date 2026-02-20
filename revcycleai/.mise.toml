@@ -1,0 +1,3 @@
+# Disable mise for this project - static site only
+[tools]
+# No build tools needed

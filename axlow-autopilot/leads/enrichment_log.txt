@@ -1,0 +1,57 @@
+Enriching 43 incomplete leads via Hunter.io...
+
+  [1/43] Intermountain Health (intermountainhealth.org) — searching...
+    ✗ No matches found
+  [2/43] Sutter Health (sutterhealth.org) — searching...
+    ✗ No matches found
+  [3/43] Bon Secours Mercy Health — no domain mapping, skipping
+  [4/43] Ochsner Health (ochsner.org) — searching...
+    ✓ Found: Arlene Tew | arlene.tew@ochsner.org (99%) | Assistant Director of Business Services
+  [5/43] UCHealth — no domain mapping, skipping
+  [6/43] Novant Health — no domain mapping, skipping
+  [7/43] OhioHealth — no domain mapping, skipping
+  [8/43] Affordable Care / Affordable Dentures & Implants (ADI) (affordablecare.com) — searching...
+    ✓ Found: Eric Perkins | eric.perkins@affordablecare.com (99%) | Senior Director of Project Management Office
+  [9/43] Aspen Dental Management (aspendental.com) — searching...
+    ✓ Found: Laura Spawn | laura.spawn@aspendental.com (91%) | Director of Operations
+  [10/43] US Oncology Network (McKesson) — no domain mapping, skipping
+  [11/43] Surgery Partners — no domain mapping, skipping
+  [12/43] Envision Healthcare — no domain mapping, skipping
+  [13/43] Privia Health — no domain mapping, skipping
+  [14/43] US Dermatology Partners — no domain mapping, skipping
+  [15/43] DaVita Medical Group / DaVita Integrated Kidney Care — no domain mapping, skipping
+  [16/43] Gastro Health — no domain mapping, skipping
+  [17/43] Agilon Health — no domain mapping, skipping
+  [18/43] Urology of Indiana — no domain mapping, skipping
+  [19/43] National Spine & Pain Centers — no domain mapping, skipping
+  [20/43] American Oncology Network — no domain mapping, skipping
+  [21/43] LifeStance Health — no domain mapping, skipping
+  [22/43] Concentra (Occupational Health) — no domain mapping, skipping
+  [23/43] National HealthCare Corporation (NHC) — no domain mapping, skipping
+  [24/43] Spire Orthopedic Partners — no domain mapping, skipping
+  [25/43] Oak Street Health (CVS Health subsidiary) — no domain mapping, skipping
+  [26/43] Ardent Health Services — no domain mapping, skipping
+  [27/43] Sound Physicians — no domain mapping, skipping
+  [28/43] Access Healthcare — no domain mapping, skipping
+  [29/43] nThrive (formerly Navicure/MedAssets) (nthrive.com) — searching...
+    ✓ Found: Jeanne Haas | jeanne.haas@nthrive.com (89%) | Marketing Manager
+  [30/43] Medical Advantage (TDC Group) — no domain mapping, skipping
+  [31/43] MedBridge / MedBridge Healthcare — no domain mapping, skipping
+  [32/43] Meduit (formerly MedA/Rx and CompuMed) — no domain mapping, skipping
+  [33/43] Aspirion (formerly A/R Management Group) — no domain mapping, skipping
+  [34/43] Xtend Healthcare (Navient subsidiary) — no domain mapping, skipping
+  [35/43] QHR Health (Quorum Health Resources) — no domain mapping, skipping
+  [36/43] CareCore National / eviCore Healthcare (Evernorth/Cigna subsidiary) — no domain mapping, skipping
+  [37/43] Medusind (formerly MedA/Rx, now Medusind) — no domain mapping, skipping
+  [38/43] Physicians Revenue Group (PRG) — no domain mapping, skipping
+  [39/43] Firstsource Healthcare (Firstsource Solutions subsidiary) — no domain mapping, skipping
+  [40/43] Acadia Healthcare — no domain mapping, skipping
+  [41/43] BrightSpring Health Services — no domain mapping, skipping
+  [42/43] AFC Urgent Care (American Family Care) — no domain mapping, skipping
+  [43/43] Behavioral Health Group (BHG) — no domain mapping, skipping
+
+==================================================
+Names found:  4/43
+Emails found: 4/43
+Skipped:      39
+batch_parsed.json updated.

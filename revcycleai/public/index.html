@@ -5,6 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RevCycleAI — RCM Intelligence for Healthcare Finance Teams</title>
 <meta name="description" content="Daily RCM intelligence. Payor policy changes, denial management insights, and network routing analysis — before they hit your AR.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://revcycleai.com">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://revcycleai.com">
+<meta property="og:title" content="RevCycleAI — RCM Intelligence for Healthcare Finance Teams">
+<meta property="og:description" content="Daily RCM intelligence. Payor policy changes, denial management insights, and network routing analysis.">
+<meta property="og:image" content="https://revcycleai.com/og-image.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://revcycleai.com">
+<meta property="twitter:title" content="RevCycleAI — RCM Intelligence for Healthcare Finance Teams">
+<meta property="twitter:description" content="Daily RCM intelligence. Payor policy changes, denial management insights, and network routing analysis.">
+<meta property="twitter:image" content="https://revcycleai.com/og-image.png">
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "vk5ezds2o8");
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
@@ -19,7 +45,9 @@
   --masthead-border: 3px solid var(--text);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+html { overflow-x: hidden; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; overflow-x: hidden; max-width: 100vw; }
+img { max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--accent); }
 
@@ -58,6 +86,12 @@ a:hover { color: var(--accent); }
 .site-nav ul { display: flex; gap: 0; list-style: none; }
 .site-nav li a { display: block; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px; }
 .site-nav li a:hover, .site-nav li.active a { color: var(--text); border-bottom-color: var(--text); }
+.site-nav li a.nav-highlight { color: #16A34A; font-weight: 700; position: relative; }
+.site-nav li a.nav-highlight::after { content: "FREE"; font-size: 8px; background: #16A34A; color: #fff; padding: 2px 4px; border-radius: 3px; margin-left: 5px; letter-spacing: 0.3px; vertical-align: middle; }
+.site-nav li a.nav-highlight:hover { color: #15803D; border-bottom-color: #16A34A; }
+.site-nav li a.nav-newsletter { color: #1D4ED8; font-weight: 700; }
+.site-nav li a.nav-newsletter::after { content: "📧"; margin-left: 5px; }
+.site-nav li a.nav-newsletter:hover { color: #1E40AF; border-bottom-color: #1D4ED8; }
 
 /* ── LAYOUT ── */
 .page-wrap { max-width: 1200px; margin: 0 auto; padding: 28px 24px 60px; }
@@ -172,6 +206,40 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
   .pub-name { font-size: 32px; }
   .subscribe-inline { display: none; }
   .story-grid { grid-template-columns: 1fr; }
+  
+  /* Prevent overflow */
+  .topbar-inner { padding: 0 16px; }
+  .masthead-inner { padding: 16px; }
+  .nav-inner { padding: 0 16px; }
+  .main-story, .story-card { padding: 20px; }
+  .sidebar-block-body { padding: 16px; }
+  
+  /* Constrain widths */
+  .masthead, .nav, .content-wrap, .footer-inner { max-width: 100vw; padding-left: 16px; padding-right: 16px; }
+  .ticker { font-size: 11px; }
+  
+  /* Adjust typography */
+  .main-story h1 { font-size: 28px; line-height: 1.2; }
+  .story-card h2 { font-size: 16px; }
+  
+  /* Fix navigation tabs on mobile */
+  .site-nav { padding: 0 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .site-nav ul { gap: 0; flex-wrap: nowrap; }
+  .site-nav li a { 
+    padding: 10px 10px; 
+    font-size: 11px; 
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  
+  /* Masthead mobile */
+  .masthead { padding: 16px; }
+  .wordmark-rc, .wordmark-cycle { font-size: 22px; }
+  .pub-tagline { font-size: 10px; }
+  
+  /* Show mobile newsletter and Pro CTA */
+  .mobile-newsletter { display: block !important; }
+  .mobile-pro-cta { display: block !important; }
 }
 </style>
 </head>
@@ -226,12 +294,12 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
   <ul>
     <li class="active"><a href="/">Top Stories</a></li>
     <li><a href="/blog">All Intelligence</a></li>
+    <li><a href="/newsletter" class="nav-newsletter">Newsletter</a></li>
+    <li><a href="/free" class="nav-highlight">Free Resources</a></li>
+    <li><a href="/tools">Tools</a></li>
     <li><a href="/blog#regulatory">Regulatory</a></li>
     <li><a href="/blog#denials">Denial Management</a></li>
     <li><a href="/blog#network">Network & PPO</a></li>
-    <li><a href="/tools">Tools</a></li>
-    <li><a href="/free">Free Resources</a></li>
-    <li><a href="/newsletter">Newsletter</a></li>
   </ul>
 </nav>
 
@@ -253,6 +321,31 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
           <span>8 min read</span>
           <a href="https://axlow.com" class="inline-cta" target="_blank">Find updated policy → Axlow ↗</a>
         </div>
+      </div>
+
+      <!-- MOBILE NEWSLETTER -->
+      <div class="mobile-newsletter" style="display: none; background: #09090B; color: #fff; border-radius: 8px; padding: 24px; margin: 24px 0;">
+        <h4 style="font-size: 18px; margin: 0 0 8px 0; font-weight: 700;">📧 This Week in RCM</h4>
+        <p style="font-size: 14px; color: #A1A1AA; margin-bottom: 16px; line-height: 1.6;">The top 3 RCM signals from the past week — what changed, what it means, and what to do. Every Tuesday morning.</p>
+        <form data-subscribe-form data-subscribe-source="mobile" style="display: flex; flex-direction: column; gap: 10px;">
+          <input type="email" name="email" placeholder="your@email.com" required style="padding: 12px; border: 1px solid #3F3F46; border-radius: 6px; font-size: 15px; font-family: inherit; background: #18181B; color: #fff; outline: none;">
+          <button type="submit" style="background: #1D4ED8; color: #fff; border: none; border-radius: 6px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit;">Subscribe Free →</button>
+        </form>
+        <p style="font-size: 12px; color: #71717A; margin: 12px 0 0; text-align: center;">Join RCM professionals. Free. Unsubscribe anytime.</p>
+      </div>
+
+      <!-- MOBILE PRO CTA -->
+      <div class="mobile-pro-cta" style="display: none; background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 2px solid #1D4ED8; border-radius: 8px; padding: 20px; margin: 24px 0;">
+        <h4 style="color: #1D4ED8; font-size: 18px; margin: 0 0 12px 0;">⭐ RevCycleAI Pro</h4>
+        <p style="font-weight: 600; margin-bottom: 12px; color: #09090B; font-size: 15px;">Full access to premium RCM tools &amp; resources</p>
+        <ul style="font-size: 14px; line-height: 1.8; color: #52525B; margin-bottom: 16px; padding-left: 20px;">
+          <li>Advanced denial benchmarking</li>
+          <li>Carve-out opportunity scanner</li>
+          <li>Full resource library</li>
+          <li>Premium reports</li>
+        </ul>
+        <a href="/pro" style="display: block; text-align: center; background: #1D4ED8; color: #fff; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 15px; text-decoration: none;">See pricing →</a>
+        <p style="font-size: 13px; color: #71717A; margin: 12px 0 0; text-align: center;">$19/mo · Founding member rate</p>
       </div>
 
       <!-- STORY GRID -->
@@ -292,15 +385,7 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
             <div class="story-meta"><span class="source">Dental Economics</span> · Feb 16, 2026 · <a href="https://payormap.com" style="color:var(--accent);font-weight:600">Map your routing → payormap.com</a></div>
           </div>
         </div>
-        <div class="story-row">
-          <div class="story-num">2</div>
-          <div>
-            <div class="story-urgency high">🟡 24h · Denial Management</div>
-            <h4><a href="#">Denial Rates Hit 5-Year High: What the 2026 CAQH Index Means for Your AR</a></h4>
-            <p>Medical necessity denials up 18% year-over-year. $39B in annual administrative waste. Here's what's driving it and the appeal strategy that's working.</p>
-            <div class="story-meta"><span class="source">RevCycle Intelligence</span> · Feb 15, 2026 · <a href="https://axlow.com" style="color:var(--accent);font-weight:600">Policy citation tool → axlow.com</a></div>
-          </div>
-        </div>
+        <!-- Story removed - article not yet published -->
         <!-- Sponsored inline unit -->
         <div class="sponsored-block">
           <div class="sp-label">Sponsored · Axlow</div>
@@ -353,6 +438,22 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
             <button type="submit">Subscribe Free →</button>
           </form>
           <p class="fine-print">Join RCM professionals. Free. Unsubscribe anytime.</p>
+        </div>
+      </div>
+
+      <!-- Pro CTA -->
+      <div class="sidebar-block" style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 2px solid #1D4ED8;">
+        <div class="sidebar-block-header" style="background: transparent; border-bottom: none;"><h4 style="color: #1D4ED8; font-size: 15px;">⭐ RevCycleAI Pro</h4></div>
+        <div class="sidebar-block-body">
+          <p style="font-weight: 600; margin-bottom: 10px; color: #09090B;">Full access to premium RCM tools &amp; resources</p>
+          <ul style="font-size: 13px; line-height: 1.7; color: #52525B; margin-bottom: 16px; padding-left: 18px;">
+            <li>Advanced denial benchmarking</li>
+            <li>Carve-out opportunity scanner</li>
+            <li>Full resource library</li>
+            <li>Premium reports</li>
+          </ul>
+          <a href="/pro" style="display: block; text-align: center; background: #1D4ED8; color: #fff; padding: 11px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none;">See pricing →</a>
+          <p class="fine-print" style="margin-top: 10px; text-align: center;">$19/mo · Founding member rate</p>
         </div>
       </div>
 
@@ -475,7 +576,6 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
       <a href="https://axlow.com" target="_blank">Axlow</a>
       <a href="https://payormap.com" target="_blank">PayorMap</a>
       <a href="/advertise">Advertise</a>
-      <a href="/roadmap">Roadmap</a>
     </div>
     <div class="footer-copy">© 2026 RevCycleAI. Revenue Cycle Intelligence, published daily.</div>
   </div>

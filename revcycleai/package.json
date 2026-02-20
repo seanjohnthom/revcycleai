@@ -1,0 +1,9 @@
+{
+  "name": "revcycleai",
+  "version": "1.0.0",
+  "description": "RevCycleAI — RCM intelligence platform",
+  "private": true,
+  "dependencies": {
+    "stripe": "^14.14.0"
+  }
+}

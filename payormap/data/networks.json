@@ -1,0 +1,92 @@
+{
+  "umbrella_networks": [
+    {
+      "id": "careington",
+      "name": "Careington International",
+      "aka": ["Careington"],
+      "parent": "Careington International Corporation",
+      "type": "ppo_lease",
+      "estimated_providers": 100000,
+      "notes": "Largest dental umbrella network. Single contract grants access to Cigna, UHC, Anthem, MetLife (limited plans), Humana (via Zelis sub-lease), GEHA/FEDVIP, and 50+ TPAs.",
+      "key_exclusions": [
+        "MetLife standard PDP — only PDP Plus and FEDVIP accessible via Careington",
+        "Delta Dental — does not participate in Careington leasing",
+        "Aetna — does not access Careington in most markets"
+      ]
+    },
+    {
+      "id": "connection_dental",
+      "name": "Connection Dental",
+      "aka": ["Connection Dental Network"],
+      "parent": "GEHA (Government Employees Health Association)",
+      "type": "ppo_lease",
+      "estimated_providers": 90000,
+      "notes": "GEHA-owned network. Primary conduit for federal employee dental plans (FEDVIP), Cigna DPPO access in some markets, BCBS/DNOA sub-networks.",
+      "key_exclusions": [
+        "Not used by most commercial payors",
+        "Primarily federal/government employee market"
+      ]
+    },
+    {
+      "id": "zelis",
+      "name": "Zelis / Maverest",
+      "aka": ["Zelis Healthcare", "Maverest", "Stratose", "4Most", "PPOPlus", "HFN", "NPPN", "Plan Vista", "Qualident", "OPPN", "PlanCare America"],
+      "parent": "Zelis Healthcare",
+      "type": "ppo_lease_and_repricing",
+      "estimated_providers": 150000,
+      "notes": "Brand consolidation of multiple legacy networks. NOT an insurance carrier — pure network leasing + repricing. Primary conduit for Humana dental leasing.",
+      "key_exclusions": [
+        "Not a direct contracting entity — always a sub-lease",
+        "Repricing engine only; payor still appears on EOB as primary"
+      ]
+    },
+    {
+      "id": "dentemax",
+      "name": "DenteMax",
+      "aka": ["DenteMax LLC"],
+      "parent": "DenteMax LLC",
+      "type": "ppo_lease",
+      "estimated_providers": 120000,
+      "notes": "75M+ members. Primary leasing network for mid-market and voluntary benefit payors: Beam, Colonial Life, Mutual of Omaha, Renaissance, Starmount, TruAssure, Unum, AlwaysCare.",
+      "key_exclusions": [
+        "Does not lease to Big 5 payors (Cigna, UHC, Aetna, MetLife, Delta)",
+        "Primarily used by voluntary/supplemental benefit carriers"
+      ]
+    },
+    {
+      "id": "dnoa",
+      "name": "DNOA (Dental Network of America)",
+      "aka": ["Dental Network of America", "DNOA"],
+      "parent": "Health Care Service Corporation (HCSC)",
+      "type": "ppo_lease",
+      "estimated_providers": null,
+      "notes": "Represents BCBS plans in states where BCBS does not operate own dental network: TX, IL, NM, Kansas City, OK, MT. Also Dearborn National.",
+      "key_exclusions": [
+        "Geographic restriction — only active in specific BCBS states",
+        "Not used outside HCSC-affiliated BCBS plans"
+      ]
+    },
+    {
+      "id": "premier_dental",
+      "name": "Premier Dental Network (PDG)",
+      "aka": ["PDG", "Premier Dental Group"],
+      "parent": "Premier Dental Group",
+      "type": "ppo_lease",
+      "estimated_providers": null,
+      "notes": "Smaller umbrella. State-specific availability. Less common than Careington/Zelis/DenteMax.",
+      "key_exclusions": [
+        "State-specific — verify availability by geography"
+      ]
+    },
+    {
+      "id": "dha",
+      "name": "Dental Health Alliance (DHA)",
+      "aka": ["DHA"],
+      "parent": "DHA",
+      "type": "ppo_lease",
+      "estimated_providers": null,
+      "notes": "Regional umbrella network. Smaller footprint.",
+      "key_exclusions": []
+    }
+  ]
+}
