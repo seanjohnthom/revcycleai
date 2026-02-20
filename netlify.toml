@@ -6,6 +6,8 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
+  MISE_INSTALL = "false"
+  DISABLE_MISE_INSTALL = "true"
 
 [[redirects]]
   from = "/blog"
