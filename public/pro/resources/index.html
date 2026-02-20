@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Resource Library — RevCycleAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --text: #09090B; --text2: #52525B; --text3: #A1A1AA; --border: #E4E4E7; --border2: #D4D4D8; --accent: #1D4ED8; --accent-bg: #EFF6FF; --green: #059669; --green-bg: #ECFDF5; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #FAFAFA; color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
+a { color: var(--accent); text-decoration: none; }
+
+.masthead { max-width: 1200px; margin: 0 auto; padding: 20px 24px 16px; border-bottom: 3px solid var(--text); }
+.wordmark { display: inline-flex; align-items: center; line-height: 1; text-decoration: none; color: inherit; }
+.wordmark-rc { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.wordmark-cycle { font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 400; letter-spacing: -0.5px; }
+.wordmark-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 10px; }
+.wordmark-ai { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+.page-wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+.page-header { text-align: center; margin-bottom: 48px; }
+.pro-badge { display: inline-block; background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%); color: #fff; font-size: 11px; font-weight: 800; padding: 6px 12px; border-radius: 5px; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px; }
+h1 { font-family: 'DM Sans', sans-serif; font-size: 42px; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 12px; }
+.lead { font-size: 17px; color: var(--text2); line-height: 1.6; }
+
+.resources-grid { display: grid; gap: 20px; }
+.resource-card { background: #fff; border: 2px solid var(--border); border-radius: 10px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; transition: all 0.2s; }
+.resource-card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(29, 78, 216, 0.1); }
+.resource-icon { width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.icon-pdf { background: #FEE2E2; }
+.icon-excel { background: #D1FAE5; }
+.resource-content { flex: 1; }
+.resource-content h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.resource-content p { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+.resource-meta { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.download-btn { background: var(--accent); color: #fff; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; white-space: nowrap; align-self: center; }
+.download-btn:hover { background: #1E40AF; }
+
+.category-header { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+.category-header:first-of-type { margin-top: 0; }
+
+footer { border-top: 3px solid var(--text); background: var(--text); color: #fff; padding: 28px 24px; margin-top: 80px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-links a { font-size: 12px; color: #A1A1AA; margin-right: 20px; }
+.footer-links a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <a href="/" class="wordmark">
+    <span class="wordmark-rc">Rev</span><span class="wordmark-cycle">Cycle</span>
+    <div class="wordmark-divider"></div>
+    <span class="wordmark-ai">AI</span>
+  </a>
+</div>
+
+<div class="page-wrap">
+  
+  <div class="page-header">
+    <div class="pro-badge">⭐ Pro Member Library</div>
+    <h1>Premium Resource Library</h1>
+    <p class="lead">17 templates, playbooks, and tools to optimize your revenue cycle</p>
+  </div>
+
+  <!-- PAYOR-SPECIFIC GUIDES -->
+  <div class="category-header">Payor-Specific Strategies</div>
+  <div class="resources-grid">
+    
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>UnitedHealthcare Prior Auth Strategy Guide</h3>
+        <p>Navigate UHC's complex authorization tiers, high-denial CPT codes, and denial recovery tactics</p>
+        <div class="resource-meta">PDF • 6 pages</div>
+      </div>
+      <a href="/downloads/pro/uhc-prior-auth-strategy-guide.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Aetna Medical Necessity Appeal Template</h3>
+        <p>Pre-formatted appeal letter with policy language and clinical justification structure</p>
+        <div class="resource-meta">PDF • 4 pages</div>
+      </div>
+      <a href="/downloads/pro/aetna-medical-necessity-appeal-template.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>BCBS State-by-State Variations Guide</h3>
+        <p>Key differences across the 34 independent BCBS plans and common provider mistakes</p>
+        <div class="resource-meta">PDF • 5 pages</div>
+      </div>
+      <a href="/downloads/pro/bcbs-state-variations-guide.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Cigna Denial Code Decoder</h3>
+        <p>Top 10 Cigna denial codes, what they really mean, and how to fix them (with success rates)</p>
+        <div class="resource-meta">PDF • 5 pages</div>
+      </div>
+      <a href="/downloads/pro/cigna-denial-code-decoder.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Humana Appeals Fast-Track Guide</h3>
+        <p>How to use Humana's hidden expedited reconsideration process (78% success rate)</p>
+        <div class="resource-meta">PDF • 4 pages</div>
+      </div>
+      <a href="/downloads/pro/humana-appeals-fast-track-guide.pdf" class="download-btn" download>Download</a>
+    </div>
+
+  </div>
+
+  <!-- OPERATIONS & WORKFLOWS -->
+  <div class="category-header">Operations & Workflows</div>
+  <div class="resources-grid">
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>RCM Staff Training Checklist</h3>
+        <p>30-day onboarding roadmap for new billing specialists with week-by-week milestones</p>
+        <div class="resource-meta">PDF • 4 pages</div>
+      </div>
+      <a href="/downloads/pro/rcm-staff-training-checklist.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Revenue Leakage Audit Checklist</h3>
+        <p>10 hidden revenue leaks and how to plug them ($155K–$547K potential annual recovery)</p>
+        <div class="resource-meta">PDF • 5 pages</div>
+      </div>
+      <a href="/downloads/pro/revenue-leakage-audit-checklist.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Peer-to-Peer Discussion Script Template</h3>
+        <p>Word-for-word script for winning denied prior authorizations on medical director calls</p>
+        <div class="resource-meta">PDF • 5 pages</div>
+      </div>
+      <a href="/downloads/pro/peer-to-peer-script-template.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-excel">📊</div>
+      <div class="resource-content">
+        <h3>RCM KPI Dashboard</h3>
+        <p>Track 10 key performance indicators with targets, trends, and action items</p>
+        <div class="resource-meta">Excel • Pre-built formulas</div>
+      </div>
+      <a href="/downloads/pro/rcm-kpi-dashboard.xlsx" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-excel">📊</div>
+      <div class="resource-content">
+        <h3>Prior Auth Tracking Template</h3>
+        <p>Monitor authorization requests, expiration dates, and follow-up reminders</p>
+        <div class="resource-meta">Excel • Ready to use</div>
+      </div>
+      <a href="/downloads/pro/prior-auth-tracking-template.xlsx" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-excel">📊</div>
+      <div class="resource-content">
+        <h3>Denial Appeal Success Rate Tracker</h3>
+        <p>Calculate appeal win rates, recovery amounts, and ROI by payor and denial type</p>
+        <div class="resource-meta">Excel • Auto-calculates metrics</div>
+      </div>
+      <a href="/downloads/pro/denial-appeal-success-tracker.xlsx" class="download-btn" download>Download</a>
+    </div>
+
+  </div>
+
+  <!-- FINANCIAL & CONTRACTS -->
+  <div class="category-header">Financial & Contract Management</div>
+  <div class="resources-grid">
+
+    <div class="resource-card">
+      <div class="resource-icon icon-excel">📊</div>
+      <div class="resource-content">
+        <h3>Contract Negotiation ROI Calculator</h3>
+        <p>Calculate the financial impact of payor contract renegotiation (revenue gain + denial reduction)</p>
+        <div class="resource-meta">Excel • Interactive model</div>
+      </div>
+      <a href="/downloads/pro/contract-negotiation-roi-calculator.xlsx" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-excel">📊</div>
+      <div class="resource-content">
+        <h3>Fee Schedule Comparison Tool</h3>
+        <p>Compare payor reimbursement rates across your top CPT codes to identify best/worst contracts</p>
+        <div class="resource-meta">Excel • Pre-built comparison</div>
+      </div>
+      <a href="/downloads/pro/fee-schedule-comparison-tool.xlsx" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Payor Contract Termination Template</h3>
+        <p>90-day notice letter for terminating payor agreements (with legal checklist)</p>
+        <div class="resource-meta">PDF • Legal template</div>
+      </div>
+      <a href="/downloads/pro/contract-termination-template.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Year-End Financial Close Checklist</h3>
+        <p>December closing procedures: AR reconciliation, metrics tracking, tax prep items</p>
+        <div class="resource-meta">PDF • Step-by-step</div>
+      </div>
+      <a href="/downloads/pro/year-end-financial-close-checklist.pdf" class="download-btn" download>Download</a>
+    </div>
+
+  </div>
+
+  <!-- COMPLIANCE -->
+  <div class="category-header">Compliance & Regulations</div>
+  <div class="resources-grid">
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>Medicare Advantage Compliance Calendar 2026</h3>
+        <p>Key dates, deadlines, and compliance areas for MA providers (quarterly breakdown)</p>
+        <div class="resource-meta">PDF • 2026 calendar</div>
+      </div>
+      <a href="/downloads/pro/medicare-advantage-compliance-calendar-2026.pdf" class="download-btn" download>Download</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-icon icon-pdf">📄</div>
+      <div class="resource-content">
+        <h3>No Surprises Act Compliance Checklist</h3>
+        <p>Federal balance billing protection requirements, GFE rules, and IDR process</p>
+        <div class="resource-meta">PDF • Compliance guide</div>
+      </div>
+      <a href="/downloads/pro/surprise-billing-compliance-checklist.pdf" class="download-btn" download>Download</a>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/blog">Blog</a>
+      <a href="/newsletter">Newsletter</a>
+      <a href="/free">Free Resources</a>
+      <a href="/tools">Tools</a>
+      <a href="/pro">Pro</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+    <div style="font-size: 11px; color: #71717A;">© 2026 RevCycleAI</div>
+  </div>
+</footer>
+
+</body>
+</html>
