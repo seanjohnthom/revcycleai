@@ -215,6 +215,21 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
   /* Adjust typography */
   .main-story h1 { font-size: 28px; line-height: 1.2; }
   .story-card h2 { font-size: 16px; }
+  
+  /* Fix navigation tabs on mobile */
+  .site-nav { padding: 0 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .site-nav ul { gap: 0; flex-wrap: nowrap; }
+  .site-nav li a { 
+    padding: 10px 10px; 
+    font-size: 11px; 
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  
+  /* Masthead mobile */
+  .masthead { padding: 16px; }
+  .wordmark-rc, .wordmark-cycle { font-size: 22px; }
+  .pub-tagline { font-size: 10px; }
 }
 </style>
 </head>
