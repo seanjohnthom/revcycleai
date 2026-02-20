@@ -26,7 +26,7 @@ def slugify(text: str) -> str:
 def generate_blog_post(trend: dict, verbose: bool = True) -> dict:
     """
     Generate full blog post from trend
-    Returns dict with: title, slug, html_content, date, category, urgency
+    Returns dict with: title, slug, html_content, date, category, urgency, meta_description
     """
     
     title = trend.get('title', 'Untitled')
@@ -39,6 +39,11 @@ def generate_blog_post(trend: dict, verbose: bool = True) -> dict:
     
     # Generate slug
     slug = slugify(title)
+    
+    # Generate compelling meta description (150-160 chars)
+    meta_description = summary[:157] + "..." if len(summary) > 160 else summary
+    if not meta_description:
+        meta_description = f"Essential RCM intelligence for billing teams. {title[:100]}"
     
     # Generate blog content (800-1000 words)
     # This is a simplified version - you can enhance with more sophisticated content generation
@@ -149,7 +154,8 @@ def generate_blog_post(trend: dict, verbose: bool = True) -> dict:
         'category': category,
         'urgency': urgency,
         'products': products,
-        'source': source
+        'source': source,
+        'meta_description': meta_description
     }
 
 
@@ -172,7 +178,34 @@ def create_blog_post_html(post: dict) -> str:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{post['title']} — RevCycleAI</title>
-<meta name="description" content="{post['title']}">
+<meta name="description" content="{post.get('meta_description', post['title'][:160])}">
+
+<!-- Article Schema (JSON-LD) -->
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{post['title']}",
+  "description": "{post.get('meta_description', post['title'][:160])}",
+  "author": {{
+    "@type": "Organization",
+    "name": "RevCycleAI"
+  }},
+  "publisher": {{
+    "@type": "Organization",
+    "name": "RevCycleAI",
+    "url": "https://revcycleai.com"
+  }},
+  "datePublished": "{datetime.now().strftime('%Y-%m-%d')}",
+  "dateModified": "{datetime.now().strftime('%Y-%m-%d')}",
+  "mainEntityOfPage": {{
+    "@type": "WebPage",
+    "@id": "https://revcycleai.com/blog/{post['slug']}"
+  }},
+  "articleSection": "{post['category'].replace('_', ' ').title()}"
+}}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>

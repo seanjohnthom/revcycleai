@@ -34,13 +34,13 @@
         "kalshi_market_data",
         "favorite_longshot_bias"
       ],
-      "status": "open",
+      "status": "settled",
       "entry_time": "2026-02-19T01:36:12.486264+00:00",
-      "exit_price_cents": null,
-      "pnl": null,
-      "exit_time": null,
+      "exit_price_cents": 0,
+      "pnl": -0.9,
+      "exit_time": "2026-02-20T15:34:52.951571+00:00",
       "settlement": null,
-      "notes": "Real trade. Settles Feb 20."
+      "notes": "GDP came in BELOW 2.0%. YES lost."
     },
     {
       "id": "nba-okc-feb20",
@@ -116,13 +116,34 @@
       "data_sources": [
         "ledger_correction"
       ],
-      "status": "open",
+      "status": "settled",
       "entry_time": "2026-02-19T14:00:48.312617+00:00",
+      "exit_price_cents": 100,
+      "pnl": 3.12,
+      "exit_time": "2026-02-20T15:34:52.951828+00:00",
+      "settlement": null,
+      "notes": "ACCIDENTAL SHORT WINS! GDP < 2.0%. 4 NO contracts @ $1.00 each = $4.00 payout"
+    },
+    {
+      "id": "dd454911-9ccd-43fa-b77b-b095fa30dba6",
+      "ticker": "KXNBAGAME-26FEB20DALMIN-MIN",
+      "side": "yes",
+      "entry_price_cents": 87,
+      "count": 4,
+      "capital_deployed": 3.48,
+      "thesis": "Favorite-longshot bias: Minnesota favored at 87\u00a2, model estimates 96% true probability. Edge: 69.2%. Kelly sizing (4 contracts).",
+      "edge_at_entry": 0.692,
+      "data_sources": [
+        "kalshi_orderbook",
+        "favorite_longshot_model"
+      ],
+      "status": "open",
+      "entry_time": "2026-02-20T15:51:20.156778Z",
       "exit_price_cents": null,
       "pnl": null,
       "exit_time": null,
       "settlement": null,
-      "notes": "Accidental short. Max loss $0.88. Decision: hold to settlement Feb 20."
+      "notes": "Manual trade via Kelly sizing (Option 2). User chose to bet more due to exceptional edge."
     }
   ],
   "watchlist": [],

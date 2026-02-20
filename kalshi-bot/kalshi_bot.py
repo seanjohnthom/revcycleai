@@ -422,6 +422,72 @@ def _weekly_report(client: KalshiClient):
 
 # ── ENTRY POINT ───────────────────────────────────────────────────────────────
 
+def run_status(client: KalshiClient):
+    """Show comprehensive portfolio status."""
+    print("━" * 50)
+    print("KALSHI PORTFOLIO STATUS")
+    print("━" * 50)
+    print()
+    
+    # Get balance
+    bal = client.get_balance()
+    balance = bal.get('balance', 0) / 100
+    
+    # Get positions
+    positions = client.get_positions()
+    open_positions = [p for p in positions if p.get('position', 0) != 0]
+    
+    # Calculate deployed capital
+    deployed = sum(p.get('market_exposure', 0) for p in open_positions) / 100
+    cash = balance - deployed
+    
+    # Get realized P&L from ledger
+    settled_trades = [t for t in ledger.get_all_trades() if t.get('status') == 'settled']
+    realized_pnl = sum(t.get('pnl', 0) for t in settled_trades)
+    
+    print(f"Balance:           ${balance:.2f}")
+    print(f"Deployed:          ${deployed:.2f}")
+    print(f"Cash available:    ${cash:.2f}")
+    print(f"Open positions:    {len(open_positions)}/8")
+    print(f"Realized P&L:      ${realized_pnl:+.2f}")
+    print()
+    
+    if open_positions:
+        print("OPEN POSITIONS:")
+        for i, pos in enumerate(open_positions, 1):
+            ticker = pos.get('ticker', 'Unknown')
+            position = pos.get('position', 0)
+            exposure = pos.get('market_exposure', 0) / 100
+            
+            # Try to get current market price for unrealized P&L
+            try:
+                market = client.get_market(ticker)
+                yes_bid = market.get('yes_bid', 0) / 100
+                
+                # Find entry price from ledger
+                ledger_trades = [t for t in ledger.get_all_trades() 
+                               if t.get('ticker') == ticker and t.get('status') == 'open']
+                
+                if ledger_trades and yes_bid > 0:
+                    entry_price = ledger_trades[0].get('entry_price_cents', 0) / 100
+                    side = ledger_trades[0].get('side', '').upper()
+                    
+                    if position > 0:  # Long position
+                        unrealized = (yes_bid - entry_price) * position
+                        print(f"{i}. {ticker} ({side} {position}) — ${exposure:.2f} deployed | ${unrealized:+.2f} unrealized")
+                    else:  # Short position
+                        print(f"{i}. {ticker} ({side} {position}) — ${exposure:.2f} deployed")
+                else:
+                    print(f"{i}. {ticker} ({position} contracts) — ${exposure:.2f} deployed")
+                    
+            except:
+                print(f"{i}. {ticker} ({position} contracts) — ${exposure:.2f} deployed")
+        
+        print()
+    
+    print("━" * 50)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Kalshi Edge Finder — ClawdBot')
     parser.add_argument('--scan-only', action='store_true', help='Scan markets, no trading')
@@ -429,11 +495,15 @@ if __name__ == '__main__':
     parser.add_argument('--monitor', action='store_true', help='Check open positions')
     parser.add_argument('--balance', action='store_true', help='Check account balance')
     parser.add_argument('--starter', action='store_true', help='Run starter batch')
+    parser.add_argument('--status', action='store_true', help='Show portfolio status')
     args = parser.parse_args()
 
     client = KalshiClient()
 
-    if args.balance:
+    if args.status:
+        run_status(client)
+
+    elif args.balance:
         bal = client.get_balance()
         print(f"Balance:         ${bal.get('balance', 0)/100:.2f}")
         print(f"Portfolio value: ${bal.get('portfolio_value', 0)/100:.2f}")
