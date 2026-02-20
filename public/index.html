@@ -231,7 +231,8 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
   .wordmark-rc, .wordmark-cycle { font-size: 22px; }
   .pub-tagline { font-size: 10px; }
   
-  /* Show mobile Pro CTA */
+  /* Show mobile newsletter and Pro CTA */
+  .mobile-newsletter { display: block !important; }
   .mobile-pro-cta { display: block !important; }
 }
 </style>
@@ -314,6 +315,17 @@ footer { border-top: var(--masthead-border); background: var(--text); color: #ff
           <span>8 min read</span>
           <a href="https://axlow.com" class="inline-cta" target="_blank">Find updated policy → Axlow ↗</a>
         </div>
+      </div>
+
+      <!-- MOBILE NEWSLETTER -->
+      <div class="mobile-newsletter" style="display: none; background: #09090B; color: #fff; border-radius: 8px; padding: 24px; margin: 24px 0;">
+        <h4 style="font-size: 18px; margin: 0 0 8px 0; font-weight: 700;">📧 This Week in RCM</h4>
+        <p style="font-size: 14px; color: #A1A1AA; margin-bottom: 16px; line-height: 1.6;">The top 3 RCM signals from the past week — what changed, what it means, and what to do. Every Tuesday morning.</p>
+        <form data-subscribe-form data-subscribe-source="mobile" style="display: flex; flex-direction: column; gap: 10px;">
+          <input type="email" name="email" placeholder="your@email.com" required style="padding: 12px; border: 1px solid #3F3F46; border-radius: 6px; font-size: 15px; font-family: inherit; background: #18181B; color: #fff; outline: none;">
+          <button type="submit" style="background: #1D4ED8; color: #fff; border: none; border-radius: 6px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit;">Subscribe Free →</button>
+        </form>
+        <p style="font-size: 12px; color: #71717A; margin: 12px 0 0; text-align: center;">Join RCM professionals. Free. Unsubscribe anytime.</p>
       </div>
 
       <!-- MOBILE PRO CTA -->
