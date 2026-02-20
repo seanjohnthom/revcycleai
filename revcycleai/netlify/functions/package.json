@@ -1,0 +1,8 @@
+{
+  "name": "revcycleai-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for RevCycleAI",
+  "dependencies": {
+    "stripe": "^14.14.0"
+  }
+}
