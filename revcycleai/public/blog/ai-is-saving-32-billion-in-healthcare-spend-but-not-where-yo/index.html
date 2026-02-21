@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Is Saving $32 Billion in Healthcare Spend — But Not Where You Think | RevCycleAI</title>
 <meta name="description" content="Four health systems are using AI to prevent $32B in vendor overpayments. Here's what claims management teams need to learn from supply chain automation.">
-<link rel="stylesheet" href="/styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -18,22 +17,100 @@
   "publisher": {"@type": "Organization", "name": "RevCycleAI", "logo": {"@type": "ImageObject", "url": "https://revcycleai.com/logo.png"}}
 }
 </script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #fff; color: #09090B; line-height: 1.7; }
+  a { color: #1D4ED8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav { background: #fff; border-bottom: 1px solid #E4E4E7; padding: 0 24px; }
+  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .wordmark { font-family: Arial, sans-serif; font-size: 18px; font-weight: 900; color: #09090B; letter-spacing: -0.3px; text-decoration: none; }
+  .wordmark span { font-weight: 400; }
+  .wordmark em { display: inline-block; background: #1D4ED8; color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle; font-style: normal; letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 20px; font-family: Arial, sans-serif; font-size: 13px; }
+  .nav-links a { color: #52525B; }
+
+  /* ARTICLE */
+  .article-wrap { max-width: 680px; margin: 0 auto; padding: 48px 24px 80px; }
+  .breadcrumb { font-family: Arial, sans-serif; font-size: 12px; color: #A1A1AA; margin-bottom: 20px; }
+  .breadcrumb a { color: #A1A1AA; }
+  .category-badge { display: inline-block; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #DC2626; margin-bottom: 12px; }
+  h1 { font-size: 32px; line-height: 1.25; font-weight: 700; color: #09090B; margin-bottom: 16px; }
+  .deck { font-size: 18px; line-height: 1.55; color: #52525B; margin-bottom: 24px; border-left: 3px solid #E4E4E7; padding-left: 16px; }
+  .meta { font-family: Arial, sans-serif; font-size: 13px; color: #A1A1AA; display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid #E4E4E7; }
+  .meta strong { color: #52525B; }
+
+  /* BODY */
+  .article-body h2 { font-size: 22px; margin: 36px 0 12px; color: #09090B; line-height: 1.3; }
+  .article-body h3 { font-size: 17px; margin: 28px 0 10px; color: #09090B; }
+  .article-body p { margin-bottom: 18px; font-size: 17px; line-height: 1.75; }
+  .article-body ul, .article-body ol { margin: 0 0 18px 24px; font-size: 17px; line-height: 1.75; }
+  .article-body li { margin-bottom: 8px; }
+  .article-body strong { font-weight: 700; }
+
+  /* CALLOUT BOXES */
+  .callout { background: #EFF6FF; border-left: 4px solid #1D4ED8; padding: 16px 20px; border-radius: 0 6px 6px 0; margin: 28px 0; font-size: 15px; line-height: 1.6; }
+  .callout.action { background: #F0FDF4; border-left-color: #16A34A; }
+  .callout.warning { background: #FFFBEB; border-left-color: #D97706; }
+  .callout-label { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; color: #1D4ED8; }
+  .callout.action .callout-label { color: #16A34A; }
+  .callout.warning .callout-label { color: #D97706; }
+
+  /* DATA TABLE */
+  table { max-width: 100%; }
+  .article-wrap table { overflow-x: auto; display: block; }
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: Arial, sans-serif; font-size: 14px; }
+  th { background: #09090B; color: #fff; padding: 10px 12px; text-align: left; font-weight: 700; }
+  td { padding: 9px 12px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
+  tr:nth-child(even) td { background: #F4F4F5; }
+
+  /* CTA BOX */
+  .cta-box { background: #09090B; color: #fff; padding: 28px 32px; border-radius: 8px; margin: 40px 0; }
+  .cta-box h3 { font-size: 20px; margin-bottom: 8px; color: #fff; }
+  .cta-box p { font-size: 14px; color: #A1A1AA; margin-bottom: 18px; font-family: Arial, sans-serif; line-height: 1.6; }
+  .cta-btn { display: inline-block; background: #1F4B43; color: #fff; font-family: Arial, sans-serif; font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 6px; text-decoration: none; }
+  .cta-btn:hover { background: #17392f; text-decoration: none; }
+
+  /* FOOTER */
+  footer { background: #09090B; color: #71717A; padding: 32px 24px; font-family: Arial, sans-serif; font-size: 12px; text-align: center; }
+  footer a { color: #71717A; }
+  .footer-wordmark { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+</style>
 </head>
 <body>
-<div class="article-container">
-<header class="article-header">
-<div class="breadcrumb"><a href="/">Home</a> → <a href="/blog">Blog</a> → AI Vendor Spend Automation</div>
-<h1>AI Is Saving $32 Billion in Healthcare Spend — But Not Where You Think</h1>
-<div class="article-meta">
-<span class="date">February 21, 2026</span>
-<span class="category">AI + Automation</span>
-<span class="read-time">6 min read</span>
-</div>
-</header>
 
-<article class="article-content">
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Rev<span>Cycle</span><em>AI</em></a>
+    <div class="nav-links">
+      <a href="/blog">Blog</a>
+      <a href="/tools">Tools</a>
+      <a href="/free">Free Resources</a>
+      <a href="/newsletter">Newsletter</a>
+    </div>
+  </div>
+</nav>
 
-<p class="lead">Four health systems just deployed AI to validate vendor invoices before payment. The technology is preventing <strong>$32 billion in overpayments annually</strong> across a $323 billion spend category.</p>
+<div class="article-wrap">
+  <div class="breadcrumb"><a href="/">Home</a> → <a href="/blog">Blog</a> → AI + Automation</div>
+  <div class="category-badge">🤖 AI + Automation</div>
+
+  <h1>AI Is Saving $32 Billion in Healthcare Spend — But Not Where You Think</h1>
+
+  <p class="deck">Four health systems are using AI to prevent $32B in vendor overpayments. Here's what claims management teams need to learn from supply chain automation — and why revenue cycle AI is backwards.</p>
+
+  <div class="meta">
+    <span><strong>Source:</strong> Healthcare Finance News</span>
+    <span>February 21, 2026</span>
+    <span>6 min read</span>
+  </div>
+
+  <div class="article-body">
+
+<p>Four health systems just deployed AI to validate vendor invoices before payment. The technology is preventing <strong>$32 billion in overpayments annually</strong> across a $323 billion spend category.</p>
 
 <p>But here's the twist: this isn't revenue cycle AI. It's supply chain AI.</p>
 
@@ -61,17 +138,13 @@
 
 <p>Think about the parallels:</p>
 
-<table class="comparison-table">
-<thead>
+<table>
 <tr><th>Vendor Invoices (Supply Chain)</th><th>Claim Submissions (Revenue Cycle)</th></tr>
-</thead>
-<tbody>
 <tr><td>Vendor sends invoice</td><td>Provider submits claim</td></tr>
 <tr><td>Invoice should match contract</td><td>Claim should match payor policy</td></tr>
 <tr><td>Most invoices approved without validation</td><td>Most claims submitted without policy validation</td></tr>
 <tr><td>Overbilling discovered after payment</td><td>Errors discovered after denial</td></tr>
 <tr><td><strong>AI validates before payment</strong></td><td><strong>AI predicts denials after submission</strong></td></tr>
-</tbody>
 </table>
 
 <p>See the problem?</p>
@@ -142,33 +215,18 @@
 <p>Your claims are just invoices to payors. It's time to treat them like supply chain does.</p>
 
 <div class="cta-box">
-<h3>Ready to Move From Reactive to Proactive?</h3>
-<p>RevCycleAI Pro includes denial prevention tools, payor policy databases, and real-time claim validation workflows.</p>
-<a href="/pro" class="cta-button">Explore Pro Features →</a>
+  <h3>Ready to Move From Reactive to Proactive?</h3>
+  <p>RevCycleAI Pro includes denial prevention tools, payor policy databases, and real-time claim validation workflows.</p>
+  <a href="/pro" class="cta-btn">Explore Pro Features →</a>
 </div>
 
-<div class="related-tools">
-<h3>Related Tools</h3>
-<ul>
-<li><a href="/tools/denials">Denial Rate Benchmarking Tool</a> — See where you stand</li>
-<li><a href="https://axlow.com">Axlow</a> — AI-powered denial management platform</li>
-</ul>
+  </div>
 </div>
 
-</article>
-
-<div class="article-footer">
-<div class="tags">
-<span class="tag">AI</span>
-<span class="tag">Denial Prevention</span>
-<span class="tag">Claims Automation</span>
-<span class="tag">Revenue Optimization</span>
-</div>
-<div class="share">
-<a href="https://www.linkedin.com/sharing/share-offsite/?url=https://revcycleai.com/blog/ai-is-saving-32-billion-in-healthcare-spend-but-not-where-yo/" target="_blank">Share on LinkedIn</a>
-</div>
-</div>
-
-</div>
+<footer>
+  <div class="footer-wordmark">RevCycleAI</div>
+  <p>RCM intelligence for billing teams, directors, and DSO operators.</p>
+  <p style="margin-top: 8px;"><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/newsletter">Newsletter</a> · <a href="/tools">Tools</a></p>
+</footer>
 </body>
 </html>
