@@ -1,0 +1,113 @@
+LinkedIn Posts — Fresh Content — February 21, 2026
+
+═══════════════════════════════════════════════════════════════
+
+POST #1: AI Spend Control ($32B Story)
+─────────────────────────────────────────────────────────────
+
+🤖 If AI Can Save $32 Billion on Vendor Invoices, Why Aren't We Using It on Claims?
+
+Four health systems just deployed AI to validate service invoices before payment. The result? They're preventing $32 billion in annual overpayments across a $323 billion spend category.
+
+Here's how it works:
+AI encodes contract terms into code → validates every invoice line against terms → flags discrepancies automatically → no manual approvals needed.
+
+Now ask yourself: If AI can catch vendor overpayments BEFORE they happen, why are we still submitting claims AFTER denials hit?
+
+The revenue cycle industry is using AI backwards.
+
+We're deploying it to predict denials (after the claim is already wrong), appeal denials (after we've already lost), and track A/R (after cash flow is already damaged).
+
+But AI's real power is UPSTREAM:
+✅ Validate claims against payor contracts before submission
+✅ Encode medical necessity criteria into real-time edits
+✅ Flag coding errors before the claim goes out the door
+✅ Automate prior auth validation (not prediction)
+
+The lesson from vendor invoice AI isn't about supply chain.
+
+It's about shifting from reactive to proactive. From damage control to damage prevention.
+
+Your claims are just invoices to payors. Treat them like it.
+
+Read the breakdown: https://revcycleai.com/blog/ai-is-saving-32-billion-in-healthcare-spend-but-not-where-yo/
+
+#RevenueCycle #AIinHealthcare #RCM #DenialPrevention
+
+═══════════════════════════════════════════════════════════════
+
+POST #2: Payer Mix Crisis
+─────────────────────────────────────────────────────────────
+
+📉 Hospital Volumes Are Up. Revenue Is Flat. Here's Why.
+
+Kaufman Hall just released their National Hospital Flash Report tracking 1,300+ hospitals.
+
+The finding that should terrify every CFO:
+
+"Higher patient volumes are NOT translating into stronger financial results."
+
+Why? Payer mix deterioration.
+
+More uninsured patients. More government program coverage. Fewer commercially insured patients. Result: same volume, worse margins.
+
+The gap between gross revenue and net revenue keeps widening. Bad debt is climbing. Charity care is climbing. And the math doesn't work anymore.
+
+You can't control who walks through your door. But you CAN control:
+
+1️⃣ Eligibility verification upstream - Catch coverage gaps BEFORE service
+2️⃣ Point-of-service collections - Don't bill what you can collect upfront
+3️⃣ Network optimization - Drop low-reimbursing contracts, keep profitable ones
+4️⃣ Service line portfolio strategy - Not all volume is good volume
+
+The Kaufman Hall report says high-performers are "nimbler on managing revenue AND expenses."
+
+Translation: They know which patients, which services, and which payors generate margin. And they optimize accordingly.
+
+If you're chasing volume without tracking payer mix, you're running faster on a treadmill.
+
+#HealthcareFinance #RCM #PayorStrategy #HospitalCFO
+
+═══════════════════════════════════════════════════════════════
+
+POST #3: Medicare Advantage Growth Collapse
+─────────────────────────────────────────────────────────────
+
+⚠️ Medicare Advantage Just Hit a Wall — And Your Revenue Cycle Needs to Adapt
+
+MA enrollment grew 7-10% annually from 2017-2024.
+
+In 2025? 1% growth.
+In 2026? Projected 1-3%.
+
+UnitedHealthcare is LOSING 1.3-1.4 million MA members this year. Humana gained members but margins collapsed. CVS Health pulled back entirely.
+
+What's happening?
+• CMS gave MA insurers <1% reimbursement increase
+• $30 billion in funding cuts over 3 years
+• Insurers are slashing benefits to stay profitable
+
+Why this matters for RCM teams:
+
+Medicare Advantage now covers 55% of Medicare beneficiaries. But not all MA plans are created equal anymore.
+
+Some MA plans are:
+❌ Cutting reimbursement rates
+❌ Adding more prior auth requirements
+❌ Denying claims at higher rates
+❌ Delaying payments longer
+
+Your 2024 MA contract analysis is already outdated.
+
+Action items for Q1 2026:
+1. Re-analyze your MA contracts by plan (not just insurer)
+2. Calculate true reimbursement rate after denials + delays
+3. Identify which MA plans are underwater
+4. Build a termination roadmap for bottom 20%
+5. Reallocate resources to profitable contracts
+
+The MA market is consolidating. Winners will be practices that recognize it early and optimize their network portfolio accordingly.
+
+#MedicareAdvantage #RevenueCycle #RCM #PayorContracting
+
+═══════════════════════════════════════════════════════════════

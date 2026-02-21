@@ -1,0 +1,84 @@
+LinkedIn Posts — Saturday, February 21, 2026
+
+═══════════════════════════════════════════════════════════════
+
+POST #1: Cigna/Zelis Network Expansion
+─────────────────────────────────────────────────────────────
+
+🚨 Cigna Just Expanded Its Zelis Network Leasing — Here's What Dental Practices Need to Know
+
+Cigna has quietly expanded its leasing arrangement with Zelis Healthcare (formerly Maverest), now including additional dental and medical procedures under the repricing umbrella.
+
+Translation? More claims are getting repriced at lower rates — even if you thought you had a direct Cigna contract.
+
+What to do NOW:
+✅ Audit your last 90 days of Cigna EOBs
+✅ Look for "Zelis Healthcare" or "Maverest" in repricing notes
+✅ Verify your network routing path (direct vs. leased)
+✅ Calculate revenue impact if repricing has already started
+
+This is classic silent PPO behavior — and it's costing practices 5-15% on affected claims.
+
+The good news? Once you identify it, you can fix it. Network routing is solvable.
+
+Read the full breakdown: https://revcycleai.com/blog/cigna-expands-zelismaverest-network-access-impact-on-dental/
+
+#DentalRCM #SilentPPO #RevenueCycle #NetworkOptimization
+
+═══════════════════════════════════════════════════════════════
+
+POST #2: UnitedHealthcare Prior Auth Expansion
+─────────────────────────────────────────────────────────────
+
+🔔 UnitedHealthcare Prior Auth Requirements Expanding March 1st — Are You Ready?
+
+UnitedHealthcare just announced they're expanding prior authorization requirements to include additional outpatient surgical procedures and imaging studies, effective March 1, 2026.
+
+If you're not reviewing updated policy guidelines right now, you're setting yourself up for denials.
+
+What changes:
+• More outpatient procedures now require pre-auth
+• Imaging studies added to the authorization list
+• Tighter documentation requirements across the board
+
+Revenue cycle teams have exactly 7 days to:
+1. Review UHC's updated policy guidelines
+2. Update your authorization tracking workflows
+3. Train front desk + scheduling staff on new requirements
+4. Set up automation triggers for newly covered procedures
+
+The worst-case scenario? Claims sitting in limbo for 30+ days while you scramble to get retroactive authorizations (which UHC rarely approves).
+
+Don't let preventable denials blow up your AR aging.
+
+Full guide: https://revcycleai.com/blog/unitedhealthcare-expands-prior-auth-requirements-for-outpati/
+
+#PriorAuthorization #RevenueCycle #UHC #RCM
+
+═══════════════════════════════════════════════════════════════
+
+POST #3: Humana/Zelis Transition
+─────────────────────────────────────────────────────────────
+
+⚠️ Humana Dental Is Moving More Plans to Zelis Repricing — Check Your Contracts
+
+Humana Dental just announced it's transitioning additional plan types to utilize Zelis Healthcare's network leasing arrangement for claim repricing.
+
+If you have a direct Humana contract, you might THINK you're getting Humana rates. But if they've moved your patients' plans to Zelis repricing, you're actually getting leased network rates — which can be 10-20% lower.
+
+Here's the problem:
+Most practices don't find out until the EOB arrives. By then, the claim is already adjudicated at the lower rate.
+
+Action items:
+📋 Verify which Humana plans remain under direct contract
+📋 Identify which plans have moved to Zelis leasing
+📋 Update your eligibility verification scripts
+📋 Calculate revenue impact on affected patient base
+
+Silent PPO leakage is real, and Zelis/Maverest/DNOA umbrella networks are the #1 culprit.
+
+Arm yourself with data: https://revcycleai.com/blog/humana-dental-transitions-additional-plans-to-zelis-repricin/
+
+#DentalRCM #SilentPPO #HumanaDental #RevenueOptimization
+
+═══════════════════════════════════════════════════════════════
