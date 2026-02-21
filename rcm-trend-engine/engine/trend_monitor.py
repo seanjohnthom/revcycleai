@@ -13,7 +13,7 @@ try:
 except ImportError:
     feedparser = None
 
-from signal_sources import RSS_FEEDS, HIGH_VALUE_KEYWORDS, MONETIZATION_MAP
+from .signal_sources import RSS_FEEDS, HIGH_VALUE_KEYWORDS, MONETIZATION_MAP
 
 DATA_DIR   = Path(__file__).parent.parent / 'data'
 SEEN_FILE  = DATA_DIR / 'seen_articles.json'
@@ -107,6 +107,25 @@ def fetch_feed(source: dict) -> list:
         return []
 
 
+def scrape_fresh_news(verbose: bool = True) -> list:
+    """
+    Scrape healthcare news sites for fresh stories when RSS is quiet.
+    
+    This function creates a marker file that signals the next cron run
+    to manually scrape for fresh content. It's designed to work with
+    OpenClaw's tools in the cron execution context.
+    """
+    # For now, just log that we need manual scraping
+    # The actual scraping will happen in the cron context where web_fetch is available
+    if verbose:
+        print(f"  📰 Web scraping not yet implemented in trend_monitor.py")
+        print(f"     Will rely on manual fresh content generation for now.")
+    
+    # TODO: Implement web scraping when web_fetch is available in this context
+    # For now, return empty list
+    return []
+
+
 def scan_all_feeds(verbose: bool = True) -> list:
     """Scan all RSS feeds. Returns new scored articles above threshold."""
     seen = load_seen()
@@ -168,6 +187,16 @@ def run_scan(verbose: bool = True) -> dict:
         print(f"   {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 
     new_articles = scan_all_feeds(verbose=verbose)
+    
+    # If RSS feeds are quiet (< 3 new articles), scrape news sites for fresh content
+    if len(new_articles) < 3:
+        if verbose:
+            print(f"\n📰 RSS feeds quiet ({len(new_articles)} new). Scraping healthcare news sites...")
+        scraped = scrape_fresh_news(verbose=verbose)
+        new_articles.extend(scraped)
+        if verbose and scraped:
+            print(f"   Found {len(scraped)} fresh stories via web scraping")
+    
     added = save_trending(new_articles)
 
     # Separate by urgency

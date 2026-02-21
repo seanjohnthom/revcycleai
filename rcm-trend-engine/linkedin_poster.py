@@ -27,42 +27,11 @@ def load_token():
 
 def get_organization_urn(token):
     """Get the Organization URN for the RevCycleAI company page"""
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "X-Restli-Protocol-Version": "2.0.0"
-    }
-    
-    try:
-        response = requests.get(
-            "https://api.linkedin.com/v2/organizationAcls?q=roleAssignee&projection=(elements*(organization~(localizedName)))",
-            headers=headers
-        )
-        
-        if response.status_code != 200:
-            print(f"❌ Failed to get organization: {response.status_code}")
-            print(response.text)
-            sys.exit(1)
-        
-        data = response.json()
-        
-        # Find RevCycleAI
-        for elem in data.get("elements", []):
-            org = elem.get("organization~", {})
-            name = org.get("localizedName")
-            if name and "RevCycle" in name:
-                urn = elem.get("organization")
-                print(f"✅ Found organization: {name} → {urn}")
-                return urn
-        
-        print("❌ RevCycleAI organization not found. Organizations available:")
-        for elem in data.get("elements", []):
-            org = elem.get("organization~", {})
-            print(f"  - {org.get('localizedName')}")
-        sys.exit(1)
-    
-    except Exception as e:
-        print(f"❌ Failed to get organization: {e}")
-        sys.exit(1)
+    # Use vanity name directly to bypass organizationAcls permission requirement
+    # Company page: linkedin.com/company/revcycle-ai
+    org_urn = "urn:li:organization:(vanityName:revcycle-ai)"
+    print(f"✅ Using vanity name URN: {org_urn}")
+    return org_urn
 
 
 def post_text(token, org_urn, text):

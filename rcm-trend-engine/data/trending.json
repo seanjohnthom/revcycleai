@@ -49,7 +49,7 @@
     ],
     "urgency": "immediate",
     "scanned_at": "2026-02-19T08:00:00+00:00",
-    "status": "new"
+    "status": "published"
   },
   {
     "id": "e5f6a1b2c3d4e5f6",
@@ -76,7 +76,7 @@
     ],
     "urgency": "24h",
     "scanned_at": "2026-02-19T08:00:00+00:00",
-    "status": "new"
+    "status": "published"
   },
   {
     "id": "b2c3d4e5f6a1b2c3",
@@ -101,7 +101,7 @@
     ],
     "urgency": "immediate",
     "scanned_at": "2026-02-19T08:00:00+00:00",
-    "status": "new"
+    "status": "published"
   },
   {
     "id": "a7b8c9d0e1f2a3b4",
@@ -128,7 +128,7 @@
     ],
     "urgency": "24h",
     "scanned_at": "2026-02-19T08:00:00+00:00",
-    "status": "new"
+    "status": "published"
   },
   {
     "id": "d0e1f2a3b4c5d6e7",
